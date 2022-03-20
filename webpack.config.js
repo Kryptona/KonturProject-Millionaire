@@ -20,9 +20,53 @@ module.exports = {
                 use: ['babel-loader']
             },
             {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            }
+                test: /\.s[ac]ss$/i,
+                use: [
+                    // Creates `style` nodes from JS strings
+                    MiniCssExtractPlugin.loader,
+                    // Translates CSS into CommonJS
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                        },
+                    },
+                    // Compiles Sass to CSS
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sassOptions: {
+                                includePaths: [srcDirectory],
+                            },
+                        },
+                    }
+                ],
+            },
+            {
+                test: /\.css$/i,
+                include: nodeModulesDir,
+                use: [
+                    // Creates `style` nodes from JS strings
+                    MiniCssExtractPlugin.loader,
+                    // Translates CSS into CommonJS
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: false,
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        limit: 10000000,
+                        outputPath: distDirectory,
+                    }
+                }],
+            },
         ]
     },
     resolve: {
