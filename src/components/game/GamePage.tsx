@@ -1,8 +1,9 @@
 import React from 'react';
+import styles from './GamePage.scss';
 
-export const GamePage = () => {
+export const GamePage: React.FC = () => {
     return (
-        <div>
+        <div className={styles.root}>
             GamePage
         </div>
     );

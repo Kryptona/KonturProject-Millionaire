@@ -1,5 +1,6 @@
 import React from 'react';
 import {Routes} from 'react-router-dom';
+import styles from './default.scss';
 import {
     BrowserRouter as Router,
     Route,
@@ -10,24 +11,22 @@ import {MenuPage} from "./components/menu/MenuPage";
 
 const App = () => {
     return (
-        <div>
+        <div className={styles.root}>
             <Router>
-                <div>
-                    <nav>
-                        <ul>
-                            <li>
-                                <Link to="/">Menu</Link>
-                            </li>
-                            <li>
-                                <Link to="/game">Game</Link>
-                            </li>
-                        </ul>
-                    </nav>
-                    <Routes>
-                        <Route index element={<MenuPage/>}/>
-                        <Route path="/game" element={<GamePage/>}/>
-                    </Routes>
-                </div>
+                {/*<nav>*/}
+                {/*    <ul>*/}
+                {/*        <li>*/}
+                {/*            <Link to="/">Menu</Link>*/}
+                {/*        </li>*/}
+                {/*        <li>*/}
+                {/*            <Link to="/game">Game</Link>*/}
+                {/*        </li>*/}
+                {/*    </ul>*/}
+                {/*</nav>*/}
+                <Routes>
+                    <Route index element={<MenuPage/>}/>
+                    <Route path="/game" element={<GamePage/>}/>
+                </Routes>
             </Router>
         </div>
     )

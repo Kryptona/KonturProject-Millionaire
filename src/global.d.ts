@@ -1,6 +1,6 @@
 declare module '*.scss' {
     const content: {[className: string]: string};
-    // noinspection JSUnusedGlobalSymbols
+    // noinspection JSUnusedGlobalSymbos
     export default content;
 }
 

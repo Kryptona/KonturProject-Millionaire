@@ -1,8 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
-const ESLintPlugin = require('eslint-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const distDirectory = path.resolve(__dirname, 'dist');
+const nodeModulesDir = path.resolve(__dirname, 'node_modules');
+
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const srcDirectory = path.resolve(__dirname, 'src');
 
 module.exports = {
     mode: "development",
@@ -21,6 +26,7 @@ module.exports = {
             },
             {
                 test: /\.s[ac]ss$/i,
+                include: srcDirectory,
                 use: [
                     // Creates `style` nodes from JS strings
                     MiniCssExtractPlugin.loader,
@@ -52,7 +58,7 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: false,
+                            modules: true,
                         },
                     },
                 ],
@@ -77,10 +83,25 @@ module.exports = {
         }
     },
     plugins: [
-        new webpack.ProvidePlugin({
-            process: 'process/browser',
+        new HtmlWebpackPlugin({
+            template: "./public/index.html",
         }),
         new ForkTsCheckerWebpackPlugin(),
-        new ESLintPlugin()
-    ]
+        new MiniCssExtractPlugin({
+            filename: '[name].bundle.css',
+            ignoreOrder: true,
+        }),
+    ],
+    devServer: {
+        hot: true,
+        open: true,
+        historyApiFallback: true,
+        client: {
+            progress: true,
+            overlay: {
+                errors: true,
+                warnings: false,
+            },
+        },
+    },
 };
