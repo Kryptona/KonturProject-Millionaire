@@ -2,3 +2,12 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.root{
+  display: flex;
+  justify-content: center;
+}
+
+$default_blue: #1A76FF;
+$default_white: #F9FAFE;
+$transition_duration: 250ms;
