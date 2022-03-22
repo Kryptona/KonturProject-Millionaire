@@ -11,6 +11,7 @@
     "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.13",
     "@types/react-router-dom": "^5.3.3",
+    "classnames": "^2.3.1",
     "css-loader": "^6.7.1",
     "fork-ts-checker-webpack-plugin": "^7.2.1",
     "image-webpack-loader": "^8.1.0",

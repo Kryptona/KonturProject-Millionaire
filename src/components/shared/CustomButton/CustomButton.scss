@@ -1,0 +1,75 @@
+@import 'src/default.scss';
+
+$height: 64px;
+$half-height: calc(#{$height} / 2);
+$color: #600268;
+$hover-color: green;
+
+.root {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: none;
+  user-select: none;
+  display: inline-block;
+
+  & > span {
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    height: $height;
+    margin: 0 $half-height;
+    padding: 0 24px;
+    text-align: center;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: $height;
+    color: white;
+    background-color: $color;
+    transition: background-color $transition_duration;
+
+    &:active {
+      transform: translateY(1px);
+    }
+
+    &:hover {
+      background-color: $hover-color;
+
+      &:before {
+        border-right-color: $hover-color;
+      }
+
+      &:after {
+        border-left-color: $hover-color;
+      }
+    }
+
+    &:before, &:after {
+      position: absolute;
+      top: 0;
+      content: '';
+      display: block;
+      box-sizing: border-box;
+      width: $height;
+      height: $height;
+      border-top: $half-height transparent solid;
+      border-bottom: $half-height transparent solid;
+    }
+
+    &:before {
+      left: -$height;
+      border-right: $half-height $color solid;
+      border-left: $half-height transparent solid;
+      transition: border-right-color $transition_duration;
+    }
+
+    &:after {
+      left: 100%;
+      border-right: $half-height transparent solid;
+      border-left: $half-height $color solid;
+      transition: border-left-color $transition_duration;
+    }
+  }
+}

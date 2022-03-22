@@ -1,9 +1,31 @@
-.root{
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   width: 1024px;
   height: 100vh;
+  background: linear-gradient(213.77deg, #151978 37.3%, #600268 95.78%);
 
-  .millionare_icon{
-    width: 256px;
-    height: 256px;
+  .millionare_icon {
+    width: 400px;
+    height: 400px;
+    margin-top: 96px;
+  }
+
+  .nickname_input {
+    margin-top: 64px;
+  }
+
+  .play_game_button {
+    margin-top: 32px;
+  }
+
+  .buttons {
+    margin-top: 16px;
+
+    & > *:not(:first-child) {
+      margin-left: 16px;
+    }
   }
 }
