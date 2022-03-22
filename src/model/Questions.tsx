@@ -1,4 +1,4 @@
-import questions from "./questions.json"
+import questions from "../resources/questions.json"
 
 export default function getThreeQuestions(level: String){
     switch (level) {

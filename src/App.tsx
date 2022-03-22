@@ -13,16 +13,16 @@ const App = () => {
     return (
         <div className={styles.root}>
             <Router>
-                {/*<nav>*/}
-                {/*    <ul>*/}
-                {/*        <li>*/}
-                {/*            <Link to="/">Menu</Link>*/}
-                {/*        </li>*/}
-                {/*        <li>*/}
-                {/*            <Link to="/game">Game</Link>*/}
-                {/*        </li>*/}
-                {/*    </ul>*/}
-                {/*</nav>*/}
+                <nav>
+                    <ul>
+                        <li>
+                            <Link to="/">Menu</Link>
+                        </li>
+                        <li>
+                            <Link to="/game">Game</Link>
+                        </li>
+                    </ul>
+                </nav>
                 <Routes>
                     <Route index element={<MenuPage/>}/>
                     <Route path="/game" element={<GamePage/>}/>
