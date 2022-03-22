@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import Answer from "./answer/Answer";
+import "./Question.scss"
 
 type questionCard = {
     question: string,
@@ -16,17 +17,8 @@ type questionOptions = {
 }
 const Question  = (questionOptions : questionOptions ) => {
     const question = questionOptions.questionCard
-    // const [questions, setQuestion] = useState({
-    //     question: "Как называется домик для птиц, сделанный руками человека?",
-    //     A: "Избушка",
-    //     B: "Скворечник",
-    //     C: "Квартира",
-    //     D: "Дупло",
-    //     rightAnswer: "Избушка",
-    //     id: 0
-    // })
     return (
-        <div>
+        <div className="card_question">
             Вопрос: {question.question}
             <Answer A={question.A} B={question.B} C={question.C} D={question.D} rightAnswer={question.rightAnswer} upQuestionNumber={questionOptions.UpQuestionNumber}/>
         </div>
