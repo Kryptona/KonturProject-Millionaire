@@ -15,11 +15,15 @@ const Answer = (answer: answer_card) => {
         <RightAnswerContext.Provider value={answer.rightAnswer}>
             <div>
                 <div>
+                    A:
                     <ButtonAnswer text={answer.A} upQuestionNumber={answer.upQuestionNumber}/>
+                    B:
                     <ButtonAnswer text={answer.B} upQuestionNumber={answer.upQuestionNumber}/>
                 </div>
                 <div>
+                    C:
                     <ButtonAnswer text={answer.C} upQuestionNumber={answer.upQuestionNumber}/>
+                    D:
                     <ButtonAnswer text={answer.D} upQuestionNumber={answer.upQuestionNumber}/>
                 </div>
             </div>
