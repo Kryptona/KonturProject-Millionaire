@@ -6,37 +6,44 @@ type answer_card = {
     B: string,
     C: string,
     D: string,
-    rightAnswer: string
+    rightAnswer: string,
+    upQuestionNumber : () => void
 }
-
 const RightAnswerContext = React.createContext('')
 const Answer = (answer: answer_card) => {
     return (
         <RightAnswerContext.Provider value={answer.rightAnswer}>
             <div>
-                <ButtonAnswer text={answer.A}/>
-                <ButtonAnswer text={answer.B}/>
-                <ButtonAnswer text={answer.C}/>
-                <ButtonAnswer text={answer.D}/>
+                <div>
+                    <ButtonAnswer text={answer.A} upQuestionNumber={answer.upQuestionNumber}/>
+                    <ButtonAnswer text={answer.B} upQuestionNumber={answer.upQuestionNumber}/>
+                </div>
+                <div>
+                    <ButtonAnswer text={answer.C} upQuestionNumber={answer.upQuestionNumber}/>
+                    <ButtonAnswer text={answer.D} upQuestionNumber={answer.upQuestionNumber}/>
+                </div>
             </div>
         </RightAnswerContext.Provider>
     );
 };
 
 type answer = {
-    text : string
+    text : string,
+    upQuestionNumber: () => void
 }
 const ButtonAnswer = (answer: answer) => {
     const checkRightAnswer = (rightAnswer: string) => {
-        if (answer.text === rightAnswer)
+        if (answer.text === rightAnswer) {
             alert("Правильный ответ")
+            answer.upQuestionNumber()
+        }
         else alert("Ошибка")
     }
     return (
         <RightAnswerContext.Consumer>{rightAnswer =>
-            <div>
+            <span>
                 <button onClick={() => checkRightAnswer(rightAnswer)}>{answer.text}</button>
-            </div>
+            </span>
         }</RightAnswerContext.Consumer>
     )
 }
