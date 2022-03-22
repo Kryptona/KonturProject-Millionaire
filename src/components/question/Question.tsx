@@ -1,20 +1,34 @@
 import React, {useState} from "react";
 import Answer from "./answer/Answer";
 
-const Question = () => {
-    const [questions, setQuestion] = useState({
-        question: "Как называется домик для птиц, сделанный руками человека?",
-        A: "Избушка",
-        B: "Скворечник",
-        C: "Квартира",
-        D: "Дупло",
-        rightAnswer: "Избушка",
-        id: 0
-    })
+type questionCard = {
+    question: string,
+    A: string,
+    B: string,
+    C: string,
+    D: string,
+    rightAnswer: string,
+}
+export type {questionCard}
+type questionOptions = {
+    questionCard : questionCard,
+    UpQuestionNumber : () => void,
+}
+const Question  = (questionOptions : questionOptions ) => {
+    const question = questionOptions.questionCard
+    // const [questions, setQuestion] = useState({
+    //     question: "Как называется домик для птиц, сделанный руками человека?",
+    //     A: "Избушка",
+    //     B: "Скворечник",
+    //     C: "Квартира",
+    //     D: "Дупло",
+    //     rightAnswer: "Избушка",
+    //     id: 0
+    // })
     return (
         <div>
-            Вопрос
-            <Answer A={questions.A} B={questions.B} C={questions.C} D={questions.D} rightAnswer={questions.rightAnswer} />
+            Вопрос: {question.question}
+            <Answer A={question.A} B={question.B} C={question.C} D={question.D} rightAnswer={question.rightAnswer} upQuestionNumber={questionOptions.UpQuestionNumber}/>
         </div>
     )
 }
