@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Answer from "./answer/Answer";
-import "./Question.scss"
+import styles from "./Question.scss"
 
 type questionCard = {
     question: string,
@@ -18,8 +18,10 @@ type questionOptions = {
 const Question  = (questionOptions : questionOptions ) => {
     const question = questionOptions.questionCard
     return (
-        <div className="card_question">
-            Вопрос: {question.question}
+        <div className={styles.root}>
+            <div className={styles.question}>
+                {question.question}
+            </div>
             <Answer A={question.A} B={question.B} C={question.C} D={question.D} rightAnswer={question.rightAnswer} upQuestionNumber={questionOptions.UpQuestionNumber}/>
         </div>
     )

@@ -3,6 +3,7 @@ import styles from './GamePage.scss';
 import Question from "../question/Question";
 import getThreeQuestions from "../../model/Questions"
 import {questionCard} from "../question/Question";
+import logo from "/src/img/millionaire_icon.svg"
 
 export const GamePage: React.FC = () => {
     const [score, setScore] = useState('$ 0')
@@ -20,7 +21,12 @@ export const GamePage: React.FC = () => {
 
     return (
         <div className={styles.root}>
-            <Question questionCard={questions[questionNumber] as questionCard} UpQuestionNumber = {upQuestionNumber} />
+            <div className={styles.background}>
+                <div className={styles.background_image}>
+                    <img className={styles.image} alt="image" src={logo}/>
+                </div>
+                <Question questionCard={questions[questionNumber] as questionCard} UpQuestionNumber = {upQuestionNumber} />
+            </div>
         </div>
     );
 };

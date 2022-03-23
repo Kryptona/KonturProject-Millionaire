@@ -1,6 +1,25 @@
-.card_question {
+
+$color: #151978;
+$hover-color: green;
+
+.root {
   margin-left: auto;
   margin-right: auto;
-  width: 20em;
+  width: 100%;
+  height: 100%;
   font-size: 36px;
+
+  .question {
+    box-sizing: border-box;
+    height: auto;
+    padding: 0 24px;
+    text-align: center;
+    font-size: 48px;
+    font-weight: 400;
+    border-radius: 20px;
+    background-color: $color;
+    border: solid yellow;
+    color: yellow;
+  }
 }
+

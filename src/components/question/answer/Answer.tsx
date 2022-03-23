@@ -1,5 +1,7 @@
 import questions from "../../../resources/questions.json"
 import React from "react";
+import {CustomButton} from "../../shared/CustomButton/CustomButton";
+import styles from "./Answer.scss"
 
 type answer_card = {
     A: string,
@@ -13,18 +15,14 @@ const RightAnswerContext = React.createContext('')
 const Answer = (answer: answer_card) => {
     return (
         <RightAnswerContext.Provider value={answer.rightAnswer}>
-            <div>
-                <div>
-                    A:
-                    <ButtonAnswer text={answer.A} upQuestionNumber={answer.upQuestionNumber}/>
-                    B:
-                    <ButtonAnswer text={answer.B} upQuestionNumber={answer.upQuestionNumber}/>
+            <div className={styles.root}>
+                <div className={styles.answer_buttons}>
+                    <ButtonAnswer text={answer.A} variant={"A"} upQuestionNumber={answer.upQuestionNumber}/>
+                    <ButtonAnswer text={answer.B} variant={"B"} upQuestionNumber={answer.upQuestionNumber}/>
                 </div>
-                <div>
-                    C:
-                    <ButtonAnswer text={answer.C} upQuestionNumber={answer.upQuestionNumber}/>
-                    D:
-                    <ButtonAnswer text={answer.D} upQuestionNumber={answer.upQuestionNumber}/>
+                <div className={styles.answer_buttons}>
+                    <ButtonAnswer text={answer.C} variant={"C"} upQuestionNumber={answer.upQuestionNumber}/>
+                    <ButtonAnswer text={answer.D} variant={"D"} upQuestionNumber={answer.upQuestionNumber}/>
                 </div>
             </div>
         </RightAnswerContext.Provider>
@@ -33,7 +31,8 @@ const Answer = (answer: answer_card) => {
 
 type answer = {
     text : string,
-    upQuestionNumber: () => void
+    upQuestionNumber: () => void,
+    variant: string
 }
 const ButtonAnswer = (answer: answer) => {
     const checkRightAnswer = (rightAnswer: string) => {
@@ -45,8 +44,10 @@ const ButtonAnswer = (answer: answer) => {
     }
     return (
         <RightAnswerContext.Consumer>{rightAnswer =>
-            <span>
-                <button onClick={() => checkRightAnswer(rightAnswer)}>{answer.text}</button>
+            <span className={styles.answer_button_background}>
+                <CustomButton className={styles.answer_button} onClick={() => checkRightAnswer(rightAnswer)}>
+                    <a className={styles.variant}>{answer.variant}: </a>
+                    <a>{answer.text}</a></CustomButton>
             </span>
         }</RightAnswerContext.Consumer>
     )
