@@ -13,6 +13,7 @@ export const MenuPage: React.FC = () => {
     const onStatistics = () => {
         console.log('onStatistics clicked');
     };
+
     const onSettings = () => {
         console.log('onSettings clicked');
     };

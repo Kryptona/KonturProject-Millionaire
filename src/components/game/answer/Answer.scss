@@ -1,0 +1,35 @@
+.root {
+  display: grid;
+  grid-gap: 8px;
+  grid-template-rows: repeat(2, min-content);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    'A B'
+    'C D';
+
+  @media (max-width: 760px) {
+    grid-template-rows: repeat(4, min-content);
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    'A'
+    'B'
+    'C'
+    'D';
+  }
+
+  .variantA {
+    grid-area: A;
+  }
+
+  .variantB {
+    grid-area: B;
+  }
+
+  .variantC {
+    grid-area: C;
+  }
+
+  .variantD {
+    grid-area: D;
+  }
+}

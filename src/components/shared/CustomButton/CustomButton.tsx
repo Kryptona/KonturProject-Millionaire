@@ -2,16 +2,34 @@ import React from 'react';
 import cn from 'classnames';
 import styles from "./CustomButton.scss";
 
-interface Props {
+export enum CustomButtonUse {
+    primary,
+    secondary
+}
+
+export interface CustomButtonProps {
     readonly className?: string;
     readonly children: React.ReactNode;
+    readonly use?: CustomButtonUse;
     readonly onClick?: React.ButtonHTMLAttributes<HTMLButtonElement>["onClick"];
 }
 
-export const CustomButton: React.FC<Props> = ({className, children, onClick}) => {
+export const CustomButton: React.FC<CustomButtonProps> = ({
+                                                              className,
+                                                              children,
+                                                              use = CustomButtonUse.primary,
+                                                              onClick
+                                                          }) => {
+    const colorClassName = colorClassNamesMap[use];
+
     return (
         <button className={cn(styles.root, className)} onClick={onClick}>
-            <span>{children}</span>
+            <span className={colorClassName}>{children}</span>
         </button>
     );
 };
+
+const colorClassNamesMap = {
+    [CustomButtonUse.primary]: styles.primary,
+    [CustomButtonUse.secondary]: styles.secondary,
+} as const;

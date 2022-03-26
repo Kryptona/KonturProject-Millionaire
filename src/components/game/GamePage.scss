@@ -1,24 +1,13 @@
 @import 'src/default.scss';
 
-.root{
-  margin-right: auto;
-  margin-left: auto;
-  width: 80em;
+.root {
+  width: 75%;
+  margin: 0 auto;
+  padding: 32px;
   background: #151978;
 
-  .background {
-    width: 100%;
-    height: 100%;
-
-    .background_image {
-      height: 500px;
-
-      .image {
-        margin-top: 30px;
-        height: 90%;
-        width: 90%;
-      }
-    }
-
+  .image {
+    display: block;
+    margin: 32px auto;
   }
 }

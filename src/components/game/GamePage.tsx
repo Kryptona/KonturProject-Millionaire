@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import styles from './GamePage.scss';
-import Question from "../question/Question";
+import Question from "./question/Question";
 import getThreeQuestions from "../../model/Questions"
-import {questionCard} from "../question/Question";
+import {questionCard} from "./question/Question";
 import logo from "/src/img/millionaire_icon.svg"
 
 export const GamePage: React.FC = () => {
@@ -21,12 +21,9 @@ export const GamePage: React.FC = () => {
 
     return (
         <div className={styles.root}>
-            <div className={styles.background}>
-                <div className={styles.background_image}>
-                    <img className={styles.image} alt="image" src={logo}/>
-                </div>
-                <Question questionCard={questions[questionNumber] as questionCard} UpQuestionNumber = {upQuestionNumber} />
-            </div>
+            <img className={styles.image} alt="image" src={logo}/>
+
+            <Question questionCard={questions[questionNumber] as questionCard} UpQuestionNumber={upQuestionNumber}/>
         </div>
     );
 };

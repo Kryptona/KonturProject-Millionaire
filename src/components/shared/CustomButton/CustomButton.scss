@@ -2,8 +2,30 @@
 
 $height: 64px;
 $half-height: calc(#{$height} / 2);
-$color: #600268;
-$hover-color: green;
+
+@mixin colorMap($color, $hover-color) {
+  background-color: $color;
+
+  &:before {
+    border-right-color: $color;
+  }
+
+  &:after {
+    border-left-color: $color;
+  }
+
+  &:hover {
+    background-color: $hover-color;
+
+    &:before {
+      border-right-color: $hover-color;
+    }
+
+    &:after {
+      border-left-color: $hover-color;
+    }
+  }
+}
 
 .root {
   margin: 0;
@@ -13,12 +35,13 @@ $hover-color: green;
   cursor: pointer;
   background: none;
   user-select: none;
-  display: inline-block;
+  display: inline;
 
   & > span {
     display: inline-block;
     position: relative;
     box-sizing: border-box;
+    width: calc(100% - #{$height});
     height: $height;
     margin: 0 $half-height;
     padding: 0 24px;
@@ -27,23 +50,18 @@ $hover-color: green;
     font-weight: 400;
     line-height: $height;
     color: white;
-    background-color: $color;
     transition: background-color $transition_duration;
+
+    &.primary {
+      @include colorMap(#003d17, #5a3e22);
+    }
+
+    &.secondary {
+      @include colorMap(#600268, green);
+    }
 
     &:active {
       transform: translateY(1px);
-    }
-
-    &:hover {
-      background-color: $hover-color;
-
-      &:before {
-        border-right-color: $hover-color;
-      }
-
-      &:after {
-        border-left-color: $hover-color;
-      }
     }
 
     &:before, &:after {
@@ -55,20 +73,18 @@ $hover-color: green;
       width: $height;
       height: $height;
       border-top: $half-height transparent solid;
+      border-right: $half-height transparent solid;
       border-bottom: $half-height transparent solid;
+      border-left: $half-height transparent solid;
     }
 
     &:before {
       left: -$height;
-      border-right: $half-height $color solid;
-      border-left: $half-height transparent solid;
       transition: border-right-color $transition_duration;
     }
 
     &:after {
       left: 100%;
-      border-right: $half-height transparent solid;
-      border-left: $half-height $color solid;
       transition: border-left-color $transition_duration;
     }
   }

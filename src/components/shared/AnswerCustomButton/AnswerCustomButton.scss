@@ -1,0 +1,18 @@
+.root {
+  width: 100%;
+
+  .content {
+    display: flex;
+    flex-flow: row nowrap;
+    font-size: 40px;
+
+    .letter {
+      color: yellow;
+      margin-right: 8px;
+    }
+
+    .text {
+
+    }
+  }
+}

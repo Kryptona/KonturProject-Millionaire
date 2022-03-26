@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Answer from "./answer/Answer";
+import {Answer} from "../answer/Answer";
 import styles from "./Question.scss"
 
 type questionCard = {
