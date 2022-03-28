@@ -5,9 +5,21 @@
   margin: 0 auto;
   padding: 32px;
   background: #151978;
+  text-align: right;
 
-  .image {
-    display: block;
-    margin: 32px auto;
+  .display {
+    display: flex;
+
+    .image {
+      display: block;
+      margin: 32px auto;
+
+    }
   }
+
+  .score {
+    color: yellow;
+    font-size: 32px;
+  }
+
 }

@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import {Answer} from "../answer/Answer";
 import styles from "./Question.scss"
+import {QuestionField} from "../questionField/QuestionField";
 
 type questionCard = {
     question: string,
@@ -15,16 +16,11 @@ type questionOptions = {
     questionCard : questionCard,
     UpQuestionNumber : () => void,
 }
-const Question  = (questionOptions : questionOptions ) => {
-    const question = questionOptions.questionCard
+export const Question: React.FC<questionOptions>  = ({questionCard, UpQuestionNumber}) => {
     return (
         <div className={styles.root}>
-            <div className={styles.question}>
-                {question.question}
-            </div>
-            <Answer A={question.A} B={question.B} C={question.C} D={question.D} rightAnswer={question.rightAnswer} upQuestionNumber={questionOptions.UpQuestionNumber}/>
+            <QuestionField question={questionCard.question} />
+            <Answer A={questionCard.A} B={questionCard.B} C={questionCard.C} D={questionCard.D} rightAnswer={questionCard.rightAnswer} upQuestionNumber={UpQuestionNumber}/>
         </div>
     )
 }
-
-export default Question
