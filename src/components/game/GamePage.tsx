@@ -28,7 +28,7 @@ export const GamePage: React.FC = () => {
         <div className={styles.root}>
             <div className={styles.display}>
                 <img className={styles.image} alt="image" src={logo}/>
-                <Scores numberQuestions={questionNumber} levelGame={levelNumber}/>
+                <Scores />
             </div>
             <span className={styles.score}>Вы набрали - {score}</span>
             <Question questionCard={questions[questionNumber - 1] as questionCard} UpQuestionNumber={upQuestionNumber}/>
