@@ -14,8 +14,6 @@ export const GamePage: React.FC = () => {
     const [levelNumber, setLevelNumber] = useState(1)
 
     const upQuestionNumber = () => {
-        console.log(questionNumber)
-        console.log(questions)
         if (questionNumber % 3 === 0) {
             setQuestions(getThreeQuestions(3 * levelNumber + 1))
             setQuestionNumber(1)

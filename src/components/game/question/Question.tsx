@@ -1,6 +1,7 @@
 import React from "react";
 import {Answer} from "../answer/Answer";
 import styles from "./Question.scss"
+import {QuestionField} from "../questionField/QuestionField";
 
 type questionCard = {
     question: string,
@@ -18,9 +19,7 @@ type questionOptions = {
 export const Question: React.FC<questionOptions>  = ({questionCard, UpQuestionNumber}) => {
     return (
         <div className={styles.root}>
-            <div className={styles.question}>
-                {questionCard.question}
-            </div>
+            <QuestionField question={questionCard.question} />
             <Answer A={questionCard.A} B={questionCard.B} C={questionCard.C} D={questionCard.D} rightAnswer={questionCard.rightAnswer} upQuestionNumber={UpQuestionNumber}/>
         </div>
     )
