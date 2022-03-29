@@ -39,7 +39,7 @@ export const EndGameMenuPage: React.FC<PropsEndGame> = ({scores, name, isOpen, s
     };
 
     return (
-        <Modal isOpen={isOpen} className={styles.root} style={customStyles}>
+        <Modal isOpen={isOpen} className={styles.root} style={customStyles} ariaHideApp={false}>
             <span className={styles.title}>Вы выиграли {scores}</span>
             <div className={styles.buttons}>
                 <CustomButton onClick={restartGame}>Начать игру заново</CustomButton>
