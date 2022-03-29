@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import styles from './GamePage.scss';
-import {Question} from "./question/Question";
+import {Question} from "./Question/Question";
 import getThreeQuestions from "../../model/Questions"
-import {questionCard} from "./question/Question";
+import {questionCard} from "./Question/Question";
 import logo from "/src/img/millionaire_icon.svg"
-import {Scores} from "./scores/Scores";
+import {Scores} from "./Scores/Scores";
 import scoresList from "../../resources/scores.json";
-import {EndGameMenuPage} from "../endGameMenuPage/EndGameMenuPage";
-import {Timer} from "../Timer/Timer";
+import {EndGameMenuPage} from "./EndGameMenuPage/EndGameMenuPage";
+import {Timer} from "./Timer/Timer";
 
 const TIME_ANSWER = 60
+
 export const GamePage: React.FC = () => {
     const [score, setScore] = useState('0 руб.')
     const [questionNumber, setQuestionNumber] = useState(1)

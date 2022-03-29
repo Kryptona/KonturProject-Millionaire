@@ -1,7 +1,7 @@
 import React, {Dispatch, SetStateAction} from "react";
-import {Answer} from "../answer/Answer";
+import {Answer} from "../Answer/Answer";
 import styles from "./Question.scss"
-import {QuestionField} from "../questionField/QuestionField";
+import {QuestionField} from "../QuestionField/QuestionField";
 
 type questionCard = {
     question: string,

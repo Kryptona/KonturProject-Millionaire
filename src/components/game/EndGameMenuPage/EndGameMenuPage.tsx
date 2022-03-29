@@ -1,6 +1,6 @@
 import styles from "./EndGameMenuPage.scss"
 import React, {Dispatch, SetStateAction} from "react";
-import {CustomButton} from "../shared/CustomButton/CustomButton"
+import {CustomButton} from "../../shared/CustomButton/CustomButton"
 import Modal from 'react-modal';
 
 interface PropsEndGame {
