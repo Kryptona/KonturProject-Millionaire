@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Dispatch, SetStateAction} from "react";
 import styles from "./Answer.scss"
 import {AnswerCustomButton} from "../../shared/AnswerCustomButton/AnswerCustomButton";
 
@@ -8,14 +8,18 @@ type Props = {
     C: string,
     D: string,
     rightAnswer: string,
-    upQuestionNumber: () => void
+    upQuestionNumber: () => void,
+    setOpenModal: Dispatch<SetStateAction<boolean>>
 }
-export const Answer: React.FC<Props> = ({A, B, C, D, rightAnswer, upQuestionNumber}) => {
+export const Answer: React.FC<Props> = ({A, B, C, D, rightAnswer, upQuestionNumber, setOpenModal}) => {
     const checkRightAnswer = (selectedAnswer: string) => {
         if (selectedAnswer === rightAnswer) {
             alert("Правильный ответ")
             upQuestionNumber()
-        } else alert("Ошибка");
+        } else {
+            alert("Ошибка");
+            setOpenModal(true)
+        }
     }
 
     return (

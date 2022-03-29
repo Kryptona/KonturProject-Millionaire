@@ -30,7 +30,10 @@ export const GamePage: React.FC = () => {
     }
 
     const resetGame = () => {
-        console.log("restart")
+        setScore('0 руб.')
+        setQuestionNumber(1)
+        setQuestions(getThreeQuestions(questionNumber))
+        setLevelNumber(0)
     }
 
     return (
@@ -41,7 +44,7 @@ export const GamePage: React.FC = () => {
             </div>
             {isEndGame && <EndGameMenuPage resetGame={resetGame} setOpenModal={setIsEndGame} scores={score} isOpen={isEndGame} name="Джо"/>}
             <span className={styles.score}>Вы набрали - {score}</span>
-            <Question questionCard={questions[questionNumber - 1] as questionCard} UpQuestionNumber={upQuestionNumber}/>
+            <Question questionCard={questions[questionNumber - 1] as questionCard} UpQuestionNumber={upQuestionNumber} setOpenModal={setIsEndGame}/>
         </div>
     );
 };
