@@ -2,29 +2,10 @@
 
 $height: 64px;
 $half-height: calc(#{$height} / 2);
+$factor: 32px;
 
 @mixin colorMap($color, $hover-color) {
   background-color: $color;
-
-  &:before {
-    border-right-color: $color;
-  }
-
-  &:after {
-    border-left-color: $color;
-  }
-
-  &:hover {
-    background-color: $hover-color;
-
-    &:before {
-      border-right-color: $hover-color;
-    }
-
-    &:after {
-      border-left-color: $hover-color;
-    }
-  }
 }
 
 .root {
@@ -41,10 +22,9 @@ $half-height: calc(#{$height} / 2);
     display: inline-block;
     position: relative;
     box-sizing: border-box;
-    width: calc(100% - #{$height});
+    width: 100%;
     height: $height;
-    margin: 0 $half-height;
-    padding: 0 24px;
+    padding: 0 $factor;
     text-align: center;
     font-size: 48px;
     font-weight: 400;
@@ -52,40 +32,14 @@ $half-height: calc(#{$height} / 2);
     color: white;
     transition: background-color $transition_duration;
 
+    clip-path: polygon($factor 0, calc(100% - #{$factor}) 0%, 100% 50%, calc(100% - #{$factor}) 100%, $factor 100%, 0% 50%);
+
     &.primary {
       @include colorMap(#003d17, #5a3e22);
     }
 
     &.secondary {
       @include colorMap(#600268, green);
-    }
-
-    &:active {
-      transform: translateY(1px);
-    }
-
-    &:before, &:after {
-      position: absolute;
-      top: 0;
-      content: '';
-      display: block;
-      box-sizing: border-box;
-      width: $height;
-      height: $height;
-      border-top: $half-height transparent solid;
-      border-right: $half-height transparent solid;
-      border-bottom: $half-height transparent solid;
-      border-left: $half-height transparent solid;
-    }
-
-    &:before {
-      left: -$height;
-      transition: border-right-color $transition_duration;
-    }
-
-    &:after {
-      left: 100%;
-      transition: border-left-color $transition_duration;
     }
   }
 }
