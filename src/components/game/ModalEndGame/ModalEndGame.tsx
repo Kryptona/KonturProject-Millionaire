@@ -1,7 +1,8 @@
-import styles from "./EndGameMenuPage.scss"
+import styles from "./ModalEndGame.scss"
 import React, {Dispatch, SetStateAction} from "react";
-import {CustomButton} from "../../shared/CustomButton/CustomButton"
+import {CustomButton, CustomButtonUse} from "../../shared/CustomButton/CustomButton"
 import Modal from 'react-modal';
+import {useNavigate} from "react-router-dom";
 
 interface PropsEndGame {
     scores: string
@@ -11,14 +12,17 @@ interface PropsEndGame {
     resetGame: () => void
 }
 
-export const EndGameMenuPage: React.FC<PropsEndGame> = ({scores, name, isOpen, setOpenModal, resetGame}) => {
+export const ModalEndGame: React.FC<PropsEndGame> = ({scores, name, isOpen, setOpenModal, resetGame}) => {
+
+    const rout = useNavigate()
 
     const onStatistics = () => {
         console.log('onStatistics clicked');
     };
 
-    const onSettings = () => {
-        console.log('onSettings clicked');
+    const onMenu = () => {
+        rout('/')
+        console.log('onMenu clicked');
     };
 
     const restartGame = () => {
@@ -31,9 +35,9 @@ export const EndGameMenuPage: React.FC<PropsEndGame> = ({scores, name, isOpen, s
         <Modal isOpen={isOpen} className={styles.root} style={modalStyles}>
             <span className={styles.title}>Вы выиграли {scores}</span>
             <div className={styles.buttons}>
-                <CustomButton onClick={restartGame}>Начать игру заново</CustomButton>
-                <CustomButton onClick={onStatistics}>Статистика</CustomButton>
-                <CustomButton onClick={onSettings}>Меню</CustomButton>
+                <CustomButton use={CustomButtonUse.blue} onClick={restartGame}>Начать игру заново</CustomButton>
+                <CustomButton use={CustomButtonUse.blue} onClick={onStatistics}>Статистика</CustomButton>
+                <CustomButton use={CustomButtonUse.blue} onClick={onMenu}>Меню</CustomButton>
             </div>
         </Modal>
     )

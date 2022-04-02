@@ -4,7 +4,8 @@ import styles from "./CustomButton.scss";
 
 export enum CustomButtonUse {
     primary,
-    secondary
+    secondary,
+    blue
 }
 
 export interface CustomButtonProps {
@@ -32,4 +33,5 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
 const colorClassNamesMap = {
     [CustomButtonUse.primary]: styles.primary,
     [CustomButtonUse.secondary]: styles.secondary,
+    [CustomButtonUse.blue]: styles.blue,
 } as const;
