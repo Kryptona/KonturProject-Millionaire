@@ -15,18 +15,20 @@ export const GamePage: React.FC = () => {
     const [levelNumber, setLevelNumber] = useState(0)
     const [isEndGame, setIsEndGame] = useState(false)
 
+    const currentId = (3 * levelNumber) + questionNumber - 1;
+
     const upQuestionNumber = () => {
         if (questionNumber % 3 === 0) {
             if (questionNumber * levelNumber == 12) {
                 setIsEndGame(true)
-                setScore(scores[(3 * levelNumber) + questionNumber - 1].amount)
+                setScore(scores[currentId].amount)
                 return
             }
             setQuestions(getThreeQuestions(3 * levelNumber + 1))
             setQuestionNumber(1)
             setLevelNumber(levelNumber + 1)
         } else setQuestionNumber(questionNumber + 1)
-        setScore(scores[(3 * levelNumber) + questionNumber - 1].amount)
+        setScore(scores[currentId].amount)
     }
 
     const resetGame = () => {
@@ -40,7 +42,7 @@ export const GamePage: React.FC = () => {
         <div className={styles.root}>
             <div className={styles.display}>
                 <img className={styles.image} alt="image" src={logo}/>
-                <Scores id={questionNumber}/>
+                <Scores id={currentId}/>
             </div>
             {isEndGame &&
             <ModalEndGame resetGame={resetGame} setOpenModal={setIsEndGame} scores={score} isOpen={isEndGame}
