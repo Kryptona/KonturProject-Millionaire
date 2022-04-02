@@ -6,6 +6,10 @@ $factor: 32px;
 
 @mixin colorMap($color, $hover-color) {
   background-color: $color;
+
+  &:hover {
+    background-color: $hover-color;
+  }
 }
 
 .root {
@@ -40,6 +44,10 @@ $factor: 32px;
 
     &.secondary {
       @include colorMap(#600268, green);
+    }
+
+    &.blue {
+      @include colorMap(#0c2cac, green);
     }
   }
 }

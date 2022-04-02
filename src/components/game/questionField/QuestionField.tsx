@@ -6,9 +6,9 @@ interface PropsQuestionField {
 }
 
 export const QuestionField: React.FC<PropsQuestionField> = ({question}) => {
-    return(
+    return (
         <div className={styles.root}>
-            <span>{question}</span>
+            {question}
         </div>
     )
 
