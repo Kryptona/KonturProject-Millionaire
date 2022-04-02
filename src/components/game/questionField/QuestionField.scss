@@ -1,5 +1,6 @@
+@import "../../../default.scss";
+
 $color: #600268;
-$factor: 32px;
 
 .root {
   box-sizing: border-box;
@@ -8,7 +9,7 @@ $factor: 32px;
   text-align: center;
   font-size: 48px;
   font-weight: 400;
-  clip-path: polygon($factor 0, calc(100% - #{$factor}) 0%, 100% 50%, calc(100% - #{$factor}) 100%, $factor 100%, 0% 50%);
+  @include hexagon_clip_path(32px);
   background-color: $color;
   min-width: 100%;
   color: yellow;

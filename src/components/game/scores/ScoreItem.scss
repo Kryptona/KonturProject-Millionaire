@@ -1,0 +1,26 @@
+@import "../../../default.scss";
+
+
+.root {
+  width: 100px;
+  display: inline-block;
+  font-family: $Roboto;
+
+  padding: 2px 4px;
+
+  &.selected {
+    @include hexagon_clip_path(8px);
+    background-color: orange;
+  }
+
+  &.fireproof{
+    color: white;
+  }
+
+  .id{
+    display: inline-block;
+    width: 24px;
+    margin-right: 8px;
+    text-align: center;
+  }
+}

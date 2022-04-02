@@ -1,4 +1,5 @@
 @import 'src/default.scss';
+@import "../../../default.scss";
 
 $height: 64px;
 $half-height: calc(#{$height} / 2);
@@ -36,7 +37,7 @@ $factor: 32px;
     color: white;
     transition: background-color $transition_duration;
 
-    clip-path: polygon($factor 0, calc(100% - #{$factor}) 0%, 100% 50%, calc(100% - #{$factor}) 100%, $factor 100%, 0% 50%);
+    @include hexagon_clip_path(32px);
 
     &.primary {
       @include colorMap(#003d17, #5a3e22);

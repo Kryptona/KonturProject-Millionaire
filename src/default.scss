@@ -12,3 +12,8 @@ $default_white: #F9FAFE;
 $transition_duration: 250ms;
 
 $Roboto: 'Roboto';
+
+@mixin hexagon_clip_path($factor){
+  clip-path: polygon($factor 0, calc(100% - #{$factor}) 0%, 100% 50%, calc(100% - #{$factor}) 100%, $factor 100%, 0% 50%);
+}
+

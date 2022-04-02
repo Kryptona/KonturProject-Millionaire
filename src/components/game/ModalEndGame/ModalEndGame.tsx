@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import {useNavigate} from "react-router-dom";
 
 interface PropsEndGame {
-    scores: string
+    scores: number
     name: string
     isOpen: boolean
     setOpenModal: Dispatch<SetStateAction<boolean>>
@@ -33,7 +33,7 @@ export const ModalEndGame: React.FC<PropsEndGame> = ({scores, name, isOpen, setO
 
     return (
         <Modal isOpen={isOpen} className={styles.root} style={modalStyles}>
-            <span className={styles.title}>Вы выиграли {scores}</span>
+            <span className={styles.title}>Вы выиграли {scores} руб.</span>
             <div className={styles.buttons}>
                 <CustomButton use={CustomButtonUse.blue} onClick={restartGame}>Начать игру заново</CustomButton>
                 <CustomButton use={CustomButtonUse.blue} onClick={onStatistics}>

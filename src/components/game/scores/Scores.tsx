@@ -1,14 +1,21 @@
 import styles from "./Scores.scss"
 import React from "react";
-import scoresList from "../../../resources/scores.json"
+import {scores} from "../../../resources/scores"
+import {ScoreItem} from "./ScoreItem";
 
+interface Props {
+    id: number
+}
 
-export const Scores : React.FC = () => {
-    const scores = scoresList.map(x => <li id={x.id}>{x.amount}</li>).reverse()
+export const Scores: React.FC<Props> = ({id}) => {
     return (
         <div className={styles.root}>
             <ul>
-                {scores}
+                {scores.map(score => (
+                    <li key={score.id}>
+                        <ScoreItem value={score} isChecked={id === score.id} />
+                    </li>
+                )).reverse()}
             </ul>
         </div>
     )

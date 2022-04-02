@@ -14,10 +14,10 @@ type Props = {
 export const Answer: React.FC<Props> = ({A, B, C, D, rightAnswer, upQuestionNumber, setOpenModal}) => {
     const checkRightAnswer = (selectedAnswer: string) => {
         if (selectedAnswer === rightAnswer) {
-            alert("Правильный ответ")
+            // alert("Правильный ответ")
             upQuestionNumber()
         } else {
-            alert("Ошибка");
+            // alert("Ошибка");
             setOpenModal(true)
         }
     }
