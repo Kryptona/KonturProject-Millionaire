@@ -6,7 +6,7 @@ import {questionCard} from "./question/Question";
 import logo from "/src/img/millionaire_icon.svg"
 import {Scores} from "./scores/Scores";
 import scoresList from "../../resources/scores.json";
-import {EndGameMenuPage} from "../endGameMenuPage/EndGameMenuPage";
+import {EndGameMenuPage} from "./endGameMenuPage/EndGameMenuPage";
 
 export const GamePage: React.FC = () => {
     const [score, setScore] = useState('0 руб.')
@@ -40,11 +40,14 @@ export const GamePage: React.FC = () => {
         <div className={styles.root}>
             <div className={styles.display}>
                 <img className={styles.image} alt="image" src={logo}/>
-                <Scores />
+                <Scores/>
             </div>
-            {isEndGame && <EndGameMenuPage resetGame={resetGame} setOpenModal={setIsEndGame} scores={score} isOpen={isEndGame} name="Джо"/>}
+            {isEndGame &&
+            <EndGameMenuPage resetGame={resetGame} setOpenModal={setIsEndGame} scores={score} isOpen={isEndGame}
+                             name="Джо"/>}
             <span className={styles.score}>Вы набрали - {score}</span>
-            <Question questionCard={questions[questionNumber - 1] as questionCard} UpQuestionNumber={upQuestionNumber} setOpenModal={setIsEndGame}/>
+            <Question questionCard={questions[questionNumber - 1] as questionCard} UpQuestionNumber={upQuestionNumber}
+                      setOpenModal={setIsEndGame}/>
         </div>
     );
 };

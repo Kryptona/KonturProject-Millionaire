@@ -1,0 +1,34 @@
+@import "../default.scss";
+@import "../../../default.scss";
+
+$violet: #5a1880;
+$white: white;
+
+.root {
+  background: $violet;
+  color: $blue;
+  z-index: 9999;
+  position: absolute;
+  text-align: center;
+  height: 300px;
+  width: 800px;
+
+  padding: 16px;
+  box-sizing: border-box;
+
+  .title {
+    font-size: 48px;
+    color: $white;
+    font-family: $Roboto;
+  }
+
+  .buttons {
+    margin: 16px;
+
+    & > button{
+      margin-bottom: 20px;
+      min-width: 300px;
+    }
+  }
+
+}
