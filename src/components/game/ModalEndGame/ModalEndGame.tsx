@@ -36,8 +36,12 @@ export const ModalEndGame: React.FC<PropsEndGame> = ({scores, name, isOpen, setO
             <span className={styles.title}>Вы выиграли {scores}</span>
             <div className={styles.buttons}>
                 <CustomButton use={CustomButtonUse.blue} onClick={restartGame}>Начать игру заново</CustomButton>
-                <CustomButton use={CustomButtonUse.blue} onClick={onStatistics}>Статистика</CustomButton>
-                <CustomButton use={CustomButtonUse.blue} onClick={onMenu}>Меню</CustomButton>
+                <CustomButton use={CustomButtonUse.blue} onClick={onStatistics}>
+                    <span className={styles.word}>Статистика</span>
+                </CustomButton>
+                <CustomButton use={CustomButtonUse.blue} onClick={onMenu}>
+                    <span className={styles.word}>Меню</span>
+                </CustomButton>
             </div>
         </Modal>
     )
