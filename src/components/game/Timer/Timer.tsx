@@ -1,5 +1,5 @@
 import styles from "./Timre.scss"
-import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
+import React, {Dispatch, SetStateAction, useEffect, useRef, useState} from "react";
 
 interface PropsTimer {
     time: number
@@ -7,7 +7,6 @@ interface PropsTimer {
     setOpenModal: Dispatch<SetStateAction<boolean>>
 }
 export const Timer: React.FC<PropsTimer> = ({time, setOpenModal, setCounter}) => {
-
     const stop = () => {
 
     }

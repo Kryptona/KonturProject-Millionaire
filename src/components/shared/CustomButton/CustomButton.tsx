@@ -13,18 +13,20 @@ export interface CustomButtonProps {
     readonly children: React.ReactNode;
     readonly use?: CustomButtonUse;
     readonly onClick?: React.ButtonHTMLAttributes<HTMLButtonElement>["onClick"];
+    readonly disable?: boolean
 }
 
 export const CustomButton: React.FC<CustomButtonProps> = ({
                                                               className,
                                                               children,
                                                               use = CustomButtonUse.primary,
-                                                              onClick
+                                                              onClick,
+                                                              disable = false
                                                           }) => {
     const colorClassName = colorClassNamesMap[use];
 
     return (
-        <button className={cn(styles.root, className)} onClick={onClick}>
+        <button className={cn(styles.root, className)} onClick={onClick} disabled={disable}>
             <span className={colorClassName}>{children}</span>
         </button>
     );

@@ -1,0 +1,54 @@
+@import "../../../default.scss";
+$height: 64px;
+$factor: 32px;
+$color: #600268;
+
+.root {
+
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: none;
+    user-select: none;
+    display: inline;
+    background: $color;
+    @include hexagon_clip_path(32px);
+    //font-family: $Roboto ;
+
+    .content {
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+        width: 100%;
+        min-height: $height;
+        padding: 0 $factor;
+        font-size: 40px;
+        font-weight: 400;
+        line-height: $height;
+        color: white;
+        animation: click 3s linear;
+        animation-iteration-count: 2;
+
+
+        .letter {
+            color: yellow;
+            margin-right: 8px;
+        }
+    }
+}
+
+@keyframes click {
+    0% {
+        background: #003d17;
+    }
+    50% {
+        background: yellow;
+    }
+    100% {
+        background: #003d17;
+    }
+
+
+}
