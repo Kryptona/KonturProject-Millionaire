@@ -1,7 +1,7 @@
 import React, {Dispatch, SetStateAction, useState} from "react";
 import styles from "./Answer.scss"
 import {AnswerCustomButton} from "../../shared/AnswerCustomButton/AnswerCustomButton";
-import {AnimationAnswerButton} from "../AnimationAnswerButton/AnimationAnswerButton";
+import {AnimationAnswerButton} from "../../shared/AnimationAnswerButton/AnimationAnswerButton";
 
 type Props = {
     A: string,

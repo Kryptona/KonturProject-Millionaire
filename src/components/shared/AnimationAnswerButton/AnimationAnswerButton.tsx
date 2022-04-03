@@ -1,7 +1,7 @@
 import styles from "./AnimationAnswerButton.scss"
 import React, {Dispatch, SetStateAction, useState} from "react";
-import {CustomButtonProps} from "../../shared/CustomButton/CustomButton";
-import {AnswerCustomButton} from "../../shared/AnswerCustomButton/AnswerCustomButton";
+import {CustomButtonProps} from "../CustomButton/CustomButton";
+import {AnswerCustomButton} from "../AnswerCustomButton/AnswerCustomButton";
 
 interface PropsAnimationButtonAnswer {
     readonly className?: string;
