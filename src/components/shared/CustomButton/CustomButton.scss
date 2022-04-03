@@ -28,7 +28,7 @@ $factor: 32px;
     position: relative;
     box-sizing: border-box;
     width: 100%;
-    height: $height;
+    min-height: $height;
     padding: 0 $factor;
     text-align: center;
     font-size: 48px;

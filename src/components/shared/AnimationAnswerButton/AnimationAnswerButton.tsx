@@ -2,6 +2,7 @@ import styles from "./AnimationAnswerButton.scss"
 import React, {Dispatch, SetStateAction, useState} from "react";
 import {CustomButtonProps} from "../CustomButton/CustomButton";
 import {AnswerCustomButton} from "../AnswerCustomButton/AnswerCustomButton";
+import cn from "classnames";
 
 interface PropsAnimationButtonAnswer {
     readonly className?: string;
@@ -10,6 +11,7 @@ interface PropsAnimationButtonAnswer {
     readonly answerText: string;
     readonly isDisable: boolean;
     readonly setIsDisable: Dispatch<SetStateAction<boolean>>
+    readonly classNameFieldAnswer: boolean
 }
 
 export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
@@ -17,9 +19,12 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
                                                                                 answerText,
                                                                                 onClick,
                                                                                 letter,
-                                                                                setIsDisable, isDisable
+                                                                                setIsDisable,
+                                                                                isDisable,
+                                                                                classNameFieldAnswer
                                                                             }) => {
     const [isClicked, setIsClicked] = useState(false)
+
     const changeField = () => {
         if (!isDisable) {
             setIsDisable(true)
@@ -33,7 +38,7 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
             {!isClicked && <AnswerCustomButton className={className} letter={letter} onClick={onClick}
                                                disable={isDisable}>{answerText} </AnswerCustomButton>}
             {isClicked &&
-                <span className={styles.content}>
+                <span className={classNameFieldAnswer ? styles.contentRight : styles.contentFalse}>
                 <span className={styles.letter}>{letter}:</span>
                 <span className={styles.text}>{answerText}</span>
             </span>

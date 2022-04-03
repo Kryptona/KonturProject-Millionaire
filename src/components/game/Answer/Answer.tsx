@@ -25,16 +25,24 @@ export const Answer: React.FC<Props> = ({A, B, C, D, rightAnswer, upQuestionNumb
         }
     }
 
+    const getNameClassByAnswer = (answer: string) => {
+        return answer === rightAnswer
+    }
+
     return (
         <div className={styles.root}>
             <AnimationAnswerButton className={styles.variantA} letter={'A'} onClick={() => checkRightAnswer(A)}
-                                   answerText={A} isDisable={isClickedAnswer} setIsDisable={setIsClickedAnswer}/>
+                                   answerText={A} isDisable={isClickedAnswer} setIsDisable={setIsClickedAnswer}
+                                   classNameFieldAnswer={getNameClassByAnswer(A)}/>
             <AnimationAnswerButton className={styles.variantB} letter={'B'} onClick={() => checkRightAnswer(B)}
-                                   answerText={B} isDisable={isClickedAnswer} setIsDisable={setIsClickedAnswer}/>
+                                   answerText={B} isDisable={isClickedAnswer} setIsDisable={setIsClickedAnswer}
+                                   classNameFieldAnswer={getNameClassByAnswer(B)}/>
             <AnimationAnswerButton className={styles.variantC} letter={'C'} onClick={() => checkRightAnswer(C)}
-                                   answerText={C} isDisable={isClickedAnswer} setIsDisable={setIsClickedAnswer}/>
+                                   answerText={C} isDisable={isClickedAnswer} setIsDisable={setIsClickedAnswer}
+                                   classNameFieldAnswer={getNameClassByAnswer(C)}/>
             <AnimationAnswerButton className={styles.variantD} letter={'D'} onClick={() => checkRightAnswer(D)}
-                                   answerText={D} isDisable={isClickedAnswer} setIsDisable={setIsClickedAnswer}/>
+                                   answerText={D} isDisable={isClickedAnswer} setIsDisable={setIsClickedAnswer}
+                                   classNameFieldAnswer={getNameClassByAnswer(D)}/>
         </div>
     );
 };

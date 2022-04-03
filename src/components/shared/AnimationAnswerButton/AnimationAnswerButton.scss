@@ -17,7 +17,7 @@ $color: #600268;
     @include hexagon_clip_path(32px);
     //font-family: $Roboto ;
 
-    .content {
+    .contentRight, .contentFalse {
         display: inline-block;
         position: relative;
         box-sizing: border-box;
@@ -28,8 +28,6 @@ $color: #600268;
         font-weight: 400;
         line-height: $height;
         color: white;
-        animation: click 3s linear;
-        animation-iteration-count: 2;
 
 
         .letter {
@@ -37,14 +35,74 @@ $color: #600268;
             margin-right: 8px;
         }
     }
+    .contentRight {
+        animation: rightClick 6s linear;
+    }
+
+    .contentFalse {
+        animation: falseClick 6s linear;
+    }
 }
 
-@keyframes click {
-    0% {
+
+
+
+@keyframes falseClick {
+
+    10% {
         background: #003d17;
     }
-    50% {
+    20% {
         background: yellow;
+    }
+    30% {
+        background: #003d17;
+    }
+    40% {
+        background: yellow;
+    }
+    50% {
+        background: #003d17;
+    }
+    60% {
+        background: yellow;
+    }
+    70% {
+        background: #003d17;
+    }
+    80% {
+        background: red;
+    }
+    100% {
+        background: red;
+    }
+
+
+}
+@keyframes rightClick {
+    10% {
+        background: #003d17;
+    }
+    20% {
+        background: yellow;
+    }
+    30% {
+        background: #003d17;
+    }
+    40% {
+        background: yellow;
+    }
+    50% {
+        background: #003d17;
+    }
+    60% {
+        background: yellow;
+    }
+    70% {
+        background: #003d17;
+    }
+    80% {
+        background: #003d17;
     }
     100% {
         background: #003d17;
