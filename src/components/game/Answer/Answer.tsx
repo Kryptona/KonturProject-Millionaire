@@ -1,6 +1,7 @@
-import React, {Dispatch, SetStateAction} from 'react';
-import styles from './Answer.scss';
-import {AnswerCustomButton} from '../../shared/AnswerCustomButton/AnswerCustomButton';
+import React, {Dispatch, SetStateAction, useState} from "react";
+import styles from "./Answer.scss"
+import {AnswerCustomButton} from "../../shared/AnswerCustomButton/AnswerCustomButton";
+import {AnimationAnswerButton} from "../../shared/AnimationAnswerButton/AnimationAnswerButton";
 
 type Props = {
   A: string;
@@ -12,30 +13,36 @@ type Props = {
   setOpenModal: Dispatch<SetStateAction<boolean>>;
 };
 export const Answer: React.FC<Props> = ({A, B, C, D, rightAnswer, upQuestionNumber, setOpenModal}) => {
-  const checkRightAnswer = (selectedAnswer: string) => {
-    if (selectedAnswer === rightAnswer) {
-      // alert("Правильный ответ")
-      upQuestionNumber();
-    } else {
-      // alert("Ошибка");
-      setOpenModal(true);
+    const [isClickedAnswer, setIsClickedAnswer] = useState(false)
+    const checkRightAnswer = (selectedAnswer: string) => {
+        if (selectedAnswer === rightAnswer) {
+            // alert("Правильный ответ")
+            setTimeout(() => upQuestionNumber(), 6000)
+        } else {
+            // alert("Ошибка");
+            // setOpenModal(true)
+            setTimeout(() => setOpenModal(true), 6000)
+        }
     }
-  };
 
-  return (
-    <div className={styles.root}>
-      <AnswerCustomButton className={styles.variantA} letter={'A'} onClick={() => checkRightAnswer(A)}>
-        {A}
-      </AnswerCustomButton>
-      <AnswerCustomButton className={styles.variantB} letter={'B'} onClick={() => checkRightAnswer(B)}>
-        {B}
-      </AnswerCustomButton>
-      <AnswerCustomButton className={styles.variantC} letter={'C'} onClick={() => checkRightAnswer(C)}>
-        {C}
-      </AnswerCustomButton>
-      <AnswerCustomButton className={styles.variantD} letter={'D'} onClick={() => checkRightAnswer(D)}>
-        {D}
-      </AnswerCustomButton>
-    </div>
-  );
+    const getNameClassByAnswer = (answer: string) => {
+        return answer === rightAnswer
+    }
+
+    return (
+        <div className={styles.root}>
+            <AnimationAnswerButton className={styles.variantA} letter={'A'} onClick={() => checkRightAnswer(A)}
+                                   answerText={A} isDisable={isClickedAnswer} setIsDisable={setIsClickedAnswer}
+                                   classNameFieldAnswer={getNameClassByAnswer(A)}/>
+            <AnimationAnswerButton className={styles.variantB} letter={'B'} onClick={() => checkRightAnswer(B)}
+                                   answerText={B} isDisable={isClickedAnswer} setIsDisable={setIsClickedAnswer}
+                                   classNameFieldAnswer={getNameClassByAnswer(B)}/>
+            <AnimationAnswerButton className={styles.variantC} letter={'C'} onClick={() => checkRightAnswer(C)}
+                                   answerText={C} isDisable={isClickedAnswer} setIsDisable={setIsClickedAnswer}
+                                   classNameFieldAnswer={getNameClassByAnswer(C)}/>
+            <AnimationAnswerButton className={styles.variantD} letter={'D'} onClick={() => checkRightAnswer(D)}
+                                   answerText={D} isDisable={isClickedAnswer} setIsDisable={setIsClickedAnswer}
+                                   classNameFieldAnswer={getNameClassByAnswer(D)}/>
+        </div>
+    );
 };

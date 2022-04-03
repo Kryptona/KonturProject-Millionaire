@@ -1,0 +1,112 @@
+@import "../../../default";
+$height: 64px;
+$factor: 32px;
+$color: #600268;
+
+.root {
+
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: none;
+    user-select: none;
+    display: inline;
+    background: $color;
+    @include hexagon_clip_path(32px);
+    //font-family: $Roboto ;
+
+    .contentRight, .contentFalse {
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+        width: 100%;
+        min-height: $height;
+        padding: 0 $factor;
+        font-size: 40px;
+        font-weight: 400;
+        line-height: $height;
+        color: white;
+
+
+        .letter {
+            color: yellow;
+            margin-right: 8px;
+        }
+    }
+    .contentRight {
+        animation: rightClick 6s linear;
+    }
+
+    .contentFalse {
+        animation: falseClick 6s linear;
+    }
+}
+
+
+
+
+@keyframes falseClick {
+
+    10% {
+        background: #003d17;
+    }
+    20% {
+        background: yellow;
+    }
+    30% {
+        background: #003d17;
+    }
+    40% {
+        background: yellow;
+    }
+    50% {
+        background: #003d17;
+    }
+    60% {
+        background: yellow;
+    }
+    70% {
+        background: #003d17;
+    }
+    80% {
+        background: red;
+    }
+    100% {
+        background: red;
+    }
+
+
+}
+@keyframes rightClick {
+    10% {
+        background: #003d17;
+    }
+    20% {
+        background: yellow;
+    }
+    30% {
+        background: #003d17;
+    }
+    40% {
+        background: yellow;
+    }
+    50% {
+        background: #003d17;
+    }
+    60% {
+        background: yellow;
+    }
+    70% {
+        background: #003d17;
+    }
+    80% {
+        background: #003d17;
+    }
+    100% {
+        background: #003d17;
+    }
+
+
+}
