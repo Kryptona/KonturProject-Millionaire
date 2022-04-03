@@ -1,5 +1,5 @@
-@import "../default.scss";
-@import "../../../default.scss";
+@import '../default.scss';
+@import '../../../default.scss';
 
 $violet: #5a1880;
 $white: white;
@@ -25,15 +25,14 @@ $white: white;
   .buttons {
     margin: 16px;
 
-    & > button{
+    & > button {
       margin-bottom: 20px;
       min-width: 300px;
     }
 
-    .word{
+    .word {
       display: inline-block;
       width: 280px;
     }
   }
-
 }
