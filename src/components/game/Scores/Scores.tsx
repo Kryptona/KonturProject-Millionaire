@@ -1,7 +1,7 @@
 import styles from "./Scores.scss"
 import React from "react";
 import {scores} from "../../../resources/scores"
-import {ScoreItem} from "./ScoreItem";
+import {ScoreItem} from "./ScoreItem"
 
 interface Props {
     id: number
