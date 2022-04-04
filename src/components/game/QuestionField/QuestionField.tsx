@@ -1,15 +1,10 @@
-import styles from "./QuestionField.scss"
-import React from "react";
+import styles from './QuestionField.scss';
+import React from 'react';
 
 interface PropsQuestionField {
-    question: string
+  question: string;
 }
 
 export const QuestionField: React.FC<PropsQuestionField> = ({question}) => {
-    return (
-        <div className={styles.root}>
-            {question}
-        </div>
-    )
-
-}
+  return <div className={styles.root}>{question}</div>;
+};

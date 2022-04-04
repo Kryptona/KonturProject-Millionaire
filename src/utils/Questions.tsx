@@ -1,5 +1,9 @@
 import questions from "../resources/questions.json"
 
+const all = [...questions.veryEasy, ...questions.easy, ...questions.normal, ...questions.hard, ...questions.veryHard]
+const res = all.map(x => [x.A, x.B, x.C, x.D]).reduce((prev, curr) => [...prev, ...curr], []).sort((a,b) => a.length - b.length);
+console.log(res);
+
 export default function getThreeQuestions(level: number) {
     switch (true) {
         case level < 4:

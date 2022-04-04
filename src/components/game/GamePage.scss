@@ -1,11 +1,10 @@
 @import 'src/default.scss';
 
 .root {
-  width: 75%;
+  width: 100%;
   margin: 0 auto;
   padding: 32px;
   background: #151978;
-  text-align: right;
 
   .display {
     display: flex;
@@ -13,7 +12,6 @@
     .image {
       display: block;
       margin: 32px auto;
-
     }
   }
 
@@ -21,5 +19,4 @@
     color: yellow;
     font-size: 32px;
   }
-
 }

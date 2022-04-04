@@ -1,5 +1,5 @@
 @import 'src/default.scss';
-@import "../../../default.scss";
+@import '../../../default.scss';
 
 $height: 64px;
 $half-height: calc(#{$height} / 2);
@@ -28,10 +28,10 @@ $factor: 32px;
     position: relative;
     box-sizing: border-box;
     width: 100%;
-    height: $height;
+    min-height: $height;
     padding: 0 $factor;
     text-align: center;
-    font-size: 48px;
+    font-size: 38px;
     font-weight: 400;
     line-height: $height;
     color: white;
@@ -44,11 +44,15 @@ $factor: 32px;
     }
 
     &.secondary {
-      @include colorMap(#600268, green);
+      @include colorMap(#600268, #c2b82d);
     }
 
     &.blue {
       @include colorMap(#0c2cac, green);
+    }
+
+    &:active {
+      transform: translateY(1px);
     }
   }
 }
