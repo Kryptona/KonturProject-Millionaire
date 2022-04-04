@@ -1,4 +1,5 @@
 @import '../../../default';
+
 $height: 64px;
 $factor: 32px;
 $color: #600268;
@@ -11,14 +12,14 @@ $color: #600268;
   cursor: pointer;
   background: none;
   user-select: none;
-  display: inline;
   background: $color;
   @include hexagon_clip_path(32px);
   font-family: $Roboto;
+  display: flex;
 
   .contentRight,
   .contentFalse {
-    display: inline-block;
+    display: flex;
     position: relative;
     box-sizing: border-box;
     width: 100%;
@@ -34,6 +35,7 @@ $color: #600268;
       margin-right: 8px;
     }
   }
+
   .contentRight {
     animation: rightClick 6s linear;
   }
@@ -72,6 +74,7 @@ $color: #600268;
     background: red;
   }
 }
+
 @keyframes rightClick {
   10% {
     background: #003d17;
@@ -99,5 +102,11 @@ $color: #600268;
   }
   100% {
     background: #003d17;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .text, .letter {
+    font-size: 28px;
   }
 }

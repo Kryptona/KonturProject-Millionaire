@@ -20,3 +20,25 @@
     font-size: 32px;
   }
 }
+
+@media screen and (max-width: 800px) {
+  .root {
+    .display {
+
+      .image {
+        width: 200px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .root {
+    .display {
+
+      .image {
+        width: 100px;
+      }
+    }
+  }
+}

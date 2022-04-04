@@ -18,6 +18,7 @@ export const GamePage: React.FC = () => {
   const [levelNumber, setLevelNumber] = useState(0);
   const [isEndGame, setIsEndGame] = useState(false);
   const [counter, setCounter] = useState(TIME_ANSWER);
+  const [isClickedAnswer, setIsClickedAnswer] = useState(false);
 
   const currentId = 3 * levelNumber + questionNumber - 1;
 
@@ -51,15 +52,22 @@ export const GamePage: React.FC = () => {
         <img className={styles.image} alt="image" src={logo} />
         <Scores id={currentId} />
       </div>
-      <Timer time={counter} setCounter={setCounter} setOpenModal={setIsEndGame} />
+      <Timer
+        time={counter}
+        setCounter={setCounter}
+        setOpenModal={setIsEndGame}
+        isDisable={isClickedAnswer}
+        isOpenModal={isEndGame}
+      />
       {isEndGame && (
         <ModalEndGame resetGame={resetGame} setOpenModal={setIsEndGame} scores={score} isOpen={isEndGame} name="Джо" />
       )}
-      <span className={styles.score}>Вы набрали - {score}</span>
       <Question
         questionCard={questions[questionNumber - 1] as questionCard}
         UpQuestionNumber={upQuestionNumber}
         setOpenModal={setIsEndGame}
+        isClickedAnswer={isClickedAnswer}
+        setIsClickedAnswer={setIsClickedAnswer}
       />
     </div>
   );

@@ -36,3 +36,28 @@ $white: white;
     }
   }
 }
+
+@media screen and (max-width: 800px) {
+  span {
+    display: block;
+  }
+
+  .root {
+    width: 450px;
+    height: auto;
+
+    .buttons {
+
+      .word, {
+        font-size: 24px;
+        width: auto;
+      }
+    }
+
+    .title {
+      font-size: 24px;
+    }
+
+  }
+
+}

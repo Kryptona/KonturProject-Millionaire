@@ -11,13 +11,25 @@ type Props = {
   rightAnswer: string;
   upQuestionNumber: () => void;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
+  isClickedAnswer: boolean;
+  setIsClickedAnswer: Dispatch<SetStateAction<boolean>>;
 };
-export const Answer: React.FC<Props> = ({A, B, C, D, rightAnswer, upQuestionNumber, setOpenModal}) => {
-  const [isClickedAnswer, setIsClickedAnswer] = useState(false);
+export const Answer: React.FC<Props> = ({
+  A,
+  B,
+  C,
+  D,
+  rightAnswer,
+  upQuestionNumber,
+  setOpenModal,
+  setIsClickedAnswer,
+  isClickedAnswer,
+}) => {
+  // const [isClickedAnswer, setIsClickedAnswer] = useState(false);
   const checkRightAnswer = (selectedAnswer: string) => {
     if (selectedAnswer === rightAnswer) {
       // alert("Правильный ответ")
-      setTimeout(() => upQuestionNumber(), 6000);
+      setTimeout(() => upQuestionNumber(), 6001);
     } else {
       // alert("Ошибка");
       // setOpenModal(true)

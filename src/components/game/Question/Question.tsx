@@ -16,8 +16,16 @@ type questionOptions = {
   questionCard: questionCard;
   UpQuestionNumber: () => void;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
+  isClickedAnswer: boolean;
+  setIsClickedAnswer: Dispatch<SetStateAction<boolean>>;
 };
-export const Question: React.FC<questionOptions> = ({questionCard, UpQuestionNumber, setOpenModal}) => {
+export const Question: React.FC<questionOptions> = ({
+  questionCard,
+  UpQuestionNumber,
+  setOpenModal,
+  isClickedAnswer,
+  setIsClickedAnswer,
+}) => {
   return (
     <div className={styles.root}>
       <QuestionField question={questionCard.question} />
@@ -29,6 +37,8 @@ export const Question: React.FC<questionOptions> = ({questionCard, UpQuestionNum
         rightAnswer={questionCard.rightAnswer}
         setOpenModal={setOpenModal}
         upQuestionNumber={UpQuestionNumber}
+        setIsClickedAnswer={setIsClickedAnswer}
+        isClickedAnswer={isClickedAnswer}
       />
     </div>
   );
