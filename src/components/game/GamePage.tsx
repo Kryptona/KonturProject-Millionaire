@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styles from './GamePage.scss';
 import {Question} from './Question/Question';
-import getThreeQuestions from '../../utils/Questions';
 import logo from '/src/img/millionaire_icon.svg';
 import {Scores} from './Scores/Scores';
 import {scores} from '../../resources/scores';
