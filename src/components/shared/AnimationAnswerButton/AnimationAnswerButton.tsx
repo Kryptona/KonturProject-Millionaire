@@ -29,8 +29,10 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
     if (!isDisable) {
       setIsDisable(true);
       setIsClicked(!isClicked);
-      setTimeout(() => setIsClicked(false), 6000);
-      setTimeout(() => setIsDisable(false), 6000);
+      setTimeout(() => {
+        setIsClicked(false);
+        setIsDisable(false);
+      }, 6000);
     }
   };
   return (
