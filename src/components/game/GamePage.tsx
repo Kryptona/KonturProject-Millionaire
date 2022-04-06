@@ -9,6 +9,7 @@ import {Timer} from './Timer/Timer';
 import {questionsList} from '../../utils/Questions';
 import initQuestionsList from '../../utils/Questions';
 import {QuestionModel} from '../../models/QuestionModel';
+import {Prompt} from '../shared/Promt/Prompt';
 
 const TIME_ANSWER = 60;
 
@@ -50,6 +51,12 @@ export const GamePage: React.FC = () => {
         isDisable={isClickedAnswer}
         isOpenModal={isEndGame}
       />
+      <div className={styles.prompts}>
+        <Prompt img={logo} name={styles.questionReplacement} onClick={() => console.log('1')} />
+        <Prompt img={logo} name={styles.fiftyFifty} onClick={() => console.log('2')} />
+        <Prompt img={logo} name={styles.hallHelp} onClick={() => console.log('3')} />
+        <Prompt img={logo} name={styles.rightToWrong} onClick={() => console.log('4')} />
+      </div>
       {isEndGame && (
         <ModalEndGame resetGame={resetGame} setOpenModal={setIsEndGame} scores={score} isOpen={isEndGame} name="Джо" />
       )}
