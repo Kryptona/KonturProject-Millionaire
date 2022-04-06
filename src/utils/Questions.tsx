@@ -1,11 +1,12 @@
 import {questions} from '../resources/questions';
 import {QuestionModel} from '../models/QuestionModel';
 
-export const questionsList: QuestionModel[] = [];
+export let questionsList: QuestionModel[] = [];
 let addedQuestions: number[] = [];
 
 export default function initQuestionsList() {
   addedQuestions = [];
+  questionsList = [];
   for (let level in questions) {
     addRandomItemsInList(questions[level]);
   }

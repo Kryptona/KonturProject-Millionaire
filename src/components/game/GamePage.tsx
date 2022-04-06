@@ -32,7 +32,7 @@ export const GamePage: React.FC = () => {
 
   const resetGame = () => {
     setScore(0);
-    setQuestionNumber(1);
+    setQuestionNumber(0);
     setCounter(TIME_ANSWER);
     initQuestionsList();
   };
