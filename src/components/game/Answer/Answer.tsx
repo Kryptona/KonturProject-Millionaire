@@ -1,6 +1,5 @@
 import React, {Dispatch, SetStateAction, useState} from 'react';
 import styles from './Answer.scss';
-import {AnswerCustomButton} from '../../shared/AnswerCustomButton/AnswerCustomButton';
 import {AnimationAnswerButton} from '../../shared/AnimationAnswerButton/AnimationAnswerButton';
 
 type Props = {
@@ -25,18 +24,20 @@ export const Answer: React.FC<Props> = ({
   setIsClickedAnswer,
   isClickedAnswer,
 }) => {
-  // const [isClickedAnswer, setIsClickedAnswer] = useState(false);
+  const [isAnswerBacklight, setIsAnswerBacklight] = useState(false);
   const checkRightAnswer = (selectedAnswer: string) => {
     if (selectedAnswer === rightAnswer) {
       // alert("Правильный ответ")
-      setTimeout(() => upQuestionNumber(), 6001);
+      setTimeout(() => {
+        upQuestionNumber();
+      }, 6001);
     } else {
       // alert("Ошибка");
       // setOpenModal(true)
+      setTimeout(() => setIsAnswerBacklight(true), 4000);
       setTimeout(() => setOpenModal(true), 6000);
     }
   };
-
   const getNameClassByAnswer = (answer: string) => {
     return answer === rightAnswer;
   };
@@ -50,6 +51,8 @@ export const Answer: React.FC<Props> = ({
         isDisable={isClickedAnswer}
         setIsDisable={setIsClickedAnswer}
         classNameFieldAnswer={getNameClassByAnswer(A)}
+        isAnswerBacklight={isAnswerBacklight}
+        setIsAnswerBacklight={setIsAnswerBacklight}
       />
       <AnimationAnswerButton
         letter={'B'}
@@ -58,6 +61,8 @@ export const Answer: React.FC<Props> = ({
         isDisable={isClickedAnswer}
         setIsDisable={setIsClickedAnswer}
         classNameFieldAnswer={getNameClassByAnswer(B)}
+        isAnswerBacklight={isAnswerBacklight}
+        setIsAnswerBacklight={setIsAnswerBacklight}
       />
       <AnimationAnswerButton
         letter={'C'}
@@ -66,6 +71,8 @@ export const Answer: React.FC<Props> = ({
         isDisable={isClickedAnswer}
         setIsDisable={setIsClickedAnswer}
         classNameFieldAnswer={getNameClassByAnswer(C)}
+        isAnswerBacklight={isAnswerBacklight}
+        setIsAnswerBacklight={setIsAnswerBacklight}
       />
       <AnimationAnswerButton
         letter={'D'}
@@ -74,6 +81,8 @@ export const Answer: React.FC<Props> = ({
         isDisable={isClickedAnswer}
         setIsDisable={setIsClickedAnswer}
         classNameFieldAnswer={getNameClassByAnswer(D)}
+        isAnswerBacklight={isAnswerBacklight}
+        setIsAnswerBacklight={setIsAnswerBacklight}
       />
     </div>
   );

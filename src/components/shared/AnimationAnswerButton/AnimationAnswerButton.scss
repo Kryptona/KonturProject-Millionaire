@@ -37,68 +37,34 @@ $color: #600268;
   }
 
   .contentRight {
-    animation: rightClick 6s linear;
+    background: #003d17;
   }
 
-  .contentFalse {
-    animation: falseClick 6s linear;
+  .contentFalse, .contentRight {
+    animation: Click 4s linear;
+  }
+
+  .rightAnswer {
+    background: #003d17 !important;
+  }
+
+  .falseAnswer {
+    background: red !important;
   }
 }
 
-@keyframes falseClick {
-  10% {
+@keyframes Click {
+  0% {
     background: #003d17;
   }
-  20% {
-    background: yellow;
-  }
-  30% {
-    background: #003d17;
-  }
-  40% {
+  25% {
     background: yellow;
   }
   50% {
     background: #003d17;
   }
-  60% {
+  75% {
     background: yellow;
-  }
-  70% {
-    background: #003d17;
-  }
-  80% {
-    background: red;
-  }
-  100% {
-    background: red;
-  }
-}
-
-@keyframes rightClick {
-  10% {
-    background: #003d17;
-  }
-  20% {
-    background: yellow;
-  }
-  30% {
-    background: #003d17;
-  }
-  40% {
-    background: yellow;
-  }
-  50% {
-    background: #003d17;
-  }
-  60% {
-    background: yellow;
-  }
-  70% {
-    background: #003d17;
-  }
-  80% {
-    background: #003d17;
   }
   100% {
     background: #003d17;

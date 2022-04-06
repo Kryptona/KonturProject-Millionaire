@@ -12,6 +12,8 @@ interface PropsAnimationButtonAnswer {
   readonly isDisable: boolean;
   readonly setIsDisable: Dispatch<SetStateAction<boolean>>;
   readonly classNameFieldAnswer: boolean;
+  readonly isAnswerBacklight: boolean;
+  readonly setIsAnswerBacklight: Dispatch<SetStateAction<boolean>>;
 }
 
 export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
@@ -22,6 +24,8 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
   setIsDisable,
   isDisable,
   classNameFieldAnswer,
+  isAnswerBacklight,
+  setIsAnswerBacklight,
 }) => {
   const [isClicked, setIsClicked] = useState(false);
 
@@ -29,21 +33,30 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
     if (!isDisable) {
       setIsDisable(true);
       setIsClicked(!isClicked);
+
       setTimeout(() => {
         setIsClicked(false);
         setIsDisable(false);
+        setIsAnswerBacklight(false);
       }, 6000);
     }
   };
+
   return (
     <div className={styles.root} onClick={() => changeField()}>
-      {!isClicked && (
+      {!isClicked && !isAnswerBacklight && (
         <AnswerCustomButton className={className} letter={letter} onClick={onClick} disable={isDisable}>
           {answerText}{' '}
         </AnswerCustomButton>
       )}
-      {isClicked && (
-        <span className={classNameFieldAnswer ? styles.contentRight : styles.contentFalse}>
+      {(isClicked || isAnswerBacklight) && (
+        <span
+          className={cn({
+            [styles.contentRight]: classNameFieldAnswer,
+            [styles.contentFalse]: !classNameFieldAnswer,
+            [styles.rightAnswer]: isAnswerBacklight && classNameFieldAnswer,
+            [styles.falseAnswer]: isAnswerBacklight && !classNameFieldAnswer,
+          })}>
           <span className={styles.letter}>{letter}:</span>
           <span className={styles.text}>{answerText}</span>
         </span>
