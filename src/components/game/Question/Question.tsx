@@ -2,18 +2,10 @@ import React, {Dispatch, SetStateAction} from 'react';
 import {Answer} from '../Answer/Answer';
 import styles from './Question.scss';
 import {QuestionField} from '../QuestionField/QuestionField';
+import {QuestionModel} from '../../../models/QuestionModel';
 
-type questionCard = {
-  question: string;
-  A: string;
-  B: string;
-  C: string;
-  D: string;
-  rightAnswer: string;
-};
-export type {questionCard};
 type questionOptions = {
-  questionCard: questionCard;
+  questionCard: QuestionModel;
   UpQuestionNumber: () => void;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   isClickedAnswer: boolean;
