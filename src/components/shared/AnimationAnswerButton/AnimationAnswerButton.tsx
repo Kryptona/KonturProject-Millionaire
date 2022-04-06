@@ -44,12 +44,12 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
 
   return (
     <div className={styles.root} onClick={() => changeField()}>
-      {!isClicked && !isAnswerBacklight && (
+      {!isClicked && (!isAnswerBacklight || !classNameFieldAnswer) && (
         <AnswerCustomButton className={className} letter={letter} onClick={onClick} disable={isDisable}>
           {answerText}{' '}
         </AnswerCustomButton>
       )}
-      {(isClicked || isAnswerBacklight) && (
+      {(isClicked || (isAnswerBacklight && classNameFieldAnswer)) && (
         <span
           className={cn({
             [styles.contentRight]: classNameFieldAnswer,
