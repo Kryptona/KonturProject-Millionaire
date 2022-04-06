@@ -6,11 +6,9 @@ let addedQuestions: number[] = [];
 
 export default function initQuestionsList() {
   addedQuestions = [];
-  addRandomItemsInList(questions.veryEasy);
-  addRandomItemsInList(questions.easy);
-  addRandomItemsInList(questions.normal);
-  addRandomItemsInList(questions.hard);
-  addRandomItemsInList(questions.veryHard);
+  for (let level in questions) {
+    addRandomItemsInList(questions[level]);
+  }
 }
 
 function addRandomItemsInList(listElements: Array<QuestionModel>, count: number = 3) {

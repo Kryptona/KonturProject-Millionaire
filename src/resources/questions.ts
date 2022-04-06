@@ -1,4 +1,6 @@
-export const questions = {
+import {QuestionModel} from '../models/QuestionModel';
+
+export const questions: {[id: string]: Array<QuestionModel>} = {
   veryEasy: [
     {
       question: 'Какой из этих видов спорта не входит в современное пятиборье?',
