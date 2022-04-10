@@ -2,22 +2,22 @@ import React, {Dispatch, SetStateAction} from 'react';
 import {Answer} from '../Answer/Answer';
 import styles from './Question.scss';
 import {QuestionField} from '../QuestionField/QuestionField';
+import {QuestionModel} from '../../../models/QuestionModel';
 
-type questionCard = {
-  question: string;
-  A: string;
-  B: string;
-  C: string;
-  D: string;
-  rightAnswer: string;
-};
-export type {questionCard};
 type questionOptions = {
-  questionCard: questionCard;
+  questionCard: QuestionModel;
   UpQuestionNumber: () => void;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
+  isClickedAnswer: boolean;
+  setIsClickedAnswer: Dispatch<SetStateAction<boolean>>;
 };
-export const Question: React.FC<questionOptions> = ({questionCard, UpQuestionNumber, setOpenModal}) => {
+export const Question: React.FC<questionOptions> = ({
+  questionCard,
+  UpQuestionNumber,
+  setOpenModal,
+  isClickedAnswer,
+  setIsClickedAnswer,
+}) => {
   return (
     <div className={styles.root}>
       <QuestionField question={questionCard.question} />
@@ -29,6 +29,8 @@ export const Question: React.FC<questionOptions> = ({questionCard, UpQuestionNum
         rightAnswer={questionCard.rightAnswer}
         setOpenModal={setOpenModal}
         upQuestionNumber={UpQuestionNumber}
+        setIsClickedAnswer={setIsClickedAnswer}
+        isClickedAnswer={isClickedAnswer}
       />
     </div>
   );
