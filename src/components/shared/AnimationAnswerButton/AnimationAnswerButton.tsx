@@ -7,7 +7,7 @@ import cn from 'classnames';
 interface PropsAnimationButtonAnswer {
   readonly className?: string;
   readonly letter: 'A' | 'B' | 'C' | 'D';
-  readonly onClick: CustomButtonProps['onClick'];
+  readonly onClick: () => void;
   readonly answerText: string;
   readonly isDisable: boolean;
   readonly setIsDisable: Dispatch<SetStateAction<boolean>>;
@@ -30,6 +30,8 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
   const [isClicked, setIsClicked] = useState(false);
 
   const changeField = () => {
+    onClick();
+
     if (!isDisable) {
       setIsDisable(true);
       setIsClicked(!isClicked);
@@ -43,24 +45,21 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
   };
 
   return (
-    <div className={styles.root} onClick={() => changeField()}>
-      {!isClicked && (!isAnswerBacklight || !classNameFieldAnswer) && (
-        <AnswerCustomButton className={className} letter={letter} onClick={onClick} disable={isDisable}>
-          {answerText}{' '}
-        </AnswerCustomButton>
-      )}
-      {(isClicked || (isAnswerBacklight && classNameFieldAnswer)) && (
-        <span
-          className={cn({
-            [styles.contentRight]: classNameFieldAnswer,
-            [styles.contentFalse]: !classNameFieldAnswer,
-            [styles.rightAnswer]: isAnswerBacklight && classNameFieldAnswer,
-            [styles.falseAnswer]: isAnswerBacklight && !classNameFieldAnswer,
-          })}>
-          <span className={styles.letter}>{letter}:</span>
-          <span className={styles.text}>{answerText}</span>
-        </span>
-      )}
-    </div>
+    <AnswerCustomButton
+      className={
+        isClicked || (isAnswerBacklight && classNameFieldAnswer)
+          ? cn(styles.root, {
+              [styles.contentRight]: classNameFieldAnswer,
+              [styles.contentFalse]: !classNameFieldAnswer,
+              [styles.rightAnswer]: isAnswerBacklight && classNameFieldAnswer,
+              [styles.falseAnswer]: isAnswerBacklight && !classNameFieldAnswer,
+            })
+          : undefined
+      }
+      letter={letter}
+      onClick={() => changeField()}
+      disable={isDisable}>
+      {answerText}
+    </AnswerCustomButton>
   );
 };

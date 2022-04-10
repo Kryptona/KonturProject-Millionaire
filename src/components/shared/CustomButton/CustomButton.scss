@@ -27,25 +27,23 @@ $factor: 32px;
   color: white;
   font-size: 38px;
   font-weight: 400;
-
   @include hexagon_clip_path(32px);
-
-  &.primary {
-    @include colorMap(#003d17, #5a3e22);
-  }
-
-  &.secondary {
-    @include colorMap(#600268, #c2b82d);
-  }
-
-  &.blue {
-    @include colorMap(#0c2cac, green);
-  }
 
   &:active {
     transform: translateY(1px);
   }
+}
 
+.primary {
+  @include colorMap(#003d17, #5a3e22);
+}
+
+.secondary {
+  @include colorMap(#600268, #c2b82d);
+}
+
+.blue {
+  @include colorMap(#0c2cac, green);
 }
 
 @media screen and (max-width: 700px) {

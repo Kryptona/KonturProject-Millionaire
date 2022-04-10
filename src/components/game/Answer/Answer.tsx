@@ -25,7 +25,7 @@ export const Answer: React.FC<Props> = ({
   isClickedAnswer,
 }) => {
   const [isAnswerBacklight, setIsAnswerBacklight] = useState(false);
-  const checkRightAnswer = (selectedAnswer: string) => {
+  const checkRightAnswer = (selectedAnswer: string): void => {
     if (selectedAnswer === rightAnswer) {
       // alert("Правильный ответ")
       setTimeout(() => {

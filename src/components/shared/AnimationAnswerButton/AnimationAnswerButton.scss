@@ -1,78 +1,45 @@
 @import '../../../default';
 
-$height: 64px;
-$factor: 32px;
-$color: #600268;
-
 .root {
-  margin: 0;
-  padding: 0;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  background: none;
-  user-select: none;
-  background: $color;
-  @include hexagon_clip_path(32px);
-  font-family: $Roboto;
-  display: flex;
-  align-items: center;
-
-  .contentRight,
-  .contentFalse {
-    display: flex;
-    position: relative;
-    box-sizing: border-box;
-    width: 100%;
-    min-height: $height;
-    padding: 0 $factor;
-    font-size: 40px;
-    font-weight: 400;
-    color: white;
-
-    .letter {
-      color: yellow;
-      margin-right: 8px;
-    }
+  &.contentRight {
+    background-color: #003d17;
   }
 
-  .contentRight {
-    background: #003d17;
+  &.contentFalse,
+  &.contentRight {
+    animation: click 4s linear;
   }
 
-  .contentFalse, .contentRight {
-    animation: Click 4s linear;
+  &.rightAnswer {
+    background-color: #003d17 !important;
   }
 
-  .rightAnswer {
-    background: #003d17 !important;
-  }
-
-  .falseAnswer {
-    background: red !important;
+  &.falseAnswer {
+    background-color: red !important;
   }
 }
 
-@keyframes Click {
+@keyframes click {
   0% {
-    background: #003d17;
+    background-color: #003d17;
   }
   25% {
-    background: yellow;
+    background-color: yellow;
   }
   50% {
-    background: #003d17;
+    background-color: #003d17;
   }
   75% {
-    background: yellow;
+    background-color: yellow;
   }
   100% {
-    background: #003d17;
+    background-color: #003d17;
   }
 }
 
 @media screen and (max-width: 700px) {
-  .text, .letter {
+  .text,
+  .letter {
     font-size: 28px;
   }
 }
