@@ -40,7 +40,7 @@ export const GamePage: React.FC = () => {
   return (
     <div className={styles.root}>
       <div className={styles.display}>
-        <img className={styles.image} alt="image" src={logo} />
+        <img className={styles.image} src={logo} />
         <Scores id={questionNumber} />
       </div>
       <Timer
