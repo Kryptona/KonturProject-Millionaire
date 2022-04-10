@@ -16,6 +16,7 @@ $color: #600268;
   @include hexagon_clip_path(32px);
   font-family: $Roboto;
   display: flex;
+  align-items: center;
 
   .contentRight,
   .contentFalse {
@@ -27,7 +28,6 @@ $color: #600268;
     padding: 0 $factor;
     font-size: 40px;
     font-weight: 400;
-    line-height: $height;
     color: white;
 
     .letter {

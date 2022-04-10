@@ -15,52 +15,41 @@ $factor: 32px;
 
 .root {
   margin: 0;
-  padding: 0;
+  padding: 0 $factor;
   border: none;
   outline: none;
   cursor: pointer;
-  background: none;
+  min-height: $height;
   user-select: none;
-  display: inline;
+  text-align: center;
+  box-sizing: border-box;
+  transition: background-color $transition_duration;
+  color: white;
+  font-size: 38px;
+  font-weight: 400;
 
-  & > span {
-    display: inline-block;
-    position: relative;
-    box-sizing: border-box;
-    width: 100%;
-    min-height: $height;
-    padding: 0 $factor;
-    text-align: center;
-    font-size: 38px;
-    font-weight: 400;
-    line-height: $height;
-    color: white;
-    transition: background-color $transition_duration;
+  @include hexagon_clip_path(32px);
 
-    @include hexagon_clip_path(32px);
-
-    &.primary {
-      @include colorMap(#003d17, #5a3e22);
-    }
-
-    &.secondary {
-      @include colorMap(#600268, #c2b82d);
-    }
-
-    &.blue {
-      @include colorMap(#0c2cac, green);
-    }
-
-    &:active {
-      transform: translateY(1px);
-    }
+  &.primary {
+    @include colorMap(#003d17, #5a3e22);
   }
+
+  &.secondary {
+    @include colorMap(#600268, #c2b82d);
+  }
+
+  &.blue {
+    @include colorMap(#0c2cac, green);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
 }
 
 @media screen and (max-width: 700px) {
   .root {
-    & > span {
       font-size: 24px;
-    }
   }
 }
