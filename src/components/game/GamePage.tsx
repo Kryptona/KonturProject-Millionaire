@@ -12,7 +12,7 @@ import {QuestionModel} from '../../models/QuestionModel';
 const TIME_ANSWER = 60;
 
 export const GamePage: React.FC = () => {
-  const [score, setScore] = useState(0);
+  const [fireproofedScore, setFireproofedScore] = useState(0);
   const [questionNumber, setQuestionNumber] = useState(0);
   const [isEndGame, setIsEndGame] = useState(false);
   const [counter, setCounter] = useState(TIME_ANSWER);
@@ -21,18 +21,21 @@ export const GamePage: React.FC = () => {
   const questionsList = getQuestionsList();
 
   const upQuestionNumber = () => {
+    const currentScore = scores[questionNumber];
+    if (currentScore.fireproof) {
+      setFireproofedScore(currentScore.amount);
+    }
+
     if (questionNumber === 15) {
       setIsEndGame(true);
-      setScore(scores[questionNumber].amount);
       return;
     }
     setQuestionNumber(questionNumber + 1);
-    setScore(scores[questionNumber].amount);
     setCounter(TIME_ANSWER);
   };
 
   const resetGame = () => {
-    setScore(0);
+    setFireproofedScore(0);
     setQuestionNumber(0);
     setCounter(TIME_ANSWER);
     initQuestionsList();
@@ -52,7 +55,13 @@ export const GamePage: React.FC = () => {
         isOpenModal={isEndGame}
       />
       {isEndGame && (
-        <ModalEndGame resetGame={resetGame} setOpenModal={setIsEndGame} scores={score} isOpen={isEndGame} name="Джо" />
+        <ModalEndGame
+          resetGame={resetGame}
+          setOpenModal={setIsEndGame}
+          scores={fireproofedScore}
+          isOpen={isEndGame}
+          name="Джо"
+        />
       )}
       <Question
         questionCard={questionsList[questionNumber] as QuestionModel}
