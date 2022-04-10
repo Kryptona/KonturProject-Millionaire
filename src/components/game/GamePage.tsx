@@ -14,7 +14,7 @@ const TIME_ANSWER = 60;
 
 export const GamePage: React.FC = () => {
   const [score, setScore] = useState(0);
-  const [questionNumber, setQuestionNumber] = useState(0);
+  const [questionNumber, setQuestionNumber] = useState(14);
   const [isEndGame, setIsEndGame] = useState(false);
   const [counter, setCounter] = useState(TIME_ANSWER);
   const [isClickedAnswer, setIsClickedAnswer] = useState(false);
