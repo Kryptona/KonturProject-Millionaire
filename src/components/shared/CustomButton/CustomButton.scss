@@ -17,7 +17,6 @@ $factor: 32px;
   margin: 0;
   padding: 0 $factor;
   border: none;
-  outline: none;
   cursor: pointer;
   min-height: $height;
   user-select: none;
@@ -27,6 +26,11 @@ $factor: 32px;
   color: white;
   font-size: 38px;
   font-weight: 400;
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
   @include hexagon_clip_path(32px);
 
   &:active {
