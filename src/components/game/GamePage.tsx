@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './GamePage.scss';
 import {Question} from './Question/Question';
 import logo from '/src/img/millionaire_icon.svg';
@@ -10,8 +10,9 @@ import {questionsList} from '../../utils/Questions';
 import initQuestionsList from '../../utils/Questions';
 import {QuestionModel} from '../../models/QuestionModel';
 import {Prompt} from '../shared/Promt/Prompt';
+import {Promts} from './Promts/Promts';
 
-const TIME_ANSWER = 60;
+const TIME_ANSWER = 30;
 
 export const GamePage: React.FC = () => {
   const [score, setScore] = useState(0);
@@ -19,6 +20,7 @@ export const GamePage: React.FC = () => {
   const [isEndGame, setIsEndGame] = useState(false);
   const [counter, setCounter] = useState(TIME_ANSWER);
   const [isClickedAnswer, setIsClickedAnswer] = useState(false);
+  const [winScores, setWinScores] = useState(0);
 
   const upQuestionNumber = () => {
     if (questionNumber === 15) {
@@ -29,6 +31,9 @@ export const GamePage: React.FC = () => {
     setQuestionNumber(questionNumber + 1);
     setScore(scores[questionNumber].amount);
     setCounter(TIME_ANSWER);
+    if (scores[questionNumber + 1].fireproof) {
+      setWinScores(scores[questionNumber + 1].amount);
+    }
   };
 
   const resetGame = () => {
@@ -51,14 +56,15 @@ export const GamePage: React.FC = () => {
         isDisable={isClickedAnswer}
         isOpenModal={isEndGame}
       />
-      <div className={styles.prompts}>
-        <Prompt img={logo} name={styles.questionReplacement} onClick={() => console.log('1')} />
-        <Prompt img={logo} name={styles.fiftyFifty} onClick={() => console.log('2')} />
-        <Prompt img={logo} name={styles.hallHelp} onClick={() => console.log('3')} />
-        <Prompt img={logo} name={styles.rightToWrong} onClick={() => console.log('4')} />
-      </div>
+      <Promts />
       {isEndGame && (
-        <ModalEndGame resetGame={resetGame} setOpenModal={setIsEndGame} scores={score} isOpen={isEndGame} name="Джо" />
+        <ModalEndGame
+          resetGame={resetGame}
+          setOpenModal={setIsEndGame}
+          scores={winScores}
+          isOpen={isEndGame}
+          name="Джо"
+        />
       )}
       <Question
         questionCard={questionsList[questionNumber] as QuestionModel}
