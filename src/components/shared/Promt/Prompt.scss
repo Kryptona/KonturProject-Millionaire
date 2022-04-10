@@ -1,17 +1,24 @@
 .root {
   height: 100px;
   width: 100px;
+  margin-left: 10px;
+  border-radius: 50%;
+
 
   .img {
-    height: 100px;
-    width: 100px;
+    height: 98px;
+    width: 98px;
   }
 
-  .isActive {
 
-  }
+}
+.isActive:hover {
+  cursor: pointer;
+  background: #c2b82d;
+}
 
-  .isNotActive {
-
-  }
+.isNotActive {
+  opacity: 0.25;
+  z-index: 2;
+  cursor: default;
 }
