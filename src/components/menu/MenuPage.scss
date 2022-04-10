@@ -17,8 +17,13 @@
     margin-top: 64px;
   }
 
-  .play_game_button {
-    margin-top: 32px;
+  .bt {
+    margin-top: 16px;
+
+    .content {
+      display: inline-block;
+      min-width: 280px;
+    }
   }
 
   .buttons {
@@ -30,9 +35,8 @@
   }
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 700px) {
   .root {
-
     .millionare_icon {
       width: 200px;
     }

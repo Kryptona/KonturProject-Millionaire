@@ -24,17 +24,15 @@ export const MenuPage: React.FC = () => {
     <div className={styles.root}>
       <img className={styles.millionare_icon} src={millionaire} alt="icon" />
       <CustomInput className={styles.nickname_input} placeholder={'Введите ник'} />
-      <CustomButton className={styles.play_game_button} onClick={onStartGame} use={CustomButtonUse.secondary}>
-        Начать игру
+      <CustomButton className={styles.bt} onClick={onStartGame} use={CustomButtonUse.secondary}>
+        <span className={styles.content}> Начать игру</span>
       </CustomButton>
-      <div className={styles.buttons}>
-        <CustomButton onClick={onStatistics} use={CustomButtonUse.secondary}>
-          Статистика
-        </CustomButton>
-        <CustomButton onClick={onSettings} use={CustomButtonUse.secondary}>
-          Настройки
-        </CustomButton>
-      </div>
+      <CustomButton className={styles.bt} onClick={onStatistics} use={CustomButtonUse.secondary}>
+        <span className={styles.content}>Статистика</span>
+      </CustomButton>
+      <CustomButton className={styles.bt} onClick={onSettings} use={CustomButtonUse.secondary}>
+        <span className={styles.content}>Настройки</span>
+      </CustomButton>
     </div>
   );
 };
