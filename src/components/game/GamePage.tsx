@@ -6,8 +6,7 @@ import {Scores} from './Scores/Scores';
 import {scores} from '../../resources/scores';
 import {ModalEndGame} from './ModalEndGame/ModalEndGame';
 import {Timer} from './Timer/Timer';
-import {questionsList} from '../../utils/Questions';
-import initQuestionsList from '../../utils/Questions';
+import {getQuestionsList, initQuestionsList} from '../../utils/Questions';
 import {QuestionModel} from '../../models/QuestionModel';
 
 const TIME_ANSWER = 60;
@@ -18,6 +17,8 @@ export const GamePage: React.FC = () => {
   const [isEndGame, setIsEndGame] = useState(false);
   const [counter, setCounter] = useState(TIME_ANSWER);
   const [isClickedAnswer, setIsClickedAnswer] = useState(false);
+
+  const questionsList = getQuestionsList();
 
   const upQuestionNumber = () => {
     if (questionNumber === 15) {

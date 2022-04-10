@@ -1,10 +1,18 @@
 import {questions} from '../resources/questions';
 import {QuestionModel} from '../models/QuestionModel';
 
-export let questionsList: QuestionModel[] = [];
+let questionsList: QuestionModel[] = [];
 let addedQuestions: number[] = [];
 
-export default function initQuestionsList() {
+export function getQuestionsList(): ReadonlyArray<QuestionModel> {
+  if (!questionsList.length) {
+    initQuestionsList();
+  }
+
+  return questionsList;
+}
+
+export function initQuestionsList() {
   addedQuestions = [];
   questionsList = [];
   for (let level in questions) {
