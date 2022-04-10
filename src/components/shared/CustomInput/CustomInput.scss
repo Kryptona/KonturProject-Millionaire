@@ -1,7 +1,8 @@
 @import '../../../default.scss';
 
 .root {
-  width: 440px;
+  width: 100%;
+  max-width: 440px;
   font-size: 48px;
 
   outline: none;
