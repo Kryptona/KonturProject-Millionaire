@@ -18,10 +18,8 @@ export const AnswerCustomButton: React.FC<Props> = ({className, children, letter
       use={CustomButtonUse.secondary}
       onClick={onClick}
       disable={disable}>
-      <span className={styles.content}>
-        <span className={styles.letter}>{letter}:</span>
-        <span className={styles.text}>{children}</span>
-      </span>
+      <span className={styles.letter}>{letter}:</span>
+      <span className={styles.text}>{children}</span>
     </CustomButton>
   );
 };

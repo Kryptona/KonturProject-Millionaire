@@ -5,7 +5,7 @@
   display: inline-block;
   font-family: $Roboto;
 
-  padding: 2px 4px;
+  padding: 2px 16px;
 
   &.selected {
     @include hexagon_clip_path(8px);

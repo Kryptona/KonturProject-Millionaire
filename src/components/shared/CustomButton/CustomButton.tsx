@@ -26,8 +26,8 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
   const colorClassName = colorClassNamesMap[use];
 
   return (
-    <button className={cn(styles.root, className)} onClick={onClick} disabled={disable}>
-      <span className={colorClassName}>{children}</span>
+    <button className={cn(styles.root, colorClassName, className)} onClick={onClick} disabled={disable}>
+      {children}
     </button>
   );
 };

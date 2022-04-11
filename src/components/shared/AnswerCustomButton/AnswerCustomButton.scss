@@ -1,18 +1,14 @@
 .root {
   width: 100%;
+  font-size: 40px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  text-align: left;
 
-  .content {
-    display: flex;
-    flex-flow: row nowrap;
-    font-size: 40px;
-
-    .letter {
-      color: yellow;
-      margin-right: 8px;
-    }
-
-    .text {
-    }
+  .letter {
+    color: yellow;
+    margin-right: 8px;
   }
 }
 
