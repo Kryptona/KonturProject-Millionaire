@@ -6,10 +6,10 @@ import {Scores} from './Scores/Scores';
 import {scores} from '../../resources/scores';
 import {ModalEndGame} from './ModalEndGame/ModalEndGame';
 import {Timer} from './Timer/Timer';
-import {getQuestionsList, initQuestionsList} from '../../utils/Questions';
+import {questionsList, initQuestionsList} from '../../utils/Questions';
 import {QuestionModel} from '../../models/QuestionModel';
-import {Prompt} from '../shared/Promt/Prompt';
-import {Promts} from './Promts/Promts';
+import {Hints} from './Hints/Hints';
+import {resetList} from '../../utils/ListActiveAnswers';
 
 const TIME_ANSWER = 30;
 
@@ -20,20 +20,22 @@ export const GamePage: React.FC = () => {
   const [counter, setCounter] = useState(TIME_ANSWER);
   const [isClickedAnswer, setIsClickedAnswer] = useState(false);
 
-  const questionsList = getQuestionsList();
+  // const questionsList = getQuestionsList();
 
   const upQuestionNumber = () => {
-    const currentScore = scores[questionNumber];
+    const currentScore = scores[questionNumber + 1];
     if (currentScore.fireproof) {
       setFireproofedScore(currentScore.amount);
     }
 
     if (questionNumber === 15) {
       setIsEndGame(true);
+      resetList();
       return;
     }
     setQuestionNumber(questionNumber + 1);
     setCounter(TIME_ANSWER);
+    resetList();
   };
 
   const resetGame = () => {
@@ -56,7 +58,7 @@ export const GamePage: React.FC = () => {
         isDisable={isClickedAnswer}
         isOpenModal={isEndGame}
       />
-      <Promts />
+      <Hints restart={isEndGame} disable={isClickedAnswer} questions={questionsList[questionNumber] as QuestionModel} />
       {isEndGame && (
         <ModalEndGame
           resetGame={resetGame}

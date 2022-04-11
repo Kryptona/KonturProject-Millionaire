@@ -4,11 +4,13 @@ import styles from './MenuPage.scss';
 import {CustomInput} from '../shared/CustomInput/CustomInput';
 import {CustomButton, CustomButtonUse} from '../shared/CustomButton/CustomButton';
 import {useNavigate} from 'react-router-dom';
+import {initQuestionsList} from '../../utils/Questions';
 
 export const MenuPage: React.FC = () => {
   const rout = useNavigate();
   const onStartGame = () => {
     rout('/game');
+    initQuestionsList();
   };
   const onStatistics = () => {
     console.log('onStatistics clicked');

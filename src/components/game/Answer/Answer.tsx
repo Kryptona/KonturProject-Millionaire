@@ -1,6 +1,7 @@
 import React, {Dispatch, SetStateAction, useState} from 'react';
 import styles from './Answer.scss';
 import {AnimationAnswerButton} from '../../shared/AnimationAnswerButton/AnimationAnswerButton';
+import {ListActiveAnswer} from '../../../utils/ListActiveAnswers';
 
 type Props = {
   A: string;
@@ -53,6 +54,7 @@ export const Answer: React.FC<Props> = ({
         classNameFieldAnswer={getNameClassByAnswer(A)}
         isAnswerBacklight={isAnswerBacklight}
         setIsAnswerBacklight={setIsAnswerBacklight}
+        isActive={ListActiveAnswer['A']}
       />
       <AnimationAnswerButton
         letter={'B'}
@@ -63,6 +65,7 @@ export const Answer: React.FC<Props> = ({
         classNameFieldAnswer={getNameClassByAnswer(B)}
         isAnswerBacklight={isAnswerBacklight}
         setIsAnswerBacklight={setIsAnswerBacklight}
+        isActive={ListActiveAnswer['B']}
       />
       <AnimationAnswerButton
         letter={'C'}
@@ -73,6 +76,7 @@ export const Answer: React.FC<Props> = ({
         classNameFieldAnswer={getNameClassByAnswer(C)}
         isAnswerBacklight={isAnswerBacklight}
         setIsAnswerBacklight={setIsAnswerBacklight}
+        isActive={ListActiveAnswer['C']}
       />
       <AnimationAnswerButton
         letter={'D'}
@@ -83,6 +87,7 @@ export const Answer: React.FC<Props> = ({
         classNameFieldAnswer={getNameClassByAnswer(D)}
         isAnswerBacklight={isAnswerBacklight}
         setIsAnswerBacklight={setIsAnswerBacklight}
+        isActive={ListActiveAnswer['D']}
       />
     </div>
   );
