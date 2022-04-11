@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const RightToWrong: React.FC<Props> = ({setActiveRightToWrong, isActive, setIsActive, disable}) => {
-  const click = () => {
+  const onClick = () => {
     setActiveRightToWrong(true);
     console.log('RightToWrong');
   };
@@ -19,7 +19,7 @@ export const RightToWrong: React.FC<Props> = ({setActiveRightToWrong, isActive, 
     <Hint
       img={logo}
       name={styles.root}
-      onClick={click}
+      onClick={onClick}
       isActive={isActive}
       setIsActive={setIsActive}
       disable={disable}

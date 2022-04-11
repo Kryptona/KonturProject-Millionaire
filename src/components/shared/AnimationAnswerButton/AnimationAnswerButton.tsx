@@ -2,6 +2,7 @@ import styles from './AnimationAnswerButton.scss';
 import React, {Dispatch, SetStateAction, useState} from 'react';
 import {AnswerCustomButton} from '../AnswerCustomButton/AnswerCustomButton';
 import cn from 'classnames';
+import {ListActiveAnswer} from '../../../utils/ListActiveAnswers';
 
 interface PropsAnimationButtonAnswer {
   readonly className?: string;
@@ -13,7 +14,6 @@ interface PropsAnimationButtonAnswer {
   readonly classNameFieldAnswer: boolean;
   readonly isAnswerBacklight: boolean;
   readonly setIsAnswerBacklight: Dispatch<SetStateAction<boolean>>;
-  readonly isActive: boolean;
 }
 
 export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
@@ -26,14 +26,12 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
   classNameFieldAnswer,
   isAnswerBacklight,
   setIsAnswerBacklight,
-  isActive,
 }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const changeField = () => {
     onClick();
-
-    if (!isDisable) {
+    if (!isDisable && ListActiveAnswer[letter]) {
       setIsDisable(true);
       setIsClicked(!isClicked);
 
@@ -44,6 +42,8 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
       }, 6000);
     }
   };
+
+  const isActive = ListActiveAnswer[letter];
 
   return (
     <AnswerCustomButton

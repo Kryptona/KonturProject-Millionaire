@@ -63,7 +63,6 @@ export const Answer: React.FC<Props> = ({
         classNameFieldAnswer={getNameClassByAnswer(A)}
         isAnswerBacklight={isAnswerBacklight}
         setIsAnswerBacklight={setIsAnswerBacklight}
-        isActive={ListActiveAnswer['A']}
       />
       <AnimationAnswerButton
         letter={'B'}
@@ -74,7 +73,6 @@ export const Answer: React.FC<Props> = ({
         classNameFieldAnswer={getNameClassByAnswer(B)}
         isAnswerBacklight={isAnswerBacklight}
         setIsAnswerBacklight={setIsAnswerBacklight}
-        isActive={ListActiveAnswer['B']}
       />
       <AnimationAnswerButton
         letter={'C'}
@@ -85,7 +83,6 @@ export const Answer: React.FC<Props> = ({
         classNameFieldAnswer={getNameClassByAnswer(C)}
         isAnswerBacklight={isAnswerBacklight}
         setIsAnswerBacklight={setIsAnswerBacklight}
-        isActive={ListActiveAnswer['C']}
       />
       <AnimationAnswerButton
         letter={'D'}
@@ -96,7 +93,6 @@ export const Answer: React.FC<Props> = ({
         classNameFieldAnswer={getNameClassByAnswer(D)}
         isAnswerBacklight={isAnswerBacklight}
         setIsAnswerBacklight={setIsAnswerBacklight}
-        isActive={ListActiveAnswer['D']}
       />
     </div>
   );
