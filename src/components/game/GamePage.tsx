@@ -10,6 +10,7 @@ import {questionsList, initQuestionsList, getQuestionsList} from '../../utils/Qu
 import {QuestionModel} from '../../models/QuestionModel';
 import {Hints} from './Hints/Hints';
 import {resetList} from '../../utils/ListActiveAnswers';
+import {HighScore} from '../../models/HighScore';
 
 const TIME_ANSWER = 30;
 
@@ -30,7 +31,7 @@ export const GamePage: React.FC = () => {
     }
 
     if (questionNumber === 15) {
-      setIsEndGame(true);
+      finishGame();
       resetList();
       return;
     }
@@ -44,6 +45,22 @@ export const GamePage: React.FC = () => {
     setQuestionNumber(0);
     setCounter(TIME_ANSWER);
     initQuestionsList();
+    setIsEndGame(false);
+  };
+
+  const finishGame = () => {
+    setIsEndGame(true);
+
+    const date = new Date();
+    const highScore: HighScore = {
+      playerName: 'Joe',
+      amount: fireproofedScore,
+      date: date + '',
+    };
+
+    const scores: HighScore[] = JSON.parse(localStorage.getItem('scores') as string) || [];
+    scores.push(highScore);
+    localStorage.setItem('scores', JSON.stringify(scores));
   };
 
   return (
@@ -55,7 +72,7 @@ export const GamePage: React.FC = () => {
       <Timer
         time={counter}
         setCounter={setCounter}
-        setOpenModal={setIsEndGame}
+        setOpenModal={finishGame}
         isDisable={isClickedAnswer}
         isOpenModal={isEndGame}
       />
@@ -65,19 +82,11 @@ export const GamePage: React.FC = () => {
         questions={questionsList[questionNumber] as QuestionModel}
         setActiveRightToWrong={setActiveRightToWrong}
       />
-      {isEndGame && (
-        <ModalEndGame
-          resetGame={resetGame}
-          setOpenModal={setIsEndGame}
-          scores={fireproofedScore}
-          isOpen={isEndGame}
-          name="Джо"
-        />
-      )}
+      {isEndGame && <ModalEndGame resetGame={resetGame} scores={fireproofedScore} isOpen={isEndGame} name="Джо" />}
       <Question
         questionCard={questionsList[questionNumber] as QuestionModel}
         UpQuestionNumber={upQuestionNumber}
-        setOpenModal={setIsEndGame}
+        setOpenModal={finishGame}
         isClickedAnswer={isClickedAnswer}
         setIsClickedAnswer={setIsClickedAnswer}
         activeRightToWrong={activeRightToWrong}

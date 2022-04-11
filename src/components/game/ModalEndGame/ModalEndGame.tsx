@@ -8,14 +8,14 @@ interface PropsEndGame {
   scores: number;
   name: string;
   isOpen: boolean;
-  setOpenModal: Dispatch<SetStateAction<boolean>>;
   resetGame: () => void;
 }
 
-export const ModalEndGame: React.FC<PropsEndGame> = ({scores, name, isOpen, setOpenModal, resetGame}) => {
+export const ModalEndGame: React.FC<PropsEndGame> = ({scores, name, isOpen, resetGame}) => {
   const rout = useNavigate();
 
   const onStatistics = () => {
+    rout('/statistics');
     console.log('onStatistics clicked');
   };
 
@@ -25,7 +25,6 @@ export const ModalEndGame: React.FC<PropsEndGame> = ({scores, name, isOpen, setO
   };
 
   const restartGame = () => {
-    setOpenModal(false);
     resetGame();
     console.log('Reset Game');
   };

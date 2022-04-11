@@ -13,6 +13,7 @@ type questionOptions = {
   activeRightToWrong: boolean;
   setActiveRightToWrong: Dispatch<SetStateAction<boolean>>;
 };
+
 export const Question: React.FC<questionOptions> = ({
   questionCard,
   UpQuestionNumber,
