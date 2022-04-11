@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './GamePage.scss';
 import {Question} from './Question/Question';
 import logo from '/src/img/millionaire_icon.svg';
@@ -6,7 +6,7 @@ import {Scores} from './Scores/Scores';
 import {scores} from '../../resources/scores';
 import {ModalEndGame} from './ModalEndGame/ModalEndGame';
 import {Timer} from './Timer/Timer';
-import {questionsList, initQuestionsList} from '../../utils/Questions';
+import {questionsList, initQuestionsList, getQuestionsList} from '../../utils/Questions';
 import {QuestionModel} from '../../models/QuestionModel';
 import {Hints} from './Hints/Hints';
 import {resetList} from '../../utils/ListActiveAnswers';
@@ -20,6 +20,8 @@ export const GamePage: React.FC = () => {
   const [counter, setCounter] = useState(TIME_ANSWER);
   const [isClickedAnswer, setIsClickedAnswer] = useState(false);
   const [activeRightToWrong, setActiveRightToWrong] = useState(false);
+
+  const questionsList = getQuestionsList();
 
   const upQuestionNumber = () => {
     const currentScore = scores[questionNumber + 1];

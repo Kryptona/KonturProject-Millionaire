@@ -4,13 +4,12 @@ import {QuestionModel} from '../models/QuestionModel';
 export let questionsList: QuestionModel[] = [];
 let addedQuestions: number[] = [];
 
-// export function getQuestionsList(): ReadonlyArray<QuestionModel> {
-//   if (!questionsList.length) {
-//     initQuestionsList();
-//   }
-//
-//   return questionsList;
-// }
+export function getQuestionsList(): ReadonlyArray<QuestionModel> {
+  if (!questionsList.length) {
+    initQuestionsList();
+  }
+  return questionsList;
+}
 
 export function initQuestionsList() {
   addedQuestions = [];
