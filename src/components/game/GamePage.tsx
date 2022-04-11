@@ -19,8 +19,7 @@ export const GamePage: React.FC = () => {
   const [isEndGame, setIsEndGame] = useState(false);
   const [counter, setCounter] = useState(TIME_ANSWER);
   const [isClickedAnswer, setIsClickedAnswer] = useState(false);
-
-  // const questionsList = getQuestionsList();
+  const [activeRightToWrong, setActiveRightToWrong] = useState(false);
 
   const upQuestionNumber = () => {
     const currentScore = scores[questionNumber + 1];
@@ -58,7 +57,12 @@ export const GamePage: React.FC = () => {
         isDisable={isClickedAnswer}
         isOpenModal={isEndGame}
       />
-      <Hints restart={isEndGame} disable={isClickedAnswer} questions={questionsList[questionNumber] as QuestionModel} />
+      <Hints
+        restart={isEndGame}
+        disable={isClickedAnswer}
+        questions={questionsList[questionNumber] as QuestionModel}
+        setActiveRightToWrong={setActiveRightToWrong}
+      />
       {isEndGame && (
         <ModalEndGame
           resetGame={resetGame}
@@ -74,6 +78,8 @@ export const GamePage: React.FC = () => {
         setOpenModal={setIsEndGame}
         isClickedAnswer={isClickedAnswer}
         setIsClickedAnswer={setIsClickedAnswer}
+        activeRightToWrong={activeRightToWrong}
+        setActiveRightToWrong={setActiveRightToWrong}
       />
     </div>
   );

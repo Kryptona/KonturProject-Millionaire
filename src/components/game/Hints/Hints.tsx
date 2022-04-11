@@ -6,24 +6,24 @@ import {HallHelp} from './HallHelp/HallHelp';
 import {QuestionReplacement} from './QuestionReplacement/QuestionReplacement';
 import {CallFriend} from './CallFriend/CallFriend';
 import {QuestionModel} from '../../../models/QuestionModel';
-import {questions} from '../../../resources/questions';
 
 interface Props {
   readonly restart: boolean;
   readonly disable: boolean;
   readonly questions: QuestionModel;
+  readonly setActiveRightToWrong: Dispatch<SetStateAction<boolean>>;
 }
 
-export const Hints: React.FC<Props> = ({restart, disable, questions}) => {
+export const Hints: React.FC<Props> = ({restart, disable, questions, setActiveRightToWrong}) => {
   const [activeFifty, setActiveFifty] = useState(true);
-  const [activeRightToWrong, setActiveRightToWrong] = useState(true);
+  const [visibleRightToWrong, setVisibleRightToWrong] = useState(true);
   const [activeHallHelp, setActiveHallHelp] = useState(true);
   const [activeQuestionReplacement, setActiveQuestionReplacement] = useState(true);
   const [activeCallFriend, setActiveCallFriend] = useState(true);
 
   useEffect(() => {
     setActiveFifty(true);
-    setActiveRightToWrong(true);
+    setVisibleRightToWrong(true);
     setActiveHallHelp(true);
     setActiveQuestionReplacement(true);
     setActiveCallFriend(true);
@@ -33,10 +33,10 @@ export const Hints: React.FC<Props> = ({restart, disable, questions}) => {
     <div className={styles.root}>
       <FiftyFifty isActive={activeFifty} setIsActive={setActiveFifty} disable={disable} questions={questions} />
       <RightToWrong
-        isActive={activeRightToWrong}
-        setIsActive={setActiveRightToWrong}
+        isActive={visibleRightToWrong}
+        setIsActive={setVisibleRightToWrong}
         disable={disable}
-        questions={questions}
+        setActiveRightToWrong={setActiveRightToWrong}
       />
       <HallHelp isActive={activeHallHelp} setIsActive={setActiveHallHelp} disable={disable} questions={questions} />
       <QuestionReplacement
