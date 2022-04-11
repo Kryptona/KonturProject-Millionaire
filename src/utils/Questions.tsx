@@ -13,6 +13,10 @@ export function getQuestionsList(): ReadonlyArray<QuestionModel> {
 
 export function initQuestionsList() {
   addedQuestions = [];
+  updateQuestionList();
+}
+
+export function updateQuestionList() {
   questionsList = [];
   for (let level in questions) {
     addRandomItemsInList(questions[level]);

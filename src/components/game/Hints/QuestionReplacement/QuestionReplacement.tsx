@@ -2,11 +2,11 @@ import styles from './QuestionReplacement.scss';
 import React from 'react';
 import {Hint, PropsHint} from '../../../shared/Promt/Hint';
 import logo from '/src/img/millionaire_icon.svg';
-import {initQuestionsList} from '../../../../utils/Questions';
+import {updateQuestionList} from '../../../../utils/Questions';
 
 export const QuestionReplacement: React.FC<PropsHint> = ({isActive, setIsActive, disable, questions}) => {
   const click = () => {
-    initQuestionsList();
+    updateQuestionList();
     console.log('questionReplacement');
   };
   return (
