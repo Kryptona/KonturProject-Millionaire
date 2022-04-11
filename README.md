@@ -1,4 +1,5 @@
 #KonturProject-Millionaire
+https://shpora-millionaire.firebaseapp.com/
 
 Проект по шпоре - игра как стать миллионером
 1. Как работает перенаправление
