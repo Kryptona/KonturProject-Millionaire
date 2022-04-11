@@ -6,10 +6,12 @@ import {Scores} from './Scores/Scores';
 import {scores} from '../../resources/scores';
 import {ModalEndGame} from './ModalEndGame/ModalEndGame';
 import {Timer} from './Timer/Timer';
-import {questionsList, initQuestionsList, getQuestionsList} from '../../utils/Questions';
+import {getQuestionsList} from '../../utils/Questions';
 import {QuestionModel} from '../../models/QuestionModel';
 import {Hints} from './Hints/Hints';
 import {resetList} from '../../utils/ListActiveAnswers';
+import {ModalCallFriend} from './Hints/ModalCallFriend/ModalCallFriend';
+import {ModalHallHelp} from './Hints/ModalHallHelp/ModalHallHelp';
 
 const TIME_ANSWER = 30;
 
@@ -20,8 +22,10 @@ export const GamePage: React.FC = () => {
   const [counter, setCounter] = useState(TIME_ANSWER);
   const [isClickedAnswer, setIsClickedAnswer] = useState(false);
   const [activeRightToWrong, setActiveRightToWrong] = useState(false);
+  const [isOpenFriedModal, setIsOpenFriedModal] = useState(false);
+  const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useState(false);
 
-  const questionsList = getQuestionsList();
+  const [questionsList, setQuestionsList] = useState(() => getQuestionsList());
 
   const upQuestionNumber = () => {
     const currentScore = scores[questionNumber + 1];
@@ -43,7 +47,9 @@ export const GamePage: React.FC = () => {
     setFireproofedScore(0);
     setQuestionNumber(0);
     setCounter(TIME_ANSWER);
-    initQuestionsList();
+    setQuestionsList(getQuestionsList());
+    setIsOpenFriedModal(false);
+    setIsOpenHallHelpModal(false);
   };
 
   return (
@@ -64,6 +70,9 @@ export const GamePage: React.FC = () => {
         disable={isClickedAnswer}
         questions={questionsList[questionNumber] as QuestionModel}
         setActiveRightToWrong={setActiveRightToWrong}
+        setIsOpenFriedModal={setIsOpenFriedModal}
+        setIsOpenHallHelpModal={setIsOpenHallHelpModal}
+        setQuestionsList={setQuestionsList}
       />
       {isEndGame && (
         <ModalEndGame
@@ -72,6 +81,22 @@ export const GamePage: React.FC = () => {
           scores={fireproofedScore}
           isOpen={isEndGame}
           name="Джо"
+        />
+      )}
+      {isOpenHallHelpModal && (
+        <ModalHallHelp
+          isOpen={isOpenHallHelpModal}
+          setOpenModal={setIsOpenHallHelpModal}
+          questions={questionsList[questionNumber] as QuestionModel}
+          questionNumber={questionNumber}
+        />
+      )}
+      {isOpenFriedModal && (
+        <ModalCallFriend
+          isOpen={isOpenFriedModal}
+          setOpenModal={setIsOpenFriedModal}
+          questions={questionsList[questionNumber] as QuestionModel}
+          questionNumber={questionNumber}
         />
       )}
       <Question

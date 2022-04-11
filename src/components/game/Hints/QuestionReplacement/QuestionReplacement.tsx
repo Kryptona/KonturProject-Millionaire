@@ -1,12 +1,21 @@
 import styles from './QuestionReplacement.scss';
-import React from 'react';
-import {Hint, PropsHint} from '../../../shared/Promt/Hint';
+import React, {Dispatch, SetStateAction} from 'react';
+import {Hint, PropsHint} from '../../../shared/Hint/Hint';
 import logo from '/src/img/millionaire_icon.svg';
-import {updateQuestionList} from '../../../../utils/Questions';
+import {getQuestionsList, updateQuestionList} from '../../../../utils/Questions';
+import {QuestionModel} from '../../../../models/QuestionModel';
 
-export const QuestionReplacement: React.FC<PropsHint> = ({isActive, setIsActive, disable, questions}) => {
+interface Props {
+  isActive: boolean;
+  setIsActive: Dispatch<SetStateAction<boolean>>;
+  disable: boolean;
+  setQuestionsList: (p: () => ReadonlyArray<QuestionModel>) => void;
+}
+
+export const QuestionReplacement: React.FC<Props> = ({isActive, setIsActive, disable, setQuestionsList}) => {
   const click = () => {
     updateQuestionList();
+    setQuestionsList(() => getQuestionsList());
     console.log('questionReplacement');
   };
   return (

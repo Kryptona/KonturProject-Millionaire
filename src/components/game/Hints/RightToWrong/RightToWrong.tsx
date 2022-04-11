@@ -1,6 +1,6 @@
 import styles from './RightToWrong.scss';
 import React, {Dispatch, SetStateAction} from 'react';
-import {Hint} from '../../../shared/Promt/Hint';
+import {Hint} from '../../../shared/Hint/Hint';
 import logo from '/src/img/millionaire_icon.svg';
 
 interface Props {

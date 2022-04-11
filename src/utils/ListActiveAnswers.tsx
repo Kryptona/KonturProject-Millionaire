@@ -45,4 +45,4 @@ function deactivateAnswer(variant: 'A' | 'B' | 'C' | 'D') {
   ListActiveAnswer[variant] = false;
 }
 
-export {deactivateAnswer, resetList, activeHintsFiftyFifty};
+export {deactivateAnswer, resetList, activeHintsFiftyFifty, getRightAnswer};

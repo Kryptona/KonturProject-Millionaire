@@ -5,9 +5,7 @@ export let questionsList: QuestionModel[] = [];
 let addedQuestions: number[] = [];
 
 export function getQuestionsList(): ReadonlyArray<QuestionModel> {
-  if (!questionsList.length) {
-    initQuestionsList();
-  }
+  initQuestionsList();
   return questionsList;
 }
 

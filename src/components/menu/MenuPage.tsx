@@ -10,7 +10,7 @@ export const MenuPage: React.FC = () => {
   const rout = useNavigate();
   const onStartGame = () => {
     rout('/game');
-    initQuestionsList();
+    // initQuestionsList();
   };
   const onStatistics = () => {
     console.log('onStatistics clicked');

@@ -48,7 +48,7 @@ export const ModalEndGame: React.FC<PropsEndGame> = ({scores, name, isOpen, setO
   );
 };
 
-const modalStyles = {
+export const modalStyles = {
   content: {
     top: '50%',
     left: '50%',

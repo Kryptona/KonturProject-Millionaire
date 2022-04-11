@@ -1,20 +1,30 @@
 import styles from './CallFriend.scss';
-import React from 'react';
-import {Hint, PropsHint} from '../../../shared/Promt/Hint';
+import React, {Dispatch, SetStateAction} from 'react';
+import {Hint} from '../../../shared/Hint/Hint';
 import logo from '/src/img/millionaire_icon.svg';
 
-export const CallFriend: React.FC<PropsHint> = ({isActive, setIsActive, disable, questions}) => {
-  const click = () => {
+interface Props {
+  isActive: boolean;
+  setIsActive: Dispatch<SetStateAction<boolean>>;
+  disable: boolean;
+  setIsOpenFriedModal: Dispatch<SetStateAction<boolean>>;
+}
+
+export const CallFriend: React.FC<Props> = ({isActive, setIsActive, disable, setIsOpenFriedModal}) => {
+  const clickHint = () => {
+    setIsOpenFriedModal(true);
     console.log('CallFriend');
   };
   return (
-    <Hint
-      img={logo}
-      name={styles.root}
-      onClick={click}
-      isActive={isActive}
-      setIsActive={setIsActive}
-      disable={disable}
-    />
+    <div className={styles.root}>
+      <Hint
+        img={logo}
+        name={styles.hint}
+        onClick={clickHint}
+        isActive={isActive}
+        setIsActive={setIsActive}
+        disable={disable}
+      />
+    </div>
   );
 };

@@ -12,9 +12,20 @@ interface Props {
   readonly disable: boolean;
   readonly questions: QuestionModel;
   readonly setActiveRightToWrong: Dispatch<SetStateAction<boolean>>;
+  readonly setIsOpenFriedModal: Dispatch<SetStateAction<boolean>>;
+  readonly setIsOpenHallHelpModal: Dispatch<SetStateAction<boolean>>;
+  readonly setQuestionsList: (p: () => ReadonlyArray<QuestionModel>) => void;
 }
 
-export const Hints: React.FC<Props> = ({restart, disable, questions, setActiveRightToWrong}) => {
+export const Hints: React.FC<Props> = ({
+  restart,
+  disable,
+  questions,
+  setActiveRightToWrong,
+  setIsOpenFriedModal,
+  setIsOpenHallHelpModal,
+  setQuestionsList,
+}) => {
   const [activeFifty, setActiveFifty] = useState(true);
   const [visibleRightToWrong, setVisibleRightToWrong] = useState(true);
   const [activeHallHelp, setActiveHallHelp] = useState(true);
@@ -38,18 +49,23 @@ export const Hints: React.FC<Props> = ({restart, disable, questions, setActiveRi
         disable={disable}
         setActiveRightToWrong={setActiveRightToWrong}
       />
-      <HallHelp isActive={activeHallHelp} setIsActive={setActiveHallHelp} disable={disable} questions={questions} />
+      <HallHelp
+        isActive={activeHallHelp}
+        setIsActive={setActiveHallHelp}
+        disable={disable}
+        setIsOpenHallHelpModal={setIsOpenHallHelpModal}
+      />
       <QuestionReplacement
         isActive={activeQuestionReplacement}
         setIsActive={setActiveQuestionReplacement}
         disable={disable}
-        questions={questions}
+        setQuestionsList={setQuestionsList}
       />
       <CallFriend
         isActive={activeCallFriend}
         setIsActive={setActiveCallFriend}
         disable={disable}
-        questions={questions}
+        setIsOpenFriedModal={setIsOpenFriedModal}
       />
     </div>
   );

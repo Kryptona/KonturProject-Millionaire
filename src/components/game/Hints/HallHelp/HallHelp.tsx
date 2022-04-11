@@ -1,10 +1,18 @@
 import styles from './HallHelp.scss';
-import React from 'react';
-import {Hint, PropsHint} from '../../../shared/Promt/Hint';
+import React, {Dispatch, SetStateAction} from 'react';
+import {Hint, PropsHint} from '../../../shared/Hint/Hint';
 import logo from '/src/img/millionaire_icon.svg';
 
-export const HallHelp: React.FC<PropsHint> = ({isActive, setIsActive, disable, questions}) => {
+interface Props {
+  isActive: boolean;
+  setIsActive: Dispatch<SetStateAction<boolean>>;
+  disable: boolean;
+  setIsOpenHallHelpModal: Dispatch<SetStateAction<boolean>>;
+}
+
+export const HallHelp: React.FC<Props> = ({isActive, setIsActive, disable, setIsOpenHallHelpModal}) => {
   const click = () => {
+    setIsOpenHallHelpModal(true);
     console.log('HallHelp');
   };
   return (
