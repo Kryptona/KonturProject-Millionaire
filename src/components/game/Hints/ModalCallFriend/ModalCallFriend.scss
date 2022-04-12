@@ -1,8 +1,7 @@
 @import '../../default.scss';
 @import '../../../../default.scss';
 
-$violet: #5a1880;
-$white: white;
+
 .root {
   background: $violet;
   color: $blue;
@@ -16,14 +15,17 @@ $white: white;
   box-sizing: border-box;
 
   .window {
+
     display: flex;
+
     .img {
       width: 150px;
       height: 200px;
     }
+
     .text {
       font-size: 32px;
-      color: yellow;
+      color: $yellow;
       margin: auto;
     }
   }

@@ -1,4 +1,4 @@
-import React, {createRef, useRef} from 'react';
+import React from 'react';
 import {CustomButton, CustomButtonProps, CustomButtonUse} from '../CustomButton/CustomButton';
 import styles from './AnswerCustomButton.scss';
 import cn from 'classnames';

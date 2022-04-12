@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styles from './GamePage.scss';
 import {Question} from './Question/Question';
 import logo from '/src/img/millionaire_icon.svg';

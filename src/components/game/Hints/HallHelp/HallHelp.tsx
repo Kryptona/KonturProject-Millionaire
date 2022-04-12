@@ -1,6 +1,6 @@
 import styles from './HallHelp.scss';
 import React, {Dispatch, SetStateAction} from 'react';
-import {Hint, PropsHint} from '../../../shared/Hint/Hint';
+import {Hint} from '../../../shared/Hint/Hint';
 import logo from '/src/img/millionaire_icon.svg';
 
 interface Props {

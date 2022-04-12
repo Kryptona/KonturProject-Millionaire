@@ -4,6 +4,7 @@ import {HintModalModel} from '../../../../models/HintModalModel';
 import Modal from 'react-modal';
 import {CustomButton, CustomButtonUse} from '../../../shared/CustomButton/CustomButton';
 import {getStatistics} from '../../../../utils/Statistics';
+import {modalStyles} from '../../ModalEndGame/ModalEndGame';
 
 export const ModalHallHelp: React.FC<HintModalModel> = ({isOpen, setOpenModal, questionNumber, questions}) => {
   const [listStatistics, setListStatistics] = useState<{[id: string]: number}>(() =>
@@ -13,30 +14,30 @@ export const ModalHallHelp: React.FC<HintModalModel> = ({isOpen, setOpenModal, q
     setListStatistics(() => getStatistics(questions, questionNumber));
   }, []);
   return (
-    <Modal isOpen={isOpen} className={styles.root}>
+    <Modal isOpen={isOpen} className={styles.root} style={modalStyles}>
       <div className={styles.statistics}>
         <div className={styles.diagram}>
-          <span>A:</span>
-          <div className={styles.A} style={{width: `${listStatistics['A']}%`}}>
-            {listStatistics['A']}%
+          <span className={styles.nameColumn}>A:</span>
+          <div className={styles.columnWrapper} style={{width: `${listStatistics['A']}%`}}>
+            <div className={styles.column}>{listStatistics['A']}%</div>
           </div>
         </div>
         <div className={styles.diagram}>
-          <span>B:</span>
-          <div className={styles.B} style={{width: `${listStatistics['B']}%`}}>
-            {listStatistics['B']}%
+          <span className={styles.nameColumn}>B:</span>
+          <div className={styles.columnWrapper} style={{width: `${listStatistics['B']}%`}}>
+            <div className={styles.column}>{listStatistics['B']}%</div>
           </div>
         </div>
         <div className={styles.diagram}>
-          <span>C:</span>
-          <div className={styles.C} style={{width: `${listStatistics['C']}%`}}>
-            {listStatistics['C']}%
+          <span className={styles.nameColumn}>C:</span>
+          <div className={styles.columnWrapper} style={{width: `${listStatistics['C']}%`}}>
+            <div className={styles.column}>{listStatistics['C']}%</div>
           </div>
         </div>
         <div className={styles.diagram}>
-          <span>D:</span>
-          <div className={styles.D} style={{width: `${listStatistics['D']}%`}}>
-            {listStatistics['D']}%
+          <span className={styles.nameColumn}>D:</span>
+          <div className={styles.columnWrapper} style={{width: `${listStatistics['D']}%`}}>
+            <div className={styles.column}>{listStatistics['D']}%</div>
           </div>
         </div>
       </div>
