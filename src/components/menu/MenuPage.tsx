@@ -13,7 +13,7 @@ export const MenuPage: React.FC = () => {
     initQuestionsList();
   };
   const onStatistics = () => {
-    console.log('onStatistics clicked');
+    rout('/statistics');
   };
 
   const onSettings = () => {
