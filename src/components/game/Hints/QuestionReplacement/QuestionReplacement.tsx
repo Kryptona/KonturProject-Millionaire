@@ -1,7 +1,7 @@
 import styles from './QuestionReplacement.scss';
 import React, {Dispatch, SetStateAction} from 'react';
-import {Hint, PropsHint} from '../../../shared/Hint/Hint';
-import logo from '/src/img/millionaire_icon.svg';
+import {Hint} from '../../../shared/Hint/Hint';
+import logo from '/src/img/changeQuestion.png';
 import {getQuestionsList, updateQuestionList} from '../../../../utils/Questions';
 import {QuestionModel} from '../../../../models/QuestionModel';
 

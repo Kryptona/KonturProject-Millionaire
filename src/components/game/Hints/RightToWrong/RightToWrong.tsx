@@ -1,7 +1,7 @@
 import styles from './RightToWrong.scss';
 import React, {Dispatch, SetStateAction} from 'react';
 import {Hint} from '../../../shared/Hint/Hint';
-import logo from '/src/img/millionaire_icon.svg';
+import logo from '/src/img/rightToWrong.png';
 
 interface Props {
   readonly setActiveRightToWrong: Dispatch<SetStateAction<boolean>>;
