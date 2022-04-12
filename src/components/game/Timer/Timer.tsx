@@ -1,5 +1,5 @@
 import styles from './Timre.scss';
-import React, {Dispatch, SetStateAction, useEffect, useRef, useState} from 'react';
+import React, {Dispatch, SetStateAction, useEffect} from 'react';
 
 interface PropsTimer {
   time: number;
@@ -14,7 +14,7 @@ export const Timer: React.FC<PropsTimer> = ({time, setOpenModal, setCounter, isO
     if (isDisable || isOpenModal) {
       clearInterval(timer as NodeJS.Timeout);
     }
-    if (time == 0) {
+    if (time == 0 && !isDisable) {
       setOpenModal(true);
       setCounter(0);
       clearInterval(timer as NodeJS.Timeout);

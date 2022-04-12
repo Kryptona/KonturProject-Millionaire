@@ -1,0 +1,45 @@
+.root {
+  height: 100px;
+  width: 100px;
+  margin-left: 10px;
+  border-radius: 50%;
+  display: inline-block;
+
+  .img {
+    height: 98px;
+    width: 98px;
+    border-radius: 50%;
+  }
+}
+
+.isActive:hover {
+  cursor: pointer;
+  background: #c2b82d;
+}
+
+.isNotActive {
+  opacity: 0.25;
+  cursor: default;
+}
+
+@media screen and (max-width: 640px){
+  .root {
+    height: 65px;
+    width: 65px;
+    .img {
+      height: 64px;
+      width: 64px;
+    }
+  }
+}
+
+@media screen and (max-width: 450px){
+  .root {
+    height: 50px;
+    width: 50px;
+    .img {
+      height: 49px;
+      width: 49px;
+    }
+  }
+}

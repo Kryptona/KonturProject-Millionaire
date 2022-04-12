@@ -1,0 +1,37 @@
+@import '../../default.scss';
+@import '../../../../default.scss';
+
+
+.root {
+  background: $violet;
+  color: $blue;
+  z-index: 9;
+  position: absolute;
+  text-align: center;
+  height: 300px;
+  width: 800px;
+
+  padding: 16px;
+  box-sizing: border-box;
+
+  .window {
+
+    display: flex;
+
+    .img {
+      width: 150px;
+      height: 200px;
+    }
+
+    .text {
+      font-size: 32px;
+      color: $yellow;
+      margin: auto;
+    }
+  }
+
+  .button {
+
+  }
+
+}

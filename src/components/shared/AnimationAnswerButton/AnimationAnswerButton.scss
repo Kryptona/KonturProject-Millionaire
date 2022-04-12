@@ -17,6 +17,10 @@
   &.falseAnswer {
     background-color: red !important;
   }
+  &.isNotActive {
+    background-color: gray !important;
+    cursor: default;
+  }
 }
 
 @keyframes click {

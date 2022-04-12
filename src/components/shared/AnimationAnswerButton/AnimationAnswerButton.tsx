@@ -1,8 +1,8 @@
 import styles from './AnimationAnswerButton.scss';
 import React, {Dispatch, SetStateAction, useState} from 'react';
-import {CustomButtonProps} from '../CustomButton/CustomButton';
 import {AnswerCustomButton} from '../AnswerCustomButton/AnswerCustomButton';
 import cn from 'classnames';
+import {ListActiveAnswer} from '../../../utils/ListActiveAnswers';
 
 interface PropsAnimationButtonAnswer {
   readonly className?: string;
@@ -31,8 +31,7 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
 
   const changeField = () => {
     onClick();
-
-    if (!isDisable) {
+    if (!isDisable && ListActiveAnswer[letter]) {
       setIsDisable(true);
       setIsClicked(!isClicked);
 
@@ -44,21 +43,24 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
     }
   };
 
+  const isActive = ListActiveAnswer[letter];
+
   return (
     <AnswerCustomButton
       className={
-        isClicked || (isAnswerBacklight && classNameFieldAnswer)
+        isClicked || (isAnswerBacklight && classNameFieldAnswer) || !isActive
           ? cn(styles.root, {
               [styles.contentRight]: classNameFieldAnswer,
               [styles.contentFalse]: !classNameFieldAnswer,
               [styles.rightAnswer]: isAnswerBacklight && classNameFieldAnswer,
               [styles.falseAnswer]: isAnswerBacklight && !classNameFieldAnswer,
+              [styles.isNotActive]: !isActive,
             })
           : undefined
       }
       letter={letter}
       onClick={() => changeField()}
-      disable={isDisable}>
+      disable={isDisable || !isActive}>
       {answerText}
     </AnswerCustomButton>
   );

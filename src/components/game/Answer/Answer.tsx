@@ -1,6 +1,7 @@
 import React, {Dispatch, SetStateAction, useState} from 'react';
 import styles from './Answer.scss';
 import {AnimationAnswerButton} from '../../shared/AnimationAnswerButton/AnimationAnswerButton';
+import {deactivateAnswer, ListActiveAnswer} from '../../../utils/ListActiveAnswers';
 
 type Props = {
   A: string;
@@ -12,6 +13,8 @@ type Props = {
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   isClickedAnswer: boolean;
   setIsClickedAnswer: Dispatch<SetStateAction<boolean>>;
+  activeRightToWrong: boolean;
+  setActiveRightToWrong: Dispatch<SetStateAction<boolean>>;
 };
 export const Answer: React.FC<Props> = ({
   A,
@@ -23,9 +26,11 @@ export const Answer: React.FC<Props> = ({
   setOpenModal,
   setIsClickedAnswer,
   isClickedAnswer,
+  setActiveRightToWrong,
+  activeRightToWrong,
 }) => {
   const [isAnswerBacklight, setIsAnswerBacklight] = useState(false);
-  const checkRightAnswer = (selectedAnswer: string): void => {
+  const checkRightAnswer = (selectedAnswer: string, letter: 'A' | 'B' | 'C' | 'D'): void => {
     if (selectedAnswer === rightAnswer) {
       // alert("Правильный ответ")
       setTimeout(() => {
@@ -34,6 +39,11 @@ export const Answer: React.FC<Props> = ({
     } else {
       // alert("Ошибка");
       // setOpenModal(true)
+      if (activeRightToWrong) {
+        setActiveRightToWrong(false);
+        deactivateAnswer(letter);
+        return;
+      }
       setTimeout(() => setIsAnswerBacklight(true), 4000);
       setTimeout(() => setOpenModal(true), 6000);
     }
@@ -46,7 +56,7 @@ export const Answer: React.FC<Props> = ({
     <div className={styles.root}>
       <AnimationAnswerButton
         letter={'A'}
-        onClick={() => checkRightAnswer(A)}
+        onClick={() => checkRightAnswer(A, 'A')}
         answerText={A}
         isDisable={isClickedAnswer}
         setIsDisable={setIsClickedAnswer}
@@ -56,7 +66,7 @@ export const Answer: React.FC<Props> = ({
       />
       <AnimationAnswerButton
         letter={'B'}
-        onClick={() => checkRightAnswer(B)}
+        onClick={() => checkRightAnswer(B, 'B')}
         answerText={B}
         isDisable={isClickedAnswer}
         setIsDisable={setIsClickedAnswer}
@@ -66,7 +76,7 @@ export const Answer: React.FC<Props> = ({
       />
       <AnimationAnswerButton
         letter={'C'}
-        onClick={() => checkRightAnswer(C)}
+        onClick={() => checkRightAnswer(C, 'C')}
         answerText={C}
         isDisable={isClickedAnswer}
         setIsDisable={setIsClickedAnswer}
@@ -76,7 +86,7 @@ export const Answer: React.FC<Props> = ({
       />
       <AnimationAnswerButton
         letter={'D'}
-        onClick={() => checkRightAnswer(D)}
+        onClick={() => checkRightAnswer(D, 'D')}
         answerText={D}
         isDisable={isClickedAnswer}
         setIsDisable={setIsClickedAnswer}

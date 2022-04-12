@@ -1,19 +1,20 @@
 import {questions} from '../resources/questions';
 import {QuestionModel} from '../models/QuestionModel';
 
-let questionsList: QuestionModel[] = [];
+export let questionsList: QuestionModel[] = [];
 let addedQuestions: number[] = [];
 
 export function getQuestionsList(): ReadonlyArray<QuestionModel> {
-  if (!questionsList.length) {
-    initQuestionsList();
-  }
-
+  initQuestionsList();
   return questionsList;
 }
 
 export function initQuestionsList() {
   addedQuestions = [];
+  updateQuestionList();
+}
+
+export function updateQuestionList() {
   questionsList = [];
   for (let level in questions) {
     addRandomItemsInList(questions[level]);

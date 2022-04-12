@@ -10,6 +10,8 @@ type questionOptions = {
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   isClickedAnswer: boolean;
   setIsClickedAnswer: Dispatch<SetStateAction<boolean>>;
+  activeRightToWrong: boolean;
+  setActiveRightToWrong: Dispatch<SetStateAction<boolean>>;
 };
 export const Question: React.FC<questionOptions> = ({
   questionCard,
@@ -17,6 +19,8 @@ export const Question: React.FC<questionOptions> = ({
   setOpenModal,
   isClickedAnswer,
   setIsClickedAnswer,
+  setActiveRightToWrong,
+  activeRightToWrong,
 }) => {
   return (
     <div className={styles.root}>
@@ -31,6 +35,8 @@ export const Question: React.FC<questionOptions> = ({
         upQuestionNumber={UpQuestionNumber}
         setIsClickedAnswer={setIsClickedAnswer}
         isClickedAnswer={isClickedAnswer}
+        activeRightToWrong={activeRightToWrong}
+        setActiveRightToWrong={setActiveRightToWrong}
       />
     </div>
   );

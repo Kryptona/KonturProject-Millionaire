@@ -5,6 +5,7 @@
   margin: 0 auto;
   padding: 32px;
   background: #151978;
+  min-width: 350px;
 
   .display {
     display: flex;
@@ -12,6 +13,7 @@
     .image {
       display: block;
       margin: 32px auto;
+      width: 300px;
     }
   }
 
