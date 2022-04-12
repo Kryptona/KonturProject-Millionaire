@@ -18,7 +18,7 @@ export const HallHelp: React.FC<Props> = ({isActive, setIsActive, disable, setIs
   return (
     <Hint
       img={logo}
-      name={styles.root}
+      className={styles.root}
       onClick={click}
       isActive={isActive}
       setIsActive={setIsActive}

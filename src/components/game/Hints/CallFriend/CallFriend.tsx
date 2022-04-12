@@ -16,15 +16,13 @@ export const CallFriend: React.FC<Props> = ({isActive, setIsActive, disable, set
     console.log('CallFriend');
   };
   return (
-    <div className={styles.root}>
-      <Hint
-        img={logo}
-        name={styles.hint}
-        onClick={clickHint}
-        isActive={isActive}
-        setIsActive={setIsActive}
-        disable={disable}
-      />
-    </div>
+    <Hint
+      img={logo}
+      className={styles.root}
+      onClick={clickHint}
+      isActive={isActive}
+      setIsActive={setIsActive}
+      disable={disable}
+    />
   );
 };

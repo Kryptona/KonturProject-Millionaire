@@ -1,10 +1,10 @@
 import styles from './Hint.scss';
-import React, {Dispatch, SetStateAction, useState} from 'react';
+import React, {Dispatch, SetStateAction} from 'react';
 import cn from 'classnames';
 import {QuestionModel} from '../../../models/QuestionModel';
 
 interface Props {
-  name: string;
+  className: string;
   img: string;
   onClick: () => void;
   isActive: boolean;
@@ -19,7 +19,7 @@ export interface PropsHint {
   questions: QuestionModel;
 }
 
-export const Hint: React.FC<Props> = ({name, img, onClick, isActive, setIsActive, disable}) => {
+export const Hint: React.FC<Props> = ({className, img, onClick, isActive, setIsActive, disable}) => {
   const handleClick = () => {
     if (isActive && !disable) {
       setIsActive(false);
@@ -28,7 +28,7 @@ export const Hint: React.FC<Props> = ({name, img, onClick, isActive, setIsActive
   };
   return (
     <div
-      className={cn(styles.root, {[styles.isActive]: isActive, [styles.isNotActive]: !isActive})}
+      className={cn(styles.root, {[styles.isActive]: isActive, [styles.isNotActive]: !isActive}, className)}
       onClick={handleClick}>
       <img className={styles.img} src={img} alt="img" />
     </div>

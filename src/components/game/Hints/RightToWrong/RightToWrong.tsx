@@ -18,7 +18,7 @@ export const RightToWrong: React.FC<Props> = ({setActiveRightToWrong, isActive, 
   return (
     <Hint
       img={logo}
-      name={styles.root}
+      className={styles.root}
       onClick={onClick}
       isActive={isActive}
       setIsActive={setIsActive}
