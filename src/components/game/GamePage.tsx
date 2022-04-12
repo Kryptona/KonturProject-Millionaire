@@ -11,6 +11,9 @@ import {QuestionModel} from '../../models/QuestionModel';
 import {Hints} from './Hints/Hints';
 import {resetList} from '../../utils/ListActiveAnswers';
 import {HighScore} from '../../models/HighScore';
+import {v4 as uuidv4} from 'uuid';
+import {User} from '../../models/User';
+import {appRepository} from '../../data/appRepository';
 
 const TIME_ANSWER = 30;
 
@@ -21,6 +24,7 @@ export const GamePage: React.FC = () => {
   const [counter, setCounter] = useState(TIME_ANSWER);
   const [isClickedAnswer, setIsClickedAnswer] = useState(false);
   const [activeRightToWrong, setActiveRightToWrong] = useState(false);
+  const [userId, setUserId] = useState(uuidv4());
 
   const questionsList = getQuestionsList();
 
@@ -51,16 +55,20 @@ export const GamePage: React.FC = () => {
   const finishGame = () => {
     setIsEndGame(true);
 
-    const date = new Date();
     const highScore: HighScore = {
-      playerName: 'Joe',
       amount: fireproofedScore,
-      date: date + '',
     };
 
-    const scores: HighScore[] = JSON.parse(localStorage.getItem('scores') as string) || [];
-    scores.push(highScore);
-    localStorage.setItem('scores', JSON.stringify(scores));
+    const user: User = {
+      id: userId,
+      name: 'Joe',
+    };
+
+    appRepository.writeScore(user, highScore);
+
+    // const scores: HighScore[] = JSON.parse(localStorage.getItem('scores') as string) || [];
+    // scores.push(highScore);
+    // localStorage.setItem('scores', JSON.stringify(scores));
   };
 
   return (
