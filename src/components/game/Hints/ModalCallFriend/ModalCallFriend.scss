@@ -35,3 +35,32 @@
   }
 
 }
+
+@media screen and (max-width: 800px) {
+
+  .root {
+    width: 450px;
+    height: auto;
+
+    .window {
+
+      .img {
+        width: 100px;
+        height: 150px;
+      }
+
+      .text {
+        font-size: 24px;
+      }
+    }
+
+  }
+}
+
+@media screen and (max-width: 450px) {
+
+  .root {
+    width: 400px;
+  }
+
+}

@@ -28,7 +28,7 @@
       .columnWrapper {
         display: inline-block;
         background: none;
-        max-width: 95%;
+        max-width: 90%;
 
         .column {
           background: #c2b82d;
@@ -56,4 +56,29 @@
     width: 100%;
   }
   
+}
+
+@media screen and (max-width: 800px){
+
+  .root {
+    width: 450px;
+    height: auto;
+
+    span, div {
+      font-size: 24px;
+    }
+
+    span {
+      display: inline-block;
+    }
+  }
+
+}
+
+@media screen and (max-width: 450px) {
+
+  .root {
+    width: 400px;
+  }
+
 }
