@@ -19,8 +19,8 @@ export const Item: React.FC<Props> = ({highScore, index}) => {
     <div className={styles.root}>
       <img className={styles.avatar} src={avatar} alt={'аватар'} />
       <div className={styles.content}>
-        <span className={styles.name}>{highScore.name}</span>
-        <span>Очки: {highScore.score}</span>
+        <div className={styles.name}>{highScore.name}</div>
+        <div>Очки: {highScore.score}</div>
       </div>
       <span className={styles.rank}>
         {rankIcon && <span className={styles.rank_icon}>{rankIcon}</span>}
