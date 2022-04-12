@@ -8,13 +8,9 @@ export const ListActiveAnswer: {[variant: string]: boolean} = {
 };
 
 function activeHintsFiftyFifty(questions: QuestionModel) {
-  const listAnswer: {[variant: string]: string} = {
-    A: questions.A,
-    B: questions.B,
-    C: questions.C,
-    D: questions.D,
-  };
-  const rightAnswer = getRightAnswer(listAnswer, questions.rightAnswer);
+  const listAnswerAndAnswer = getListAnswerAndRightAnswer(questions);
+  const listAnswer: {[variant: string]: string} = listAnswerAndAnswer.listAnswer;
+  const rightAnswer = listAnswerAndAnswer.rightAnswer;
   let count = 0;
   while (count < 2) {
     for (let i in listAnswer) {
@@ -29,10 +25,23 @@ function activeHintsFiftyFifty(questions: QuestionModel) {
   }
 }
 
-function getRightAnswer(listAnswer: {[variant: string]: string}, rightAnswer: string) {
+export function getListAnswerAndRightAnswer(questions: QuestionModel) {
+  const listAnswer: {[variant: string]: string} = {
+    A: questions.A,
+    B: questions.B,
+    C: questions.C,
+    D: questions.D,
+  };
+  const rightAnswer = getRightAnswer(listAnswer, questions.rightAnswer);
+
+  return {listAnswer, rightAnswer};
+}
+
+function getRightAnswer(listAnswer: {[variant: string]: string}, rightAnswer: string): string {
   for (let i in listAnswer) {
     if (listAnswer[i] === rightAnswer) return i;
   }
+  return 'A';
 }
 
 function resetList() {
@@ -45,4 +54,4 @@ function deactivateAnswer(variant: 'A' | 'B' | 'C' | 'D') {
   ListActiveAnswer[variant] = false;
 }
 
-export {deactivateAnswer, resetList, activeHintsFiftyFifty, getRightAnswer};
+export {deactivateAnswer, resetList, activeHintsFiftyFifty};

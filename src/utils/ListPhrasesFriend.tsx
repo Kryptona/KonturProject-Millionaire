@@ -1,5 +1,5 @@
 import {QuestionModel} from '../models/QuestionModel';
-import {getRightAnswer} from './ListActiveAnswers';
+import {getListAnswerAndRightAnswer} from './ListActiveAnswers';
 
 const ListPhrases: {[id: number]: string} = {
   0: 'Я думаю, стоит выбрать вариант',
@@ -9,13 +9,9 @@ const ListPhrases: {[id: number]: string} = {
 };
 
 function getPhrase(questions: QuestionModel, questionNumber: number): string {
-  const listAnswer: {[variant: string]: string} = {
-    A: questions.A,
-    B: questions.B,
-    C: questions.C,
-    D: questions.D,
-  };
-  const rightAnswer = getRightAnswer(listAnswer, questions.rightAnswer);
+  const listAnswerAndAnswer = getListAnswerAndRightAnswer(questions);
+  const listAnswer: {[variant: string]: string} = listAnswerAndAnswer.listAnswer;
+  const rightAnswer = listAnswerAndAnswer.rightAnswer;
   let answer = rightAnswer;
   if (Math.floor(Math.random() * 100) < 70 - 10 * Math.floor(questionNumber / 3)) {
     console.log(123);
