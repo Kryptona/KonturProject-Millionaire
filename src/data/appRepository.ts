@@ -2,27 +2,39 @@ import {child, get, getDatabase, ref, set} from 'firebase/database';
 import {User} from '../models/User';
 import {HighScore} from '../models/HighScore';
 
-function writeScore(user: User, score: HighScore) {
+function writeScore(highScore: HighScore) {
   const db = getDatabase();
-  set(ref(db, 'users/' + user.id), {
-    name: user.name,
-    score: score.amount,
+  set(ref(db, 'users/' + highScore.id), {
+    name: highScore.name,
+    score: highScore.score,
   });
 }
 
-function readScores() {
+function readScores(): Promise<HighScore[]> {
   const dbRef = ref(getDatabase());
-  get(child(dbRef, `users`))
+  return get(child(dbRef, `users`))
     .then((snapshot) => {
       if (snapshot.exists()) {
-        console.log(snapshot.val());
-        return snapshot.val();
+        const snapshotScores = snapshot.val();
+        console.log(snapshotScores);
+        const scores: HighScore[] = [];
+        for (let key of Object.keys(snapshotScores)) {
+          const snapshotScore = snapshotScores[key];
+          scores.push({
+            id: key,
+            name: snapshotScore.name,
+            score: snapshotScore.score,
+          });
+        }
+        return scores;
       } else {
         console.log('No data available');
+        return [];
       }
     })
     .catch((error) => {
       console.error(error);
+      return [];
     });
 }
 

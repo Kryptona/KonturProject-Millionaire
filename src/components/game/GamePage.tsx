@@ -56,19 +56,12 @@ export const GamePage: React.FC = () => {
     setIsEndGame(true);
 
     const highScore: HighScore = {
-      amount: fireproofedScore,
-    };
-
-    const user: User = {
       id: userId,
       name: 'Joe',
+      score: fireproofedScore,
     };
 
-    appRepository.writeScore(user, highScore);
-
-    // const scores: HighScore[] = JSON.parse(localStorage.getItem('scores') as string) || [];
-    // scores.push(highScore);
-    // localStorage.setItem('scores', JSON.stringify(scores));
+    appRepository.writeScore(highScore);
   };
 
   return (

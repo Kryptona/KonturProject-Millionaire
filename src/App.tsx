@@ -4,7 +4,7 @@ import styles from './App.scss';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import {GamePage} from './components/game/GamePage';
 import {MenuPage} from './components/menu/MenuPage';
-import {Leaderboard} from './components/leaderboard/Leaderboard';
+import {LeaderboardPage} from './components/leaderboard/LeaderboardPage';
 import {initializeApp} from 'firebase/app';
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
         <Routes>
           <Route index element={<MenuPage />} />
           <Route path="/game" element={<GamePage />} />
-          <Route path="/statistics" element={<Leaderboard />} />
+          <Route path="/statistics" element={<LeaderboardPage />} />
         </Routes>
       </Router>
     </div>
@@ -23,7 +23,6 @@ const App = () => {
 
 export default App;
 
-// TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyA86RnWdjYsCGLhkNupfrmf6M5bnFup6jg',
   authDomain: 'shpora-millionaire.firebaseapp.com',

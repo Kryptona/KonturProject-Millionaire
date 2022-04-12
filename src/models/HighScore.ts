@@ -1,4 +1,8 @@
+import {User} from './User';
+
 export interface HighScore {
-  amount: number;
+  id: Guid;
+  name: string;
+  score: number;
   // date: Date
 }
