@@ -6,6 +6,7 @@ import {GamePage} from './components/game/GamePage';
 import {MenuPage} from './components/menu/MenuPage';
 import {LeaderboardPage} from './components/leaderboard/LeaderboardPage';
 import {initializeApp} from 'firebase/app';
+import {apiKey} from "./appConstants";
 
 const App = () => {
   return (
@@ -24,7 +25,7 @@ const App = () => {
 export default App;
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyA86RnWdjYsCGLhkNupfrmf6M5bnFup6jg',
+  apiKey: apiKey,
   authDomain: 'shpora-millionaire.firebaseapp.com',
   databaseURL: 'https://shpora-millionaire-default-rtdb.firebaseio.com/',
   projectId: 'shpora-millionaire',
