@@ -57,9 +57,19 @@ $factor: 32px;
 }
 
 @media (pointer: coarse) {
-  .secondary, .primary, .blue {
+  .secondary {
     &:hover {
       background: #600268;
+    }
+  }
+  .primary {
+    &:hover {
+      background: #003d17;
+    }
+  }
+  .blue {
+    &:hover {
+      background: #0c2cac;
     }
   }
 }
