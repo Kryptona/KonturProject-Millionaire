@@ -71,6 +71,8 @@ export const Hints: React.FC<Props> = ({
         setIsActive={setActiveQuestionReplacement}
         disable={disable}
         setQuestionsList={setQuestionsList}
+        isActiveFiftyFifty={activeFifty}
+        isActiveRightToWrong={visibleRightToWrong}
       />
       <CallFriend
         isActive={activeCallFriend}

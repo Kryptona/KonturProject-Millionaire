@@ -15,7 +15,10 @@ export function getQuestionsList(isUpdate: boolean): ReadonlyArray<QuestionModel
 
 function initQuestionsList() {
   addedQuestions = [];
-  updateQuestionList();
+  questionsList = [];
+  for (let level in questions) {
+    addRandomItemsInList(questions[level]);
+  }
   return questionsList;
 }
 

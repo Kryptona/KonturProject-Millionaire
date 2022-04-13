@@ -10,9 +10,18 @@ interface Props {
   setIsActive: Dispatch<SetStateAction<boolean>>;
   disable: boolean;
   setQuestionsList: (p: () => ReadonlyArray<QuestionModel>) => void;
+  isActiveFiftyFifty: boolean;
+  isActiveRightToWrong: boolean;
 }
 
-export const QuestionReplacement: React.FC<Props> = ({isActive, setIsActive, disable, setQuestionsList}) => {
+export const QuestionReplacement: React.FC<Props> = ({
+  isActive,
+  setIsActive,
+  disable,
+  setQuestionsList,
+  isActiveFiftyFifty,
+  isActiveRightToWrong,
+}) => {
   const click = () => {
     updateQuestionList();
     setQuestionsList(() => getQuestionsList(false));
@@ -25,7 +34,7 @@ export const QuestionReplacement: React.FC<Props> = ({isActive, setIsActive, dis
       onClick={click}
       isActive={isActive}
       setIsActive={setIsActive}
-      disable={disable}
+      disable={disable || isActiveFiftyFifty || isActiveRightToWrong}
     />
   );
 };
