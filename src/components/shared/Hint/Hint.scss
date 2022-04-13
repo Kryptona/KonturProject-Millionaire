@@ -21,7 +21,7 @@
   opacity: 0.25;
   cursor: default;
 }
-@media (pointer: coarse) {
+@media (hover: none) {
   .isActive:hover {
     background: none;
   }

@@ -56,7 +56,7 @@ $factor: 32px;
   }
 }
 
-@media (pointer: coarse) {
+@media (hover: none) {
   .secondary {
     &:hover {
       background: #600268;
