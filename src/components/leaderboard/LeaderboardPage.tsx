@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styles from './LeaderboardPage.scss';
 import {HighScore} from '../../models/HighScore';
 import {highScoresRepository} from '../../data/highScoresRepository';
-import {Item} from './Item';
+import {LeaderboardItem} from './LeaderboardItem/LeaderboardItem';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
 import {useNavigate} from 'react-router-dom';
@@ -31,7 +31,7 @@ export const LeaderboardPage: React.FC = () => {
       </header>
       <div className={styles.scores}>
         {scores.map((score, index) => (
-          <Item highScore={score} index={index + 1} />
+          <LeaderboardItem highScore={score} index={index + 1} />
         ))}
       </div>
     </div>
