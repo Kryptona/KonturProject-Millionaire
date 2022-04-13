@@ -21,25 +21,29 @@
   opacity: 0.25;
   cursor: default;
 }
-
+@media (hover: none) {
+  .isActive:hover {
+    background: none;
+  }
+}
 @media screen and (max-width: 640px){
   .root {
-    height: 65px;
-    width: 65px;
+    height: 75px;
+    width: 75px;
     .img {
-      height: 64px;
-      width: 64px;
+      height: 74px;
+      width: 74px;
     }
   }
 }
 
-@media screen and (max-width: 450px){
+@media screen and (max-width: 505px){
   .root {
-    height: 50px;
-    width: 50px;
+    height: 60px;
+    width: 60px;
     .img {
-      height: 49px;
-      width: 49px;
+      height: 59px;
+      width: 59px;
     }
   }
 }
