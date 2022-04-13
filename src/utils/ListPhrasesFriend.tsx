@@ -14,7 +14,6 @@ function getPhrase(questions: QuestionModel, questionNumber: number): string {
   const rightAnswer = listAnswerAndAnswer.rightAnswer;
   let answer = rightAnswer;
   if (Math.floor(Math.random() * 100) < 70 - 10 * Math.floor(questionNumber / 3)) {
-    console.log(123);
     return ListPhrases[Math.floor(Math.random() * 4)] + ' ' + rightAnswer;
   } else {
     while (answer === rightAnswer) {
