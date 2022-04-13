@@ -55,3 +55,11 @@ $factor: 32px;
       font-size: 24px;
   }
 }
+
+@media (pointer: coarse) {
+  .secondary, .primary, .blue {
+    &:hover {
+      background: #600268;
+    }
+  }
+}
