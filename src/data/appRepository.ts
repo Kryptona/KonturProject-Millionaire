@@ -26,7 +26,7 @@ function readScores(): Promise<HighScore[]> {
             score: snapshotScore.score,
           });
         }
-        return scores;
+        return scores.sort(compareTo);
       } else {
         console.log('No data available');
         return [];
@@ -36,6 +36,10 @@ function readScores(): Promise<HighScore[]> {
       console.error(error);
       return [];
     });
+}
+
+function compareTo(a: HighScore, b: HighScore): number {
+  return b.score - a.score;
 }
 
 export const appRepository = {
