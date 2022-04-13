@@ -6,7 +6,7 @@ import {GamePage} from './components/game/GamePage';
 import {MenuPage} from './components/menu/MenuPage';
 import {LeaderboardPage} from './components/leaderboard/LeaderboardPage';
 import {initializeApp} from 'firebase/app';
-import {apiKey} from "./appConstants";
+import {apiKey} from './appConstants';
 
 const App = () => {
   return (
