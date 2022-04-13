@@ -40,10 +40,10 @@ export const MenuPage: React.FC = () => {
         onChange={setUserName}
       />
       <CustomButton className={styles.bt} onClick={onStartGame} use={CustomButtonUse.secondary}>
-        <span className={styles.content}> Начать игру</span>
+        <span className={styles.content}>Начать игру</span>
       </CustomButton>
       <CustomButton className={styles.bt} onClick={onStatistics} use={CustomButtonUse.secondary}>
-        <span className={styles.content}>Статистика</span>
+        <span className={styles.content}>Таблица лидеров</span>
       </CustomButton>
       <CustomButton className={styles.bt} onClick={onSettings} use={CustomButtonUse.secondary}>
         <span className={styles.content}>Настройки</span>
