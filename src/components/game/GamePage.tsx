@@ -6,14 +6,14 @@ import {Scores} from './Scores/Scores';
 import {scores} from '../../resources/scores';
 import {ModalEndGame} from './ModalEndGame/ModalEndGame';
 import {Timer} from './Timer/Timer';
-import {questionsList, initQuestionsList, getQuestionsList} from '../../utils/Questions';
+import {initQuestionsList, getQuestionsList} from '../../utils/Questions';
 import {QuestionModel} from '../../models/QuestionModel';
 import {Hints} from './Hints/Hints';
 import {resetList} from '../../utils/ListActiveAnswers';
 import {HighScore} from '../../models/HighScore';
 import {v4 as uuidv4} from 'uuid';
-import {User} from '../../models/User';
-import {appRepository} from '../../data/appRepository';
+import {highScoresRepository} from '../../data/highScoresRepository';
+import {localStorageRepository} from '../../data/localStorageRepository';
 
 const TIME_ANSWER = 30;
 
@@ -57,11 +57,11 @@ export const GamePage: React.FC = () => {
 
     const highScore: HighScore = {
       id: userId,
-      name: 'Joe',
+      name: localStorageRepository.readUserName(),
       score: fireproofedScore,
     };
 
-    appRepository.writeScore(highScore);
+    highScoresRepository.writeScore(highScore);
   };
 
   return (

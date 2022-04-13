@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const Item: React.FC<Props> = ({highScore, index}) => {
-  const avatar = stringToAvatar(highScore.id);
+  const avatar = stringToAvatar(highScore.name);
 
   const rankIcon = renderRankIcon(index);
 

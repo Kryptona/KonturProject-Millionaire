@@ -1,5 +1,4 @@
 import {child, get, getDatabase, ref, set} from 'firebase/database';
-import {User} from '../models/User';
 import {HighScore} from '../models/HighScore';
 
 function writeScore(highScore: HighScore) {
@@ -42,7 +41,7 @@ function compareTo(a: HighScore, b: HighScore): number {
   return b.score - a.score;
 }
 
-export const appRepository = {
+export const highScoresRepository = {
   writeScore: writeScore,
   readScores: readScores,
 } as const;
