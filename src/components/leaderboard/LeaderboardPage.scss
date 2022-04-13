@@ -1,0 +1,15 @@
+.root {
+  max-width: 100%;
+  color: white;
+  padding: 16px;
+  box-sizing: border-box;
+
+  .scores {
+    width: 600px;
+    max-width: 100%;
+
+    & > *:not(:first-child) {
+      margin-top: 16px;
+    }
+  }
+}

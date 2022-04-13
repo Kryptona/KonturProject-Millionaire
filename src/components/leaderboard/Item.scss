@@ -1,0 +1,37 @@
+.root {
+  max-width: 100%;
+
+  display: grid;
+  grid-template-columns: min-content minmax(0, 1fr) 100px;
+  grid-template-rows: 1fr;
+  align-items: center;
+  grid-gap: 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px 1px rgb(0 0 0 / 16%);
+
+  .avatar {
+    width: 80px;
+    border-radius: 50%;
+  }
+
+  .content{
+    .name{
+      font-weight: 600;
+      font-size: 20px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+  }
+  .rank {
+    justify-self: end;
+    display: flex;
+    flex-flow: row nowrap;
+    .rank_icon {
+      margin-right: 8px;
+    }
+  }
+}

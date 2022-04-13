@@ -6,12 +6,16 @@ import {Scores} from './Scores/Scores';
 import {scores} from '../../resources/scores';
 import {ModalEndGame} from './ModalEndGame/ModalEndGame';
 import {Timer} from './Timer/Timer';
-import {getQuestionsList} from '../../utils/Questions';
+import {initQuestionsList, getQuestionsList} from '../../utils/Questions';
 import {QuestionModel} from '../../models/QuestionModel';
 import {Hints} from './Hints/Hints';
 import {resetList} from '../../utils/ListActiveAnswers';
 import {ModalCallFriend} from './Hints/ModalCallFriend/ModalCallFriend';
 import {ModalHallHelp} from './Hints/ModalHallHelp/ModalHallHelp';
+import {HighScore} from '../../models/HighScore';
+import {v4 as uuidv4} from 'uuid';
+import {highScoresRepository} from '../../data/highScoresRepository';
+import {localStorageRepository} from '../../data/localStorageRepository';
 
 const TIME_ANSWER = 30;
 
@@ -24,6 +28,7 @@ export const GamePage: React.FC = () => {
   const [activeRightToWrong, setActiveRightToWrong] = useState(false);
   const [isOpenFriedModal, setIsOpenFriedModal] = useState(false);
   const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useState(false);
+  const [userId, setUserId] = useState(uuidv4());
 
   const [questionsList, setQuestionsList] = useState(() => getQuestionsList());
 
@@ -34,7 +39,7 @@ export const GamePage: React.FC = () => {
     }
 
     if (questionNumber === 15) {
-      setIsEndGame(true);
+      finishGame();
       resetList();
       return;
     }
@@ -50,7 +55,20 @@ export const GamePage: React.FC = () => {
     setQuestionsList(getQuestionsList());
     setIsOpenFriedModal(false);
     setIsOpenHallHelpModal(false);
+      setIsEndGame(false);
   };
+
+    const finishGame = () => {
+        setIsEndGame(true);
+
+        const highScore: HighScore = {
+            id: userId,
+            name: localStorageRepository.readUserName(),
+            score: fireproofedScore,
+        };
+
+        highScoresRepository.writeScore(highScore);
+    };
 
   return (
     <div className={styles.root}>
@@ -61,7 +79,7 @@ export const GamePage: React.FC = () => {
       <Timer
         time={counter}
         setCounter={setCounter}
-        setOpenModal={setIsEndGame}
+        setOpenModal={finishGame}
         isDisable={isClickedAnswer}
         isOpenModal={isEndGame}
       />
@@ -102,7 +120,7 @@ export const GamePage: React.FC = () => {
       <Question
         questionCard={questionsList[questionNumber] as QuestionModel}
         UpQuestionNumber={upQuestionNumber}
-        setOpenModal={setIsEndGame}
+        setOpenModal={finishGame}
         isClickedAnswer={isClickedAnswer}
         setIsClickedAnswer={setIsClickedAnswer}
         activeRightToWrong={activeRightToWrong}
