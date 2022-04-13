@@ -55,25 +55,25 @@ export const GamePage: React.FC = () => {
     setQuestionsList(getQuestionsList());
     setIsOpenFriedModal(false);
     setIsOpenHallHelpModal(false);
-      setIsEndGame(false);
+    setIsEndGame(false);
   };
 
-    const finishGame = () => {
-        setIsEndGame(true);
+  const finishGame = () => {
+    setIsEndGame(true);
 
-        const highScore: HighScore = {
-            id: userId,
-            name: localStorageRepository.readUserName(),
-            score: fireproofedScore,
-        };
-
-        highScoresRepository.writeScore(highScore);
+    const highScore: HighScore = {
+      id: userId,
+      name: localStorageRepository.readUserName(),
+      score: fireproofedScore,
     };
+
+    highScoresRepository.writeScore(highScore);
+  };
 
   return (
     <div className={styles.root}>
       <div className={styles.display}>
-        <img className={styles.image} src={logo} />
+        <img className={styles.image} src={logo} alt={'Кто хочет стать миллионером?'} />
         <Scores id={questionNumber} />
       </div>
       <Timer
@@ -92,15 +92,7 @@ export const GamePage: React.FC = () => {
         setIsOpenHallHelpModal={setIsOpenHallHelpModal}
         setQuestionsList={setQuestionsList}
       />
-      {isEndGame && (
-        <ModalEndGame
-          resetGame={resetGame}
-          setOpenModal={setIsEndGame}
-          scores={fireproofedScore}
-          isOpen={isEndGame}
-          name="Джо"
-        />
-      )}
+      {isEndGame && <ModalEndGame resetGame={resetGame} scores={fireproofedScore} isOpen={isEndGame} name="Джо" />}
       {isOpenHallHelpModal && (
         <ModalHallHelp
           isOpen={isOpenHallHelpModal}
