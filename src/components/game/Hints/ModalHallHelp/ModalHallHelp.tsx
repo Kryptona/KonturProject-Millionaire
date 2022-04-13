@@ -5,14 +5,17 @@ import Modal from 'react-modal';
 import {CustomButton, CustomButtonUse} from '../../../shared/CustomButton/CustomButton';
 import {getStatistics} from '../../../../utils/Statistics';
 import {modalStyles} from '../../ModalEndGame/ModalEndGame';
+import {loadState, saveState} from '../../../../utils/localStogageUtils';
 
 export const ModalHallHelp: React.FC<HintModalModel> = ({isOpen, setOpenModal, questionNumber, questions}) => {
-  const [listStatistics, setListStatistics] = useState<{[id: string]: number}>(() =>
-    getStatistics(questions, questionNumber),
+  const [listStatistics] = useState<{[id: string]: number}>(() =>
+    loadState('statistics', getStatistics(questions, questionNumber)),
   );
+
   useEffect(() => {
-    setListStatistics(() => getStatistics(questions, questionNumber));
-  }, []);
+    saveState('statistics', listStatistics);
+  }, [listStatistics]);
+
   return (
     <Modal isOpen={isOpen} className={styles.root} style={modalStyles}>
       <div className={styles.statistics}>

@@ -6,6 +6,7 @@ import {HallHelp} from './HallHelp/HallHelp';
 import {QuestionReplacement} from './QuestionReplacement/QuestionReplacement';
 import {CallFriend} from './CallFriend/CallFriend';
 import {QuestionModel} from '../../../models/QuestionModel';
+import {loadState, saveState} from '../../../utils/localStogageUtils';
 
 interface Props {
   readonly restart: boolean;
@@ -26,19 +27,29 @@ export const Hints: React.FC<Props> = ({
   setIsOpenHallHelpModal,
   setQuestionsList,
 }) => {
-  const [activeFifty, setActiveFifty] = useState(true);
-  const [visibleRightToWrong, setVisibleRightToWrong] = useState(true);
-  const [activeHallHelp, setActiveHallHelp] = useState(true);
-  const [activeQuestionReplacement, setActiveQuestionReplacement] = useState(true);
-  const [activeCallFriend, setActiveCallFriend] = useState(true);
+  const [activeFifty, setActiveFifty] = useState(loadState('activeFifty', true));
+  const [visibleRightToWrong, setVisibleRightToWrong] = useState(loadState('visibleRightToWrong', true));
+  const [activeHallHelp, setActiveHallHelp] = useState(loadState('activeHallHelp', true));
+  const [activeQuestionReplacement, setActiveQuestionReplacement] = useState(
+    loadState('activeQuestionReplacement', true),
+  );
+  const [activeCallFriend, setActiveCallFriend] = useState(loadState('activeCallFriend', true));
 
   useEffect(() => {
-    setActiveFifty(true);
-    setVisibleRightToWrong(true);
-    setActiveHallHelp(true);
-    setActiveQuestionReplacement(true);
-    setActiveCallFriend(true);
+    setActiveFifty(loadState('activeFifty', true));
+    setVisibleRightToWrong(loadState('visibleRightToWrong', true));
+    setActiveHallHelp(loadState('activeHallHelp', true));
+    setActiveQuestionReplacement(loadState('activeQuestionReplacement', true));
+    setActiveCallFriend(loadState('activeCallFriend', true));
   }, [restart]);
+
+  useEffect(() => {
+    saveState('activeFifty', activeFifty);
+    saveState('visibleRightToWrong', visibleRightToWrong);
+    saveState('activeHallHelp', activeHallHelp);
+    saveState('activeQuestionReplacement', activeQuestionReplacement);
+    saveState('activeCallFriend', activeCallFriend);
+  }, [activeFifty, visibleRightToWrong, activeHallHelp, activeQuestionReplacement, activeCallFriend]);
 
   return (
     <div className={styles.root}>

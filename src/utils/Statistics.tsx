@@ -24,6 +24,7 @@ function getStatistics(questions: QuestionModel, questionNumber: number) {
       if (probability === 0) break;
     }
   }
+
   return listStatistics;
 }
 

@@ -1,11 +1,12 @@
 import {QuestionModel} from '../models/QuestionModel';
+import {loadState} from './localStogageUtils';
 
-export const ListActiveAnswer: {[variant: string]: boolean} = {
+export const ListActiveAnswer: {[variant: string]: boolean} = loadState('ListActiveAnswer', {
   A: true,
   B: true,
   C: true,
   D: true,
-};
+});
 
 function activeHintsFiftyFifty(questions: QuestionModel) {
   const listAnswerAndAnswer = getListAnswerAndRightAnswer(questions);

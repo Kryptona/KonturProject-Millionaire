@@ -4,10 +4,13 @@ import styles from './MenuPage.scss';
 import {CustomInput} from '../shared/CustomInput/CustomInput';
 import {CustomButton, CustomButtonUse} from '../shared/CustomButton/CustomButton';
 import {useNavigate} from 'react-router-dom';
+import {resetList} from '../../utils/ListActiveAnswers';
 
 export const MenuPage: React.FC = () => {
   const rout = useNavigate();
   const onStartGame = () => {
+    localStorage.clear();
+    resetList();
     rout('/game');
   };
   const onStatistics = () => {

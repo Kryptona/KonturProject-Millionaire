@@ -1,7 +1,7 @@
 import React, {Dispatch, SetStateAction, useState} from 'react';
 import styles from './Answer.scss';
 import {AnimationAnswerButton} from '../../shared/AnimationAnswerButton/AnimationAnswerButton';
-import {deactivateAnswer, ListActiveAnswer} from '../../../utils/ListActiveAnswers';
+import {deactivateAnswer} from '../../../utils/ListActiveAnswers';
 
 type Props = {
   A: string;
@@ -32,13 +32,10 @@ export const Answer: React.FC<Props> = ({
   const [isAnswerBacklight, setIsAnswerBacklight] = useState(false);
   const checkRightAnswer = (selectedAnswer: string, letter: 'A' | 'B' | 'C' | 'D'): void => {
     if (selectedAnswer === rightAnswer) {
-      // alert("Правильный ответ")
       setTimeout(() => {
         upQuestionNumber();
       }, 6001);
     } else {
-      // alert("Ошибка");
-      // setOpenModal(true)
       if (activeRightToWrong) {
         setActiveRightToWrong(false);
         deactivateAnswer(letter);

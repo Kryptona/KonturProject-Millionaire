@@ -1,17 +1,22 @@
 import {questions} from '../resources/questions';
 import {QuestionModel} from '../models/QuestionModel';
+import {loadState, saveState} from './localStogageUtils';
 
-export let questionsList: QuestionModel[] = [];
+let questionsList: QuestionModel[] = [];
 let addedQuestions: number[] = [];
 
-export function getQuestionsList(): ReadonlyArray<QuestionModel> {
-  initQuestionsList();
+export function getQuestionsList(isUpdate: boolean): ReadonlyArray<QuestionModel> {
+  if (isUpdate) {
+    initQuestionsList();
+    saveState('questionsList', questionsList);
+  } else questionsList = loadState('questionsList', initQuestionsList());
   return questionsList;
 }
 
-export function initQuestionsList() {
+function initQuestionsList() {
   addedQuestions = [];
   updateQuestionList();
+  return questionsList;
 }
 
 export function updateQuestionList() {
@@ -19,6 +24,7 @@ export function updateQuestionList() {
   for (let level in questions) {
     addRandomItemsInList(questions[level]);
   }
+  saveState('questionsList', questionsList);
 }
 
 function addRandomItemsInList(listElements: Array<QuestionModel>, count: number = 3) {

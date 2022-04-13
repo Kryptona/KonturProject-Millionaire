@@ -15,7 +15,7 @@ interface Props {
 export const QuestionReplacement: React.FC<Props> = ({isActive, setIsActive, disable, setQuestionsList}) => {
   const click = () => {
     updateQuestionList();
-    setQuestionsList(() => getQuestionsList());
+    setQuestionsList(() => getQuestionsList(false));
     console.log('questionReplacement');
   };
   return (

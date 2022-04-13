@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './GamePage.scss';
 import {Question} from './Question/Question';
 import logo from '/src/img/millionaire_icon.svg';
@@ -12,22 +12,24 @@ import {Hints} from './Hints/Hints';
 import {resetList} from '../../utils/ListActiveAnswers';
 import {ModalCallFriend} from './Hints/ModalCallFriend/ModalCallFriend';
 import {ModalHallHelp} from './Hints/ModalHallHelp/ModalHallHelp';
+import {loadState, saveState} from '../../utils/localStogageUtils';
 
 const TIME_ANSWER = 30;
 
 export const GamePage: React.FC = () => {
-  const [fireproofedScore, setFireproofedScore] = useState(0);
-  const [questionNumber, setQuestionNumber] = useState(0);
-  const [isEndGame, setIsEndGame] = useState(false);
-  const [counter, setCounter] = useState(TIME_ANSWER);
-  const [isClickedAnswer, setIsClickedAnswer] = useState(false);
-  const [activeRightToWrong, setActiveRightToWrong] = useState(false);
-  const [isOpenFriedModal, setIsOpenFriedModal] = useState(false);
-  const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useState(false);
+  const [fireproofedScore, setFireproofedScore] = useState(loadState('fireproofedScore', 0));
+  const [questionNumber, setQuestionNumber] = useState(loadState('questionNumber', 0));
+  const [isEndGame, setIsEndGame] = useState(loadState('isEndGame', false));
+  const [timer, setTimer] = useState(loadState('timer', TIME_ANSWER));
+  const [isClickedAnswer, setIsClickedAnswer] = useState(loadState('isClickedAnswer', false));
+  const [activeRightToWrong, setActiveRightToWrong] = useState(loadState('activeRightToWrong', false));
+  const [isOpenFriedModal, setIsOpenFriedModal] = useState(loadState('isOpenFriedModal', false));
+  const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useState(loadState('isOpenHallHelpModal', false));
 
-  const [questionsList, setQuestionsList] = useState(() => getQuestionsList());
+  const [questionsList, setQuestionsList] = useState(() => getQuestionsList(false));
 
   const upQuestionNumber = () => {
+    resetList();
     const currentScore = scores[questionNumber + 1];
     if (currentScore.fireproof) {
       setFireproofedScore(currentScore.amount);
@@ -39,18 +41,42 @@ export const GamePage: React.FC = () => {
       return;
     }
     setQuestionNumber(questionNumber + 1);
-    setCounter(TIME_ANSWER);
-    resetList();
+    setTimer(TIME_ANSWER);
+    localStorage.clear();
   };
 
   const resetGame = () => {
     setFireproofedScore(0);
     setQuestionNumber(0);
-    setCounter(TIME_ANSWER);
-    setQuestionsList(getQuestionsList());
+    setTimer(TIME_ANSWER);
+    setQuestionsList(getQuestionsList(true));
     setIsOpenFriedModal(false);
     setIsOpenHallHelpModal(false);
+    resetList();
+    localStorage.clear();
   };
+  //TODO переписать на пользовательский хук!
+  useEffect(() => {
+    saveState('questionsList', questionsList);
+    saveState('timer', timer);
+    saveState('questionNumber', questionNumber);
+    saveState('fireproofedScore', fireproofedScore);
+    saveState('isEndGame', isEndGame);
+    saveState('isOpenFriedModal', isOpenFriedModal);
+    saveState('isOpenHallHelpModal', isOpenHallHelpModal);
+    saveState('activeRightToWrong', activeRightToWrong);
+    saveState('isClickedAnswer', isClickedAnswer);
+    if (isEndGame) localStorage.clear();
+  }, [
+    questionsList,
+    timer,
+    questionNumber,
+    fireproofedScore,
+    isOpenFriedModal,
+    isOpenHallHelpModal,
+    activeRightToWrong,
+    isClickedAnswer,
+  ]);
 
   return (
     <div className={styles.root}>
@@ -59,8 +85,8 @@ export const GamePage: React.FC = () => {
         <Scores id={questionNumber} />
       </div>
       <Timer
-        time={counter}
-        setCounter={setCounter}
+        time={timer}
+        setCounter={setTimer}
         setOpenModal={setIsEndGame}
         isDisable={isClickedAnswer}
         isOpenModal={isEndGame}
