@@ -12,6 +12,10 @@ import {Hints} from './Hints/Hints';
 import {resetList} from '../../utils/ListActiveAnswers';
 import {ModalCallFriend} from './Hints/ModalCallFriend/ModalCallFriend';
 import {ModalHallHelp} from './Hints/ModalHallHelp/ModalHallHelp';
+import {HighScore} from '../../models/HighScore';
+import {v4 as uuidv4} from 'uuid';
+import {highScoresRepository} from '../../data/highScoresRepository';
+import {localStorageRepository} from '../../data/localStorageRepository';
 import {loadState, saveState} from '../../utils/localStogageUtils';
 
 const TIME_ANSWER = 30;
@@ -25,6 +29,7 @@ export const GamePage: React.FC = () => {
   const [activeRightToWrong, setActiveRightToWrong] = useState(loadState('activeRightToWrong', false));
   const [isOpenFriedModal, setIsOpenFriedModal] = useState(loadState('isOpenFriedModal', false));
   const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useState(loadState('isOpenHallHelpModal', false));
+  const [userId, setUserId] = useState(uuidv4());
 
   const [questionsList, setQuestionsList] = useState(() => getQuestionsList(false));
 
@@ -36,7 +41,7 @@ export const GamePage: React.FC = () => {
     }
 
     if (questionNumber === 15) {
-      setIsEndGame(true);
+      finishGame();
       resetList();
       return;
     }
@@ -52,8 +57,21 @@ export const GamePage: React.FC = () => {
     setQuestionsList(getQuestionsList(true));
     setIsOpenFriedModal(false);
     setIsOpenHallHelpModal(false);
+    setIsEndGame(false);
     resetList();
     localStorage.clear();
+  };
+
+  const finishGame = () => {
+    setIsEndGame(true);
+
+    const highScore: HighScore = {
+      id: userId,
+      name: localStorageRepository.readUserName(),
+      score: fireproofedScore,
+    };
+
+    highScoresRepository.writeScore(highScore);
   };
   //TODO переписать на пользовательский хук!
   useEffect(() => {
@@ -81,7 +99,7 @@ export const GamePage: React.FC = () => {
   return (
     <div className={styles.root}>
       <div className={styles.display}>
-        <img className={styles.image} src={logo} />
+        <img className={styles.image} src={logo} alt={'Кто хочет стать миллионером?'} />
         <Scores id={questionNumber} />
       </div>
       <Timer
@@ -100,15 +118,7 @@ export const GamePage: React.FC = () => {
         setIsOpenHallHelpModal={setIsOpenHallHelpModal}
         setQuestionsList={setQuestionsList}
       />
-      {isEndGame && (
-        <ModalEndGame
-          resetGame={resetGame}
-          setOpenModal={setIsEndGame}
-          scores={fireproofedScore}
-          isOpen={isEndGame}
-          name="Джо"
-        />
-      )}
+      {isEndGame && <ModalEndGame resetGame={resetGame} scores={fireproofedScore} isOpen={isEndGame} name="Джо" />}
       {isOpenHallHelpModal && (
         <ModalHallHelp
           isOpen={isOpenHallHelpModal}
@@ -128,7 +138,7 @@ export const GamePage: React.FC = () => {
       <Question
         questionCard={questionsList[questionNumber] as QuestionModel}
         UpQuestionNumber={upQuestionNumber}
-        setOpenModal={setIsEndGame}
+        setOpenModal={finishGame}
         isClickedAnswer={isClickedAnswer}
         setIsClickedAnswer={setIsClickedAnswer}
         activeRightToWrong={activeRightToWrong}

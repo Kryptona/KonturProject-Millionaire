@@ -1,0 +1,42 @@
+.root {
+  max-width: 100%;
+  color: white;
+  padding: 16px;
+  box-sizing: border-box;
+  min-height: 100vh;
+  height: 100%;
+
+  .header {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 16px;
+    align-items: center;
+
+    .back_bt {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      border: none;
+      box-shadow: 0 2px 5px 1px rgb(0 0 0 / 16%);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+      }
+
+      &:focus:not(:focus-visible) {
+        outline: none;
+      }
+    }
+  }
+
+  .scores {
+    width: 600px;
+    max-width: 100%;
+
+    & > *:not(:first-child) {
+      margin-top: 16px;
+    }
+  }
+}
