@@ -1,5 +1,5 @@
 import styles from './ModalCallFriend.scss';
-import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Modal from 'react-modal';
 import {CustomButton, CustomButtonUse} from '../../../shared/CustomButton/CustomButton';
 import {modalStyles} from '../../ModalEndGame/ModalEndGame';
