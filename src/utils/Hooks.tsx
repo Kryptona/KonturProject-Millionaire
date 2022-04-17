@@ -3,7 +3,11 @@ import {loadState, saveState} from './localStogageUtils';
 
 function useLocalStorage(key: string, initialValue: any) {
   const [storedValue, setStoredValue] = useState(() => {
-    return loadState(key, initialValue);
+    let init = loadState(key, initialValue);
+    if (key === 'timer' && init > 0) {
+      init = init - 1;
+    }
+    return init;
   });
   const setValue = (value: any) => {
     setStoredValue(value);
