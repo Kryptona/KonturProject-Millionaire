@@ -5,7 +5,6 @@ import {CustomInput} from '../shared/CustomInput/CustomInput';
 import {CustomButton, CustomButtonUse} from '../shared/CustomButton/CustomButton';
 import {useNavigate} from 'react-router-dom';
 import {resetList} from '../../utils/ListActiveAnswers';
-import {initQuestionsList} from '../../utils/Questions';
 import {localStorageRepository} from '../../data/localStorageRepository';
 import {generateUserName} from '../../utils/userNameGenerator';
 

@@ -16,20 +16,23 @@ import {HighScore} from '../../models/HighScore';
 import {v4 as uuidv4} from 'uuid';
 import {highScoresRepository} from '../../data/highScoresRepository';
 import {localStorageRepository} from '../../data/localStorageRepository';
-import {loadState, saveState} from '../../utils/localStogageUtils';
+import {saveState} from '../../utils/localStogageUtils';
+import {useLocalStorage} from '../../utils/Hooks';
+import {useNavigate} from 'react-router-dom';
 
 const TIME_ANSWER = 30;
 
 export const GamePage: React.FC = () => {
-  const [fireproofedScore, setFireproofedScore] = useState(loadState('fireproofedScore', 0));
-  const [questionNumber, setQuestionNumber] = useState(loadState('questionNumber', 0));
-  const [isEndGame, setIsEndGame] = useState(loadState('isEndGame', false));
-  const [timer, setTimer] = useState(loadState('timer', TIME_ANSWER));
-  const [isClickedAnswer, setIsClickedAnswer] = useState(loadState('isClickedAnswer', false));
-  const [activeRightToWrong, setActiveRightToWrong] = useState(loadState('activeRightToWrong', false));
-  const [isOpenFriedModal, setIsOpenFriedModal] = useState(loadState('isOpenFriedModal', false));
-  const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useState(loadState('isOpenHallHelpModal', false));
-  const [userId, setUserId] = useState(uuidv4());
+  const [fireproofedScore, setFireproofedScore] = useLocalStorage('fireproofedScore', 0);
+  const [questionNumber, setQuestionNumber] = useLocalStorage('questionNumber', 0);
+  const [isEndGame, setIsEndGame] = useLocalStorage('isEndGame', false);
+  const [timer, setTimer] = useLocalStorage('timer', TIME_ANSWER);
+  const [isClickedAnswer, setIsClickedAnswer] = useLocalStorage('isClickedAnswer', false);
+  const [activeRightToWrong, setActiveRightToWrong] = useLocalStorage('activeRightToWrong', false);
+  const [isOpenFriedModal, setIsOpenFriedModal] = useLocalStorage('isOpenFriedModal', false);
+  const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useLocalStorage('isOpenHallHelpModal', false);
+  const [userId] = useState(uuidv4());
+  const router = useNavigate();
 
   const [questionsList, setQuestionsList] = useState(() => getQuestionsList(false));
 
@@ -47,7 +50,6 @@ export const GamePage: React.FC = () => {
     }
     setQuestionNumber(questionNumber + 1);
     setTimer(TIME_ANSWER);
-    localStorage.clear();
   };
 
   const resetGame = () => {
@@ -60,6 +62,12 @@ export const GamePage: React.FC = () => {
     setIsEndGame(false);
     resetList();
     localStorage.clear();
+  };
+
+  const checkChoseMenu = () => {
+    if (isClickedAnswer) {
+      router('/');
+    }
   };
 
   const finishGame = () => {
@@ -76,25 +84,9 @@ export const GamePage: React.FC = () => {
   //TODO переписать на пользовательский хук!
   useEffect(() => {
     saveState('questionsList', questionsList);
-    saveState('timer', timer);
-    saveState('questionNumber', questionNumber);
-    saveState('fireproofedScore', fireproofedScore);
-    saveState('isEndGame', isEndGame);
-    saveState('isOpenFriedModal', isOpenFriedModal);
-    saveState('isOpenHallHelpModal', isOpenHallHelpModal);
-    saveState('activeRightToWrong', activeRightToWrong);
-    saveState('isClickedAnswer', isClickedAnswer);
     if (isEndGame) localStorage.clear();
-  }, [
-    questionsList,
-    timer,
-    questionNumber,
-    fireproofedScore,
-    isOpenFriedModal,
-    isOpenHallHelpModal,
-    activeRightToWrong,
-    isClickedAnswer,
-  ]);
+    return checkChoseMenu();
+  }, [questionsList]);
 
   return (
     <div className={styles.root}>
