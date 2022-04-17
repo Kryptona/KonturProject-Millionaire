@@ -4,8 +4,8 @@
   width: 100%;
   margin: 0 auto;
   padding: 32px;
-  background: #151978;
   min-width: 350px;
+  background: #151978;
 
   .display {
     display: flex;
@@ -26,7 +26,6 @@
 @media screen and (max-width: 800px) {
   .root {
     .display {
-
       .image {
         width: 200px;
       }
@@ -37,7 +36,6 @@
 @media screen and (max-width: 450px) {
   .root {
     .display {
-
       .image {
         width: 100px;
       }

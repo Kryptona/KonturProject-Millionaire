@@ -17,7 +17,7 @@ import {v4 as uuidv4} from 'uuid';
 import {highScoresRepository} from '../../data/highScoresRepository';
 import {localStorageRepository} from '../../data/localStorageRepository';
 
-const TIME_ANSWER = 30;
+const TIME_ANSWER = 3000;
 
 export const GamePage: React.FC = () => {
   const [fireproofedScore, setFireproofedScore] = useState(0);
