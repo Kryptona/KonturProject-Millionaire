@@ -34,7 +34,7 @@ export const QuestionReplacement: React.FC<Props> = ({
       onClick={click}
       isActive={isActive}
       setIsActive={setIsActive}
-      disable={disable || isActiveFiftyFifty || isActiveRightToWrong}
+      disable={disable || !isActiveFiftyFifty || !isActiveRightToWrong}
     />
   );
 };
