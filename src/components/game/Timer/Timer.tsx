@@ -8,6 +8,7 @@ interface PropsTimer {
   isOpenModal: boolean;
   isDisable: boolean;
 }
+
 export const Timer: React.FC<PropsTimer> = ({time, setOpenModal, setCounter, isOpenModal, isDisable}) => {
   useEffect(() => {
     const timer = time > 0 && setInterval(() => setCounter(time - 1), 1000);

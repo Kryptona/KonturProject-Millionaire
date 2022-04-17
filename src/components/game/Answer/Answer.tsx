@@ -2,6 +2,9 @@ import React, {Dispatch, SetStateAction, useState} from 'react';
 import styles from './Answer.scss';
 import {AnimationAnswerButton} from '../../shared/AnimationAnswerButton/AnimationAnswerButton';
 import {deactivateAnswer} from '../../../utils/ListActiveAnswers';
+import useSound from 'use-sound';
+import audioFileLost from '/src/sounds/loss.mp3';
+import audioFileRight from '/src/sounds/rightAnswer.mp3';
 
 type Props = {
   A: string;
@@ -30,8 +33,13 @@ export const Answer: React.FC<Props> = ({
   activeRightToWrong,
 }) => {
   const [isAnswerBacklight, setIsAnswerBacklight] = useState(false);
+  const [soundLoseAnswer] = useSound(audioFileLost, {volume: 1});
+  const [soundRightAnswer] = useSound(audioFileRight, {volume: 1});
   const checkRightAnswer = (selectedAnswer: string, letter: 'A' | 'B' | 'C' | 'D'): void => {
     if (selectedAnswer === rightAnswer) {
+      setTimeout(() => {
+        soundRightAnswer();
+      }, 4000);
       setTimeout(() => {
         upQuestionNumber();
       }, 6001);
@@ -41,7 +49,10 @@ export const Answer: React.FC<Props> = ({
         deactivateAnswer(letter);
         return;
       }
-      setTimeout(() => setIsAnswerBacklight(true), 4000);
+      setTimeout(() => {
+        setIsAnswerBacklight(true);
+        soundLoseAnswer();
+      }, 4000);
       setTimeout(() => setOpenModal(true), 6000);
     }
   };

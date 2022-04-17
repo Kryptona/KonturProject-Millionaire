@@ -7,10 +7,13 @@ import {useNavigate} from 'react-router-dom';
 import {resetList} from '../../utils/ListActiveAnswers';
 import {localStorageRepository} from '../../data/localStorageRepository';
 import {generateUserName} from '../../utils/userNameGenerator';
+import useSound from 'use-sound';
+import audioFile from '/src/sounds/selectAnswer.mp3';
 
 export const MenuPage: React.FC = () => {
   const [userName, setUserName] = useState('');
   const [placeholder, setPlaceholder] = useState('');
+  const [startGameSound] = useSound(audioFile, {volume: 1});
 
   useEffect(() => {
     setUserName(localStorageRepository.readUserName());
@@ -20,6 +23,7 @@ export const MenuPage: React.FC = () => {
   const rout = useNavigate();
   const onStartGame = () => {
     localStorage.clear();
+    startGameSound();
     resetList();
     rout('/game');
     localStorageRepository.writeUserName(userName ? userName : placeholder);

@@ -25,7 +25,6 @@ export const QuestionReplacement: React.FC<Props> = ({
   const click = () => {
     updateQuestionList();
     setQuestionsList(() => getQuestionsList(false));
-    console.log('questionReplacement');
   };
   return (
     <Hint

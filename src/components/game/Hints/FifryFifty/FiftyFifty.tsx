@@ -8,7 +8,6 @@ import {saveState} from '../../../../utils/localStogageUtils';
 export const FiftyFifty: React.FC<PropsHint> = ({isActive, setIsActive, disable, questions}) => {
   const click = () => {
     activeHintsFiftyFifty(questions);
-    console.log('FiftyFifty');
     saveState('ListActiveAnswer', ListActiveAnswer);
   };
   return (

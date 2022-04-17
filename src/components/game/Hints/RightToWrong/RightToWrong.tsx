@@ -13,7 +13,6 @@ interface Props {
 export const RightToWrong: React.FC<Props> = ({setActiveRightToWrong, isActive, setIsActive, disable}) => {
   const onClick = () => {
     setActiveRightToWrong(true);
-    console.log('RightToWrong');
   };
   return (
     <Hint

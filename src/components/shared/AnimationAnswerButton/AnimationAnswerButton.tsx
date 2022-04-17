@@ -3,6 +3,8 @@ import React, {Dispatch, SetStateAction, useState} from 'react';
 import {AnswerCustomButton} from '../AnswerCustomButton/AnswerCustomButton';
 import cn from 'classnames';
 import {ListActiveAnswer} from '../../../utils/ListActiveAnswers';
+import useSound from 'use-sound';
+import audioFileClick from '/src/sounds/selectAnswer.mp3';
 
 interface PropsAnimationButtonAnswer {
   readonly className?: string;
@@ -28,10 +30,12 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
   setIsAnswerBacklight,
 }) => {
   const [isClicked, setIsClicked] = useState(false);
+  const [soundOnClick] = useSound(audioFileClick, {volume: 1});
 
   const changeField = () => {
     onClick();
     if (!isDisable && ListActiveAnswer[letter]) {
+      soundOnClick();
       setIsDisable(true);
       setIsClicked(!isClicked);
 

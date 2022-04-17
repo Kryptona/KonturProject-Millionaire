@@ -13,7 +13,6 @@ interface Props {
 export const CallFriend: React.FC<Props> = ({isActive, setIsActive, disable, setIsOpenFriedModal}) => {
   const clickHint = () => {
     setIsOpenFriedModal(true);
-    console.log('CallFriend');
   };
   return (
     <Hint

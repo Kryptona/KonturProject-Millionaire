@@ -19,6 +19,8 @@ import {localStorageRepository} from '../../data/localStorageRepository';
 import {saveState} from '../../utils/localStogageUtils';
 import {useLocalStorage} from '../../utils/Hooks';
 import {useNavigate} from 'react-router-dom';
+import useSound from 'use-sound';
+import audioFile from '/src/sounds/selectAnswer.mp3';
 
 const TIME_ANSWER = 30;
 
@@ -33,6 +35,7 @@ export const GamePage: React.FC = () => {
   const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useLocalStorage('isOpenHallHelpModal', false);
   const [userId] = useState(uuidv4());
   const router = useNavigate();
+  const [startGameSound] = useSound(audioFile, {volume: 1});
 
   const [questionsList, setQuestionsList] = useState(() => getQuestionsList(false));
 
@@ -52,6 +55,8 @@ export const GamePage: React.FC = () => {
     setTimer(TIME_ANSWER);
   };
 
+  if (isClickedAnswer) stop();
+
   const resetGame = () => {
     setFireproofedScore(0);
     setQuestionNumber(0);
@@ -61,6 +66,7 @@ export const GamePage: React.FC = () => {
     setIsOpenHallHelpModal(false);
     setIsEndGame(false);
     resetList();
+    startGameSound();
     localStorage.clear();
   };
 
@@ -81,7 +87,7 @@ export const GamePage: React.FC = () => {
 
     highScoresRepository.writeScore(highScore);
   };
-  //TODO переписать на пользовательский хук!
+
   useEffect(() => {
     saveState('questionsList', questionsList);
     if (isEndGame) localStorage.clear();

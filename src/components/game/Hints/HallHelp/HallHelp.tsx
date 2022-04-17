@@ -13,7 +13,6 @@ interface Props {
 export const HallHelp: React.FC<Props> = ({isActive, setIsActive, disable, setIsOpenHallHelpModal}) => {
   const click = () => {
     setIsOpenHallHelpModal(true);
-    console.log('HallHelp');
   };
   return (
     <Hint
