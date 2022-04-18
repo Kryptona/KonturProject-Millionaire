@@ -7,19 +7,27 @@
 
   padding: 2px 16px;
 
-  &.selected {
-    @include hexagon_clip_path(8px);
-    background-color: orange;
-  }
-
   &.fireproof {
     color: white;
   }
 
+  &.selected {
+    @include hexagon_clip_path(8px);
+    background-color: orange;
+    color: $dark_blue;
+    font-weight: bold;
+  }
+
   .id {
     display: inline-block;
-    width: auto;
+    width: 20px;
     margin-right: 8px;
+    text-align: center;
+  }
+
+  .amount{
+    display: inline-block;
+    width: 100px;
     text-align: center;
   }
 }

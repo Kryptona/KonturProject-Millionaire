@@ -2,13 +2,21 @@
 
 $Roboto: 'Roboto';
 
+$yellow: yellow;
+$dark_blue: #151978;
+$violet: #5a1880;
+$white: white;
+$default_blue: #1a76ff;
+$default_white: #f9fafe;
+$transition_duration: 250ms;
+
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100vh;
   min-height: 100vh;
-  background: linear-gradient(213.77deg, #151978 37.3%, #600268 95.78%);
+  background: linear-gradient(213.77deg, $dark_blue 37.3%, $violet 95.78%);
   font-family: $Roboto;
 }
 
@@ -19,10 +27,6 @@ body {
     min-height: 100vh;
   }
 }
-
-$default_blue: #1a76ff;
-$default_white: #f9fafe;
-$transition_duration: 250ms;
 
 @mixin hexagon_clip_path($factor) {
   clip-path: polygon(
