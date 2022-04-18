@@ -21,6 +21,8 @@ import {useSessionStorage} from '../../utils/Hooks';
 import {useNavigate} from 'react-router-dom';
 import useSound from 'use-sound';
 import audioFile from '/src/sounds/selectAnswer.mp3';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
 
 const TIME_ANSWER = 30;
 
@@ -93,9 +95,25 @@ export const GamePage: React.FC = () => {
     return checkChoseMenu();
   }, [questionsList]);
 
+  const finishGameByUser = () => {
+    setIsEndGame(true);
+
+    const highScore: HighScore = {
+      id: userId,
+      name: localStorageRepository.readUserName(),
+      score: scores[questionNumber].amount,
+    };
+
+    highScoresRepository.writeScore(highScore);
+  };
+
   return (
     <div className={styles.root}>
       <div className={styles.display}>
+        <button className={styles.end_game_bt} onClick={() => finishGameByUser()}>
+          <FontAwesomeIcon icon={faAngleLeft} color={'white'} size={'lg'} />
+          <span className={styles.content_bt}>Закончить игру</span>
+        </button>
         <img className={styles.image} src={logo} alt={'Кто хочет стать миллионером?'} />
         <Scores id={questionNumber} />
       </div>
