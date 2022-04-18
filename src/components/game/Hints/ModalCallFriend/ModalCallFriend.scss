@@ -24,10 +24,11 @@
         width: 150px;
         height: 200px;
       }
-
+      margin-right: 10px;
     }
 
     .text {
+      text-align: left;
       font-size: 32px;
       color: $yellow;
       margin: auto;

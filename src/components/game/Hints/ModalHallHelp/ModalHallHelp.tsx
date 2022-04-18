@@ -1,20 +1,14 @@
 import styles from './ModalHallHelp.scss';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {HintModalModel} from '../../../../models/HintModalModel';
 import Modal from 'react-modal';
 import {CustomButton, CustomButtonUse} from '../../../shared/CustomButton/CustomButton';
 import {getStatistics} from '../../../../utils/Statistics';
 import {modalStyles} from '../../ModalEndGame/ModalEndGame';
-import {loadSessionState, saveSessionState} from '../../../../utils/StogagesUtils';
+import {useSessionStorage} from '../../../../utils/Hooks';
 
 export const ModalHallHelp: React.FC<HintModalModel> = ({isOpen, setOpenModal, questionNumber, questions}) => {
-  const [listStatistics] = useState<{[id: string]: number}>(() =>
-    loadSessionState('statistics', getStatistics(questions, questionNumber)),
-  );
-
-  useEffect(() => {
-    saveSessionState('statistics', listStatistics);
-  }, [listStatistics]);
+  const [listStatistics] = useSessionStorage('statistics', getStatistics(questions, questionNumber));
 
   return (
     <Modal isOpen={isOpen} className={styles.root} style={modalStyles}>

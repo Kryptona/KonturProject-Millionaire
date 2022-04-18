@@ -27,12 +27,12 @@ const TIME_ANSWER = 30;
 export const GamePage: React.FC = () => {
   const [fireproofedScore, setFireproofedScore] = useSessionStorage('fireproofedScore', 0);
   const [questionNumber, setQuestionNumber] = useSessionStorage('questionNumber', 0);
-  const [isEndGame, setIsEndGame] = useSessionStorage('isEndGame', false);
   const [timer, setTimer] = useSessionStorage('timer', TIME_ANSWER);
   const [isClickedAnswer, setIsClickedAnswer] = useSessionStorage('isClickedAnswer', false);
   const [activeRightToWrong, setActiveRightToWrong] = useSessionStorage('activeRightToWrong', false);
   const [isOpenFriedModal, setIsOpenFriedModal] = useSessionStorage('isOpenFriedModal', false);
   const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useSessionStorage('isOpenHallHelpModal', false);
+  const [isEndGame, setIsEndGame] = useSessionStorage('isEndGame', false);
   const [userId] = useState(uuidv4());
   const router = useNavigate();
 

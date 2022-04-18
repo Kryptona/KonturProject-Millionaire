@@ -31,10 +31,10 @@ export const Hint: React.FC<Props> = ({className, img, onClick, isActive, setIsA
     }
   };
   return (
-    <div
+    <button
       className={cn(styles.root, {[styles.isActive]: isActive, [styles.isNotActive]: !isActive}, className)}
       onClick={handleClick}>
       <img className={styles.img} src={img} alt="img" />
-    </div>
+    </button>
   );
 };

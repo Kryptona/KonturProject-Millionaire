@@ -1,14 +1,18 @@
+@import '../../game/default.scss';
+
+
 .root {
-  height: 100px;
-  width: 100px;
   margin-left: 10px;
   border-radius: 50%;
   display: inline-block;
+  padding: 0;
+  background: $blue;
 
   .img {
     height: 98px;
     width: 98px;
     border-radius: 50%;
+    margin: 0;
   }
 }
 

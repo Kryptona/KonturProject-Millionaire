@@ -1,19 +1,15 @@
 import styles from './ModalCallFriend.scss';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Modal from 'react-modal';
 import {CustomButton, CustomButtonUse} from '../../../shared/CustomButton/CustomButton';
 import {modalStyles} from '../../ModalEndGame/ModalEndGame';
 import {getPhrase} from '../../../../utils/ListPhrasesFriend';
 import friend from '/src/img/friend.png';
 import {HintModalModel} from '../../../../models/HintModalModel';
-import {loadSessionState, saveSessionState} from '../../../../utils/StogagesUtils';
+import {useSessionStorage} from '../../../../utils/Hooks';
 
 export const ModalCallFriend: React.FC<HintModalModel> = ({isOpen, setOpenModal, questionNumber, questions}) => {
-  const [phrase] = useState(loadSessionState('phrase', getPhrase(questions, questionNumber)));
-
-  useEffect(() => {
-    saveSessionState('phrase', phrase);
-  }, [phrase]);
+  const [phrase] = useSessionStorage('phrase', getPhrase(questions, questionNumber));
 
   return (
     <Modal isOpen={isOpen} className={styles.root} style={modalStyles}>
