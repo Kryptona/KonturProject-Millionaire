@@ -16,7 +16,7 @@ import {HighScore} from '../../models/HighScore';
 import {v4 as uuidv4} from 'uuid';
 import {highScoresRepository} from '../../data/highScoresRepository';
 import {localStorageRepository} from '../../data/localStorageRepository';
-import {saveState} from '../../utils/localStogageUtils';
+import {saveState} from '../../utils/SessionStogageUtils';
 import {useLocalStorage} from '../../utils/Hooks';
 import {useNavigate} from 'react-router-dom';
 import useSound from 'use-sound';
@@ -35,6 +35,7 @@ export const GamePage: React.FC = () => {
   const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useLocalStorage('isOpenHallHelpModal', false);
   const [userId] = useState(uuidv4());
   const router = useNavigate();
+
   const [startGameSound] = useSound(audioFile, {volume: 1});
 
   const [questionsList, setQuestionsList] = useState(() => getQuestionsList(false));
@@ -55,8 +56,6 @@ export const GamePage: React.FC = () => {
     setTimer(TIME_ANSWER);
   };
 
-  if (isClickedAnswer) stop();
-
   const resetGame = () => {
     setFireproofedScore(0);
     setQuestionNumber(0);
@@ -67,7 +66,7 @@ export const GamePage: React.FC = () => {
     setIsEndGame(false);
     resetList();
     startGameSound();
-    localStorage.clear();
+    sessionStorage.clear();
   };
 
   const checkChoseMenu = () => {
@@ -90,7 +89,7 @@ export const GamePage: React.FC = () => {
 
   useEffect(() => {
     saveState('questionsList', questionsList);
-    if (isEndGame) localStorage.clear();
+    if (isEndGame) sessionStorage.clear();
     return checkChoseMenu();
   }, [questionsList]);
 

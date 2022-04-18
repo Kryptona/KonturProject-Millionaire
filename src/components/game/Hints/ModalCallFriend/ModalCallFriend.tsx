@@ -6,7 +6,7 @@ import {modalStyles} from '../../ModalEndGame/ModalEndGame';
 import {getPhrase} from '../../../../utils/ListPhrasesFriend';
 import friend from '/src/img/friend.png';
 import {HintModalModel} from '../../../../models/HintModalModel';
-import {loadState, saveState} from '../../../../utils/localStogageUtils';
+import {loadState, saveState} from '../../../../utils/SessionStogageUtils';
 
 export const ModalCallFriend: React.FC<HintModalModel> = ({isOpen, setOpenModal, questionNumber, questions}) => {
   const [phrase] = useState(loadState('phrase', getPhrase(questions, questionNumber)));

@@ -22,7 +22,7 @@ export const MenuPage: React.FC = () => {
 
   const rout = useNavigate();
   const onStartGame = () => {
-    localStorage.clear();
+    sessionStorage.clear();
     startGameSound();
     resetList();
     rout('/game');

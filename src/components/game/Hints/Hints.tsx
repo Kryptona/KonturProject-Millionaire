@@ -1,12 +1,13 @@
 import styles from './Hints.scss';
-import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import React, {Dispatch, SetStateAction, useEffect} from 'react';
 import {FiftyFifty} from './FifryFifty/FiftyFifty';
 import {RightToWrong} from './RightToWrong/RightToWrong';
 import {HallHelp} from './HallHelp/HallHelp';
 import {QuestionReplacement} from './QuestionReplacement/QuestionReplacement';
 import {CallFriend} from './CallFriend/CallFriend';
 import {QuestionModel} from '../../../models/QuestionModel';
-import {loadState, saveState} from '../../../utils/localStogageUtils';
+import {useLocalStorage} from '../../../utils/Hooks';
+import {loadState} from '../../../utils/SessionStogageUtils';
 
 interface Props {
   readonly restart: boolean;
@@ -27,13 +28,11 @@ export const Hints: React.FC<Props> = ({
   setIsOpenHallHelpModal,
   setQuestionsList,
 }) => {
-  const [activeFifty, setActiveFifty] = useState(loadState('activeFifty', true));
-  const [visibleRightToWrong, setVisibleRightToWrong] = useState(loadState('visibleRightToWrong', true));
-  const [activeHallHelp, setActiveHallHelp] = useState(loadState('activeHallHelp', true));
-  const [activeQuestionReplacement, setActiveQuestionReplacement] = useState(
-    loadState('activeQuestionReplacement', true),
-  );
-  const [activeCallFriend, setActiveCallFriend] = useState(loadState('activeCallFriend', true));
+  const [activeFifty, setActiveFifty] = useLocalStorage('activeFifty', true);
+  const [visibleRightToWrong, setVisibleRightToWrong] = useLocalStorage('visibleRightToWrong', true);
+  const [activeHallHelp, setActiveHallHelp] = useLocalStorage('activeHallHelp', true);
+  const [activeQuestionReplacement, setActiveQuestionReplacement] = useLocalStorage('activeQuestionReplacement', true);
+  const [activeCallFriend, setActiveCallFriend] = useLocalStorage('activeCallFriend', true);
 
   useEffect(() => {
     setActiveFifty(loadState('activeFifty', true));
@@ -42,14 +41,6 @@ export const Hints: React.FC<Props> = ({
     setActiveQuestionReplacement(loadState('activeQuestionReplacement', true));
     setActiveCallFriend(loadState('activeCallFriend', true));
   }, [restart]);
-
-  useEffect(() => {
-    saveState('activeFifty', activeFifty);
-    saveState('visibleRightToWrong', visibleRightToWrong);
-    saveState('activeHallHelp', activeHallHelp);
-    saveState('activeQuestionReplacement', activeQuestionReplacement);
-    saveState('activeCallFriend', activeCallFriend);
-  }, [activeFifty, visibleRightToWrong, activeHallHelp, activeQuestionReplacement, activeCallFriend]);
 
   return (
     <div className={styles.root}>

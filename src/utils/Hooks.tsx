@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {loadState, saveState} from './localStogageUtils';
+import {loadState, saveState} from './SessionStogageUtils';
 
 function useLocalStorage(key: string, initialValue: any) {
   const [storedValue, setStoredValue] = useState(() => {
