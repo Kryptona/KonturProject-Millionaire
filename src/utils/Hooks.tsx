@@ -1,9 +1,9 @@
 import {useEffect, useState} from 'react';
-import {loadState, saveState} from './SessionStogageUtils';
+import {loadLocalState, loadSessionState, saveLocalState, saveSessionState} from './StogagesUtils';
 
-function useLocalStorage(key: string, initialValue: any) {
+function useSessionStorage(key: string, initialValue: any) {
   const [storedValue, setStoredValue] = useState(() => {
-    let init = loadState(key, initialValue);
+    let init = loadSessionState(key, initialValue);
     if (key === 'timer' && init > 0) {
       init = init - 1;
     }
@@ -14,10 +14,29 @@ function useLocalStorage(key: string, initialValue: any) {
   };
 
   useEffect(() => {
-    saveState(key, storedValue);
+    saveSessionState(key, storedValue);
   }, [storedValue]);
 
   return [storedValue, setValue];
 }
 
-export {useLocalStorage};
+function useLocalStorage(key: string, initialValue: any) {
+  const [storedValue, setStoredValue] = useState(() => {
+    let init = loadLocalState(key, initialValue);
+    if (key === 'timer' && init > 0) {
+      init = init - 1;
+    }
+    return init;
+  });
+  const setValue = (value: any) => {
+    setStoredValue(value);
+  };
+
+  useEffect(() => {
+    saveLocalState(key, storedValue);
+  }, [storedValue]);
+
+  return [storedValue, setValue];
+}
+
+export {useSessionStorage, useLocalStorage};

@@ -16,8 +16,8 @@ import {HighScore} from '../../models/HighScore';
 import {v4 as uuidv4} from 'uuid';
 import {highScoresRepository} from '../../data/highScoresRepository';
 import {localStorageRepository} from '../../data/localStorageRepository';
-import {saveState} from '../../utils/SessionStogageUtils';
-import {useLocalStorage} from '../../utils/Hooks';
+import {saveSessionState} from '../../utils/StogagesUtils';
+import {useSessionStorage} from '../../utils/Hooks';
 import {useNavigate} from 'react-router-dom';
 import useSound from 'use-sound';
 import audioFile from '/src/sounds/selectAnswer.mp3';
@@ -25,14 +25,14 @@ import audioFile from '/src/sounds/selectAnswer.mp3';
 const TIME_ANSWER = 30;
 
 export const GamePage: React.FC = () => {
-  const [fireproofedScore, setFireproofedScore] = useLocalStorage('fireproofedScore', 0);
-  const [questionNumber, setQuestionNumber] = useLocalStorage('questionNumber', 0);
-  const [isEndGame, setIsEndGame] = useLocalStorage('isEndGame', false);
-  const [timer, setTimer] = useLocalStorage('timer', TIME_ANSWER);
-  const [isClickedAnswer, setIsClickedAnswer] = useLocalStorage('isClickedAnswer', false);
-  const [activeRightToWrong, setActiveRightToWrong] = useLocalStorage('activeRightToWrong', false);
-  const [isOpenFriedModal, setIsOpenFriedModal] = useLocalStorage('isOpenFriedModal', false);
-  const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useLocalStorage('isOpenHallHelpModal', false);
+  const [fireproofedScore, setFireproofedScore] = useSessionStorage('fireproofedScore', 0);
+  const [questionNumber, setQuestionNumber] = useSessionStorage('questionNumber', 0);
+  const [isEndGame, setIsEndGame] = useSessionStorage('isEndGame', false);
+  const [timer, setTimer] = useSessionStorage('timer', TIME_ANSWER);
+  const [isClickedAnswer, setIsClickedAnswer] = useSessionStorage('isClickedAnswer', false);
+  const [activeRightToWrong, setActiveRightToWrong] = useSessionStorage('activeRightToWrong', false);
+  const [isOpenFriedModal, setIsOpenFriedModal] = useSessionStorage('isOpenFriedModal', false);
+  const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useSessionStorage('isOpenHallHelpModal', false);
   const [userId] = useState(uuidv4());
   const router = useNavigate();
 
@@ -88,7 +88,7 @@ export const GamePage: React.FC = () => {
   };
 
   useEffect(() => {
-    saveState('questionsList', questionsList);
+    saveSessionState('questionsList', questionsList);
     if (isEndGame) sessionStorage.clear();
     return checkChoseMenu();
   }, [questionsList]);

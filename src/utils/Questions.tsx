@@ -1,6 +1,6 @@
 import {questions} from '../resources/questions';
 import {QuestionModel} from '../models/QuestionModel';
-import {loadState, saveState} from './SessionStogageUtils';
+import {loadSessionState, saveSessionState} from './StogagesUtils';
 
 let questionsList: QuestionModel[] = [];
 let addedQuestions: number[] = [];
@@ -8,8 +8,8 @@ let addedQuestions: number[] = [];
 export function getQuestionsList(isUpdate: boolean): ReadonlyArray<QuestionModel> {
   if (isUpdate) {
     initQuestionsList();
-    saveState('questionsList', questionsList);
-  } else questionsList = loadState('questionsList', initQuestionsList());
+    saveSessionState('questionsList', questionsList);
+  } else questionsList = loadSessionState('questionsList', initQuestionsList());
   return questionsList;
 }
 
@@ -27,7 +27,7 @@ export function updateQuestionList() {
   for (let level in questions) {
     addRandomItemsInList(questions[level]);
   }
-  saveState('questionsList', questionsList);
+  saveSessionState('questionsList', questionsList);
 }
 
 function addRandomItemsInList(listElements: Array<QuestionModel>, count: number = 3) {

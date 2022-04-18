@@ -6,8 +6,8 @@ import {HallHelp} from './HallHelp/HallHelp';
 import {QuestionReplacement} from './QuestionReplacement/QuestionReplacement';
 import {CallFriend} from './CallFriend/CallFriend';
 import {QuestionModel} from '../../../models/QuestionModel';
-import {useLocalStorage} from '../../../utils/Hooks';
-import {loadState} from '../../../utils/SessionStogageUtils';
+import {useSessionStorage} from '../../../utils/Hooks';
+import {loadSessionState} from '../../../utils/StogagesUtils';
 
 interface Props {
   readonly restart: boolean;
@@ -28,18 +28,21 @@ export const Hints: React.FC<Props> = ({
   setIsOpenHallHelpModal,
   setQuestionsList,
 }) => {
-  const [activeFifty, setActiveFifty] = useLocalStorage('activeFifty', true);
-  const [visibleRightToWrong, setVisibleRightToWrong] = useLocalStorage('visibleRightToWrong', true);
-  const [activeHallHelp, setActiveHallHelp] = useLocalStorage('activeHallHelp', true);
-  const [activeQuestionReplacement, setActiveQuestionReplacement] = useLocalStorage('activeQuestionReplacement', true);
-  const [activeCallFriend, setActiveCallFriend] = useLocalStorage('activeCallFriend', true);
+  const [activeFifty, setActiveFifty] = useSessionStorage('activeFifty', true);
+  const [visibleRightToWrong, setVisibleRightToWrong] = useSessionStorage('visibleRightToWrong', true);
+  const [activeHallHelp, setActiveHallHelp] = useSessionStorage('activeHallHelp', true);
+  const [activeQuestionReplacement, setActiveQuestionReplacement] = useSessionStorage(
+    'activeQuestionReplacement',
+    true,
+  );
+  const [activeCallFriend, setActiveCallFriend] = useSessionStorage('activeCallFriend', true);
 
   useEffect(() => {
-    setActiveFifty(loadState('activeFifty', true));
-    setVisibleRightToWrong(loadState('visibleRightToWrong', true));
-    setActiveHallHelp(loadState('activeHallHelp', true));
-    setActiveQuestionReplacement(loadState('activeQuestionReplacement', true));
-    setActiveCallFriend(loadState('activeCallFriend', true));
+    setActiveFifty(loadSessionState('activeFifty', true));
+    setVisibleRightToWrong(loadSessionState('visibleRightToWrong', true));
+    setActiveHallHelp(loadSessionState('activeHallHelp', true));
+    setActiveQuestionReplacement(loadSessionState('activeQuestionReplacement', true));
+    setActiveCallFriend(loadSessionState('activeCallFriend', true));
   }, [restart]);
 
   return (

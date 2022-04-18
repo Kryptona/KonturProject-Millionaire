@@ -3,12 +3,12 @@ import React from 'react';
 import {Hint, PropsHint} from '../../../shared/Hint/Hint';
 import logo from '/src/img/fiftyFifty.png';
 import {activeHintsFiftyFifty, ListActiveAnswer} from '../../../../utils/ListActiveAnswers';
-import {saveState} from '../../../../utils/SessionStogageUtils';
+import {saveSessionState} from '../../../../utils/StogagesUtils';
 
 export const FiftyFifty: React.FC<PropsHint> = ({isActive, setIsActive, disable, questions}) => {
   const click = () => {
     activeHintsFiftyFifty(questions);
-    saveState('ListActiveAnswer', ListActiveAnswer);
+    saveSessionState('ListActiveAnswer', ListActiveAnswer);
   };
   return (
     <Hint
