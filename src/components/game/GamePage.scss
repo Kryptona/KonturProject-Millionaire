@@ -10,6 +10,29 @@
   .display {
     display: flex;
 
+    .end_game_bt{
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      height: 40px;
+      border: none;
+      box-shadow: 0 2px 5px 1px rgb(0 0 0 / 16%);
+      color: $default_white;
+      font-size: 18px;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+      }
+
+      &:focus:not(:focus-visible) {
+        outline: none;
+      }
+
+      .content_bt{
+        margin-left: 8px;
+      }
+    }
+
     .image {
       display: block;
       margin: 32px auto;
