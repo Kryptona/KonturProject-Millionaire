@@ -16,6 +16,8 @@ import {HighScore} from '../../models/HighScore';
 import {v4 as uuidv4} from 'uuid';
 import {highScoresRepository} from '../../data/highScoresRepository';
 import {localStorageRepository} from '../../data/localStorageRepository';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
 
 const TIME_ANSWER = 30;
 
@@ -70,9 +72,25 @@ export const GamePage: React.FC = () => {
     highScoresRepository.writeScore(highScore);
   };
 
+  const finishGameByUser = () => {
+    setIsEndGame(true);
+
+    const highScore: HighScore = {
+      id: userId,
+      name: localStorageRepository.readUserName(),
+      score: scores[questionNumber].amount,
+    };
+
+    highScoresRepository.writeScore(highScore);
+  };
+
   return (
     <div className={styles.root}>
       <div className={styles.display}>
+        <button className={styles.end_game_bt} onClick={() => finishGameByUser()}>
+          <FontAwesomeIcon icon={faAngleLeft} color={'white'} size={'lg'} />
+          <span className={styles.content_bt}>Закончить игру</span>
+        </button>
         <img className={styles.image} src={logo} alt={'Кто хочет стать миллионером?'} />
         <Scores id={questionNumber} />
       </div>
