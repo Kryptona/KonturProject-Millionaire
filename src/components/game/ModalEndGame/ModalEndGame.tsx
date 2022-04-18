@@ -1,8 +1,10 @@
 import styles from './ModalEndGame.scss';
-import React, {Dispatch, SetStateAction} from 'react';
+import React, {useEffect} from 'react';
 import {CustomButton, CustomButtonUse} from '../../shared/CustomButton/CustomButton';
 import Modal from 'react-modal';
 import {useNavigate} from 'react-router-dom';
+import useSound from 'use-sound';
+import audioFileWinGame from '/src/sounds/winGame.mp3';
 
 interface PropsEndGame {
   scores: number;
@@ -13,20 +15,25 @@ interface PropsEndGame {
 
 export const ModalEndGame: React.FC<PropsEndGame> = ({scores, name, isOpen, resetGame}) => {
   const rout = useNavigate();
+  const [soundWinGame, {stop}] = useSound(audioFileWinGame, {volume: 1});
+
+  useEffect(() => {
+    return soundWinGame();
+  });
 
   const onStatistics = () => {
     rout('/statistics');
-    console.log('onStatistics clicked');
+    stop();
   };
 
   const onMenu = () => {
     rout('/');
-    console.log('onMenu clicked');
+    stop();
   };
 
   const restartGame = () => {
     resetGame();
-    console.log('Reset Game');
+    stop();
   };
 
   return (

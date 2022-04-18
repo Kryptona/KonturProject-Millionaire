@@ -36,7 +36,7 @@ export const GamePage: React.FC = () => {
   const [userId] = useState(uuidv4());
   const router = useNavigate();
 
-  const [startGameSound] = useSound(audioFile, {volume: 1});
+  const [startGameSound] = useSound(audioFile, {volume: 1, interrupt: true});
 
   const [questionsList, setQuestionsList] = useState(() => getQuestionsList(false));
 
