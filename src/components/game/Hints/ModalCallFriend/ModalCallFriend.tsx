@@ -18,7 +18,9 @@ export const ModalCallFriend: React.FC<HintModalModel> = ({isOpen, setOpenModal,
   return (
     <Modal isOpen={isOpen} className={styles.root} style={modalStyles}>
       <div className={styles.window}>
-        <img className={styles.img} src={friend} alt={'friend'} />
+        <div className={styles.imageContainer}>
+          <img className={styles.img} src={friend} alt={'friend'} />
+        </div>
         <span className={styles.text}>{phrase}</span>
       </div>
       <CustomButton className={styles.button} use={CustomButtonUse.blue} onClick={() => setOpenModal(false)}>

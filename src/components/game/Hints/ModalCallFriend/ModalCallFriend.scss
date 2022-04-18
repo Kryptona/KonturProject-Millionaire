@@ -18,9 +18,13 @@
 
     display: flex;
 
-    .img {
-      width: 150px;
-      height: 200px;
+    .imageContainer {
+
+      .img {
+        width: 150px;
+        height: 200px;
+      }
+
     }
 
     .text {
