@@ -11,6 +11,10 @@
   .display {
     display: flex;
 
+    .sound_bt {
+      margin-left: 5px;
+    }
+
     .end_game_bt, .sound_bt {
       background: rgba(255, 255, 255, 0.1);
       border-radius: 8px;
