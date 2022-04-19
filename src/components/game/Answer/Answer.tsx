@@ -18,6 +18,7 @@ type Props = {
   setIsClickedAnswer: Dispatch<SetStateAction<boolean>>;
   activeRightToWrong: boolean;
   setActiveRightToWrong: Dispatch<SetStateAction<boolean>>;
+  stopSoundTimer: () => void;
 };
 export const Answer: React.FC<Props> = ({
   A,
@@ -31,11 +32,13 @@ export const Answer: React.FC<Props> = ({
   isClickedAnswer,
   setActiveRightToWrong,
   activeRightToWrong,
+  stopSoundTimer,
 }) => {
   const [isAnswerBacklight, setIsAnswerBacklight] = useState(false);
   const [soundLoseAnswer] = useSound(audioFileLost, {volume: 1});
   const [soundRightAnswer] = useSound(audioFileRight, {volume: 1});
   const checkRightAnswer = (selectedAnswer: string, letter: 'A' | 'B' | 'C' | 'D'): void => {
+    stopSoundTimer();
     if (selectedAnswer === rightAnswer) {
       setTimeout(() => {
         soundRightAnswer();

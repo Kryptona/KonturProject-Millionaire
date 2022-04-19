@@ -20,9 +20,10 @@ import {saveSessionState} from '../../utils/StogagesUtils';
 import {useSessionStorage} from '../../utils/Hooks';
 import {useNavigate} from 'react-router-dom';
 import useSound from 'use-sound';
-import audioFile from '/src/sounds/selectAnswer.mp3';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
+import audioFileStartGame from '/src/sounds/selectAnswer.mp3';
+import audioFileTimer from '/src/sounds/timer.mp3';
 
 const TIME_ANSWER = 30;
 
@@ -38,7 +39,8 @@ export const GamePage: React.FC = () => {
   const [userId] = useState(uuidv4());
   const router = useNavigate();
 
-  const [startGameSound] = useSound(audioFile, {volume: 1, interrupt: true});
+  const [startGameSound] = useSound(audioFileStartGame, {volume: 1});
+  const [timerSound, {stop}] = useSound(audioFileTimer, {volume: 1});
 
   const [questionsList, setQuestionsList] = useState(() => getQuestionsList(false));
 
@@ -56,7 +58,17 @@ export const GamePage: React.FC = () => {
     }
     setQuestionNumber(questionNumber + 1);
     setTimer(TIME_ANSWER);
+    resetTimerSound();
   };
+
+  const resetTimerSound = () => {
+    stop();
+    timerSound();
+  };
+
+  useEffect(() => {
+    return stop();
+  }, []);
 
   const resetGame = () => {
     setFireproofedScore(0);
@@ -69,6 +81,7 @@ export const GamePage: React.FC = () => {
     resetList();
     startGameSound();
     sessionStorage.clear();
+    resetTimerSound();
   };
 
   const checkChoseMenu = () => {
@@ -158,6 +171,7 @@ export const GamePage: React.FC = () => {
         setIsClickedAnswer={setIsClickedAnswer}
         activeRightToWrong={activeRightToWrong}
         setActiveRightToWrong={setActiveRightToWrong}
+        stopSoundTimer={stop}
       />
     </div>
   );
