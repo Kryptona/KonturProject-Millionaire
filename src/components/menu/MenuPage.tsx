@@ -63,13 +63,6 @@ export const MenuPage: React.FC = () => {
 
   return (
     <div className={styles.root}>
-      <button className={styles.sound_bt} onClick={onClickSoundIcon}>
-        {isSoundActive ? (
-          <FontAwesomeIcon icon={faBell} color={'white'} size={'lg'} />
-        ) : (
-          <FontAwesomeIcon icon={faBellSlash} color={'white'} size={'lg'} />
-        )}
-      </button>
       <img className={styles.millionare_icon} src={millionaire} alt="icon" />
 
       <CustomInput
@@ -87,6 +80,13 @@ export const MenuPage: React.FC = () => {
       <CustomButton className={styles.bt} onClick={onSettings} use={CustomButtonUse.secondary}>
         <span className={styles.content}>Настройки</span>
       </CustomButton>
+      <button className={styles.sound_bt} onClick={onClickSoundIcon}>
+        {isSoundActive ? (
+          <FontAwesomeIcon icon={faBell} color={'white'} size={'lg'} />
+        ) : (
+          <FontAwesomeIcon icon={faBellSlash} color={'white'} size={'lg'} />
+        )}
+      </button>
     </div>
   );
 };

@@ -18,6 +18,10 @@
     box-shadow: 0 2px 5px 1px rgb(0 0 0 / 16%);
     color: $default_white;
     font-size: 18px;
+    display: inline-block;
+    position: absolute;
+    left: 3%;
+    top: 3%;
   }
 
   .millionare_icon {
