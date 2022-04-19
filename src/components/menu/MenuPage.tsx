@@ -26,7 +26,7 @@ export const MenuPage: React.FC = () => {
     startGameSound();
     resetList();
     rout('/game');
-    localStorageRepository.writeUserName(userName ? userName : placeholder);
+    localStorageRepository.writeUserName(userName?.trim() ? userName : placeholder);
   };
   const onStatistics = () => {
     rout('/statistics');
