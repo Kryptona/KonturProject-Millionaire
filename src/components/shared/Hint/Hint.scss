@@ -25,11 +25,13 @@
   opacity: 0.25;
   cursor: default;
 }
+
 @media (hover: none) {
   .isActive:hover {
     background: none;
   }
 }
+
 @media screen and (max-width: 640px){
   .root {
     height: 75px;

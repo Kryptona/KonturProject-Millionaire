@@ -18,7 +18,6 @@ import {highScoresRepository} from '../../data/highScoresRepository';
 import {localStorageRepository} from '../../data/localStorageRepository';
 import {saveSessionState} from '../../utils/StogagesUtils';
 import {useSessionStorage} from '../../utils/Hooks';
-import {useNavigate} from 'react-router-dom';
 import useSound from 'use-sound';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAngleLeft, faBell, faBellSlash} from '@fortawesome/free-solid-svg-icons';
@@ -31,14 +30,14 @@ export const GamePage: React.FC = () => {
   const [fireproofedScore, setFireproofedScore] = useSessionStorage('fireproofedScore', 0);
   const [questionNumber, setQuestionNumber] = useSessionStorage('questionNumber', 0);
   const [timer, setTimer] = useSessionStorage('timer', TIME_ANSWER);
-  const [isClickedAnswer, setIsClickedAnswer] = useSessionStorage('isClickedAnswer', false);
+  const [isClickedAnswer, setIsClickedAnswer] = useState(false);
   const [activeRightToWrong, setActiveRightToWrong] = useSessionStorage('activeRightToWrong', false);
   const [isOpenFriedModal, setIsOpenFriedModal] = useSessionStorage('isOpenFriedModal', false);
   const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useSessionStorage('isOpenHallHelpModal', false);
   const [isEndGame, setIsEndGame] = useSessionStorage('isEndGame', false);
   const [userId] = useState(uuidv4());
-  const router = useNavigate();
   const [isSoundActive, setIsSoundActive] = useState(false);
+  const [isClickedRightAnswer, setIsClickedRightAnswer] = useSessionStorage('isClickedRightAnswer', true);
 
   const [startGameSound] = useSound(audioFileStartGame, {volume: 1});
   const [timerSound, {stop}] = useSound(audioFileTimer, {volume: 1});
@@ -83,12 +82,6 @@ export const GamePage: React.FC = () => {
     }
   };
 
-  const checkChoseMenu = () => {
-    if (isClickedAnswer) {
-      router('/');
-    }
-  };
-
   const finishGame = () => {
     setIsEndGame(true);
     stop();
@@ -104,7 +97,6 @@ export const GamePage: React.FC = () => {
   useEffect(() => {
     saveSessionState('questionsList', questionsList);
     if (isEndGame) sessionStorage.clear();
-    return checkChoseMenu();
   }, [questionsList]);
 
   const finishGameByUser = () => {
@@ -137,7 +129,14 @@ export const GamePage: React.FC = () => {
     }
   };
 
-  useEffect(() => stop, [stop]);
+  useEffect(() => {
+    return () => {
+      stop();
+      if (!isClickedRightAnswer) {
+        setIsEndGame(true);
+      }
+    };
+  }, [stop]);
 
   return (
     <div className={styles.root}>
@@ -207,6 +206,7 @@ export const GamePage: React.FC = () => {
         setActiveRightToWrong={setActiveRightToWrong}
         stopSoundTimer={stop}
         isSoundActive={isSoundActive}
+        setIsClickedRightAnswer={setIsClickedRightAnswer}
       />
     </div>
   );

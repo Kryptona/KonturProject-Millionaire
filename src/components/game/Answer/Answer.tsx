@@ -1,4 +1,4 @@
-import React, {Dispatch, SetStateAction, useState} from 'react';
+import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import styles from './Answer.scss';
 import {AnimationAnswerButton} from '../../shared/AnimationAnswerButton/AnimationAnswerButton';
 import {deactivateAnswer} from '../../../utils/ListActiveAnswers';
@@ -20,6 +20,7 @@ type Props = {
   setActiveRightToWrong: Dispatch<SetStateAction<boolean>>;
   stopSoundTimer: () => void;
   isSoundActive: boolean;
+  setIsClickedRightAnswer: Dispatch<SetStateAction<boolean>>;
 };
 export const Answer: React.FC<Props> = ({
   A,
@@ -35,36 +36,57 @@ export const Answer: React.FC<Props> = ({
   activeRightToWrong,
   stopSoundTimer,
   isSoundActive,
+  setIsClickedRightAnswer,
 }) => {
   const [isAnswerBacklight, setIsAnswerBacklight] = useState(false);
   const [soundLoseAnswer] = useSound(audioFileLost, {volume: 1});
   const [soundRightAnswer] = useSound(audioFileRight, {volume: 1});
+  const delayedCalls: NodeJS.Timeout[] = [];
+
   const checkRightAnswer = (selectedAnswer: string, letter: 'A' | 'B' | 'C' | 'D'): void => {
     stopSoundTimer();
     if (selectedAnswer === rightAnswer) {
-      if (isSoundActive)
-        setTimeout(() => {
+      if (isSoundActive) {
+        const id = setTimeout(() => {
           soundRightAnswer();
         }, 4000);
-      setTimeout(() => {
+        delayedCalls.push(id);
+      }
+      const id = setTimeout(() => {
         upQuestionNumber();
       }, 6001);
+      delayedCalls.push(id);
     } else {
       if (activeRightToWrong) {
         setActiveRightToWrong(false);
         deactivateAnswer(letter);
         return;
       }
-      setTimeout(() => {
+      let id = setTimeout(() => {
+        setIsClickedRightAnswer(false);
+        console.log(123);
+      }, 4000);
+      delayedCalls.push(id);
+      id = setTimeout(() => {
         setIsAnswerBacklight(true);
         if (isSoundActive) soundLoseAnswer();
       }, 4000);
-      setTimeout(() => setOpenModal(true), 6000);
+      delayedCalls.push(id);
+      id = setTimeout(() => setOpenModal(true), 6000);
+      delayedCalls.push(id);
     }
   };
   const getNameClassByAnswer = (answer: string) => {
     return answer === rightAnswer;
   };
+
+  useEffect(() => {
+    return () => {
+      for (let id of delayedCalls) {
+        clearTimeout(id);
+      }
+    };
+  }, []);
 
   return (
     <div className={styles.root}>
