@@ -30,6 +30,7 @@ function readScores(): Promise<HighScore[]> {
       }
     })
     .catch((error) => {
+      console.error(error);
       return [];
     });
 }
