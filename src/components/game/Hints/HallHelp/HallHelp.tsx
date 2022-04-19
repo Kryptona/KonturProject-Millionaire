@@ -1,7 +1,7 @@
 import styles from './HallHelp.scss';
 import React, {Dispatch, SetStateAction} from 'react';
 import {Hint} from '../../../shared/Hint/Hint';
-import logo from '/src/img/hallHelp.png';
+import {faUsers} from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   isActive: boolean;
@@ -16,7 +16,7 @@ export const HallHelp: React.FC<Props> = ({isActive, setIsActive, disable, setIs
   };
   return (
     <Hint
-      img={logo}
+      icon={faUsers}
       className={styles.root}
       onClick={click}
       isActive={isActive}

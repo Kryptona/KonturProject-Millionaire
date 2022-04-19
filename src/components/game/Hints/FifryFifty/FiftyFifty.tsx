@@ -1,9 +1,9 @@
 import styles from './FiftyFifty.scss';
 import React from 'react';
 import {Hint, PropsHint} from '../../../shared/Hint/Hint';
-import logo from '/src/img/fiftyFifty.png';
 import {activeHintsFiftyFifty, ListActiveAnswer} from '../../../../utils/ListActiveAnswers';
 import {saveSessionState} from '../../../../utils/StogagesUtils';
+import {faScaleBalanced} from '@fortawesome/free-solid-svg-icons';
 
 export const FiftyFifty: React.FC<PropsHint> = ({isActive, setIsActive, disable, questions}) => {
   const click = () => {
@@ -12,7 +12,7 @@ export const FiftyFifty: React.FC<PropsHint> = ({isActive, setIsActive, disable,
   };
   return (
     <Hint
-      img={logo}
+      icon={faScaleBalanced}
       className={styles.root}
       onClick={click}
       isActive={isActive}

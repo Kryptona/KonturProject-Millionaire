@@ -1,4 +1,5 @@
 @import '../../game/default.scss';
+@import "src/default.scss";
 
 
 .root {
@@ -7,18 +8,17 @@
   display: inline-block;
   padding: 0;
   background: $blue;
+  height: 80px;
+  width: 80px;
 
-  .img {
-    height: 98px;
-    width: 98px;
-    border-radius: 50%;
-    margin: 0;
+  &>svg {
+    height: 50px;
   }
 }
 
 .isActive:hover {
   cursor: pointer;
-  background: #c2b82d;
+  background: $default_blue;
 }
 
 .isNotActive {
@@ -34,9 +34,9 @@
   .root {
     height: 75px;
     width: 75px;
-    .img {
-      height: 74px;
-      width: 74px;
+
+    &>svg {
+      height: 45px;
     }
   }
 }
@@ -45,9 +45,31 @@
   .root {
     height: 60px;
     width: 60px;
-    .img {
-      height: 59px;
-      width: 59px;
+
+    &>svg {
+      height: 40px;
+    }
+  }
+}
+
+@media screen and (max-width: 450px){
+  .root {
+    height: 50px;
+    width: 50px;
+
+    &>svg {
+      height: 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 450px){
+  .root {
+    height: 45px;
+    width: 45px;
+
+    &>svg {
+      height: 25px;
     }
   }
 }

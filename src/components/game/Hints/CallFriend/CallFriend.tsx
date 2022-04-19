@@ -1,7 +1,7 @@
 import styles from './CallFriend.scss';
 import React, {Dispatch, SetStateAction} from 'react';
 import {Hint} from '../../../shared/Hint/Hint';
-import logo from '/src/img/callFriend.png';
+import {faPhone} from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   isActive: boolean;
@@ -16,7 +16,7 @@ export const CallFriend: React.FC<Props> = ({isActive, setIsActive, disable, set
   };
   return (
     <Hint
-      img={logo}
+      icon={faPhone}
       className={styles.root}
       onClick={clickHint}
       isActive={isActive}
