@@ -97,11 +97,12 @@ export const GamePage: React.FC = () => {
 
   const finishGameByUser = () => {
     setIsEndGame(true);
+    setFireproofedScore(scores[questionNumber].amount);
 
     const highScore: HighScore = {
       id: userId,
       name: localStorageRepository.readUserName(),
-      score: scores[questionNumber].amount,
+      score: fireproofedScore,
     };
 
     highScoresRepository.writeScore(highScore);
