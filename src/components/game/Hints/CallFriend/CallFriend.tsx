@@ -8,9 +8,10 @@ interface Props {
   setIsActive: Dispatch<SetStateAction<boolean>>;
   disable: boolean;
   setIsOpenFriedModal: Dispatch<SetStateAction<boolean>>;
+  isSoundActive: boolean;
 }
 
-export const CallFriend: React.FC<Props> = ({isActive, setIsActive, disable, setIsOpenFriedModal}) => {
+export const CallFriend: React.FC<Props> = ({isActive, setIsActive, disable, setIsOpenFriedModal, isSoundActive}) => {
   const clickHint = () => {
     setIsOpenFriedModal(true);
   };
@@ -22,6 +23,7 @@ export const CallFriend: React.FC<Props> = ({isActive, setIsActive, disable, set
       isActive={isActive}
       setIsActive={setIsActive}
       disable={disable}
+      isSoundActive={isSoundActive}
     />
   );
 };

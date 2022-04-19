@@ -14,6 +14,7 @@ interface Props {
   setIsActive: Dispatch<SetStateAction<boolean>>;
   disable: boolean;
   icon: IconDefinition;
+  isSoundActive: boolean;
 }
 
 export interface PropsHint {
@@ -21,13 +22,14 @@ export interface PropsHint {
   setIsActive: Dispatch<SetStateAction<boolean>>;
   disable: boolean;
   questions: QuestionModel;
+  isSoundActive: boolean;
 }
 
-export const Hint: React.FC<Props> = ({className, onClick, isActive, setIsActive, disable, icon}) => {
+export const Hint: React.FC<Props> = ({className, onClick, isActive, setIsActive, disable, icon, isSoundActive}) => {
   const [soundHintClick] = useSound(audioFile, {volume: 1});
   const handleClick = () => {
     if (isActive && !disable) {
-      soundHintClick();
+      if (isSoundActive) soundHintClick();
       setIsActive(false);
       onClick();
     }

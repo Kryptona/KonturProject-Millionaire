@@ -8,9 +8,16 @@ interface Props {
   readonly isActive: boolean;
   readonly setIsActive: Dispatch<SetStateAction<boolean>>;
   readonly disable: boolean;
+  isSoundActive: boolean;
 }
 
-export const RightToWrong: React.FC<Props> = ({setActiveRightToWrong, isActive, setIsActive, disable}) => {
+export const RightToWrong: React.FC<Props> = ({
+  setActiveRightToWrong,
+  isActive,
+  setIsActive,
+  disable,
+  isSoundActive,
+}) => {
   const onClick = () => {
     setActiveRightToWrong(true);
   };
@@ -22,6 +29,7 @@ export const RightToWrong: React.FC<Props> = ({setActiveRightToWrong, isActive, 
       isActive={isActive}
       setIsActive={setIsActive}
       disable={disable}
+      isSoundActive={isSoundActive}
     />
   );
 };

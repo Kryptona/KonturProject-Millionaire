@@ -42,6 +42,9 @@ export const Answer: React.FC<Props> = ({
   const [soundLoseAnswer] = useSound(audioFileLost, {volume: 1});
   const [soundRightAnswer] = useSound(audioFileRight, {volume: 1});
   const delayedCalls = useRef<NodeJS.Timeout[]>([]);
+  const timeChangeQuestion = 4001;
+  const gameOverTime = 4000;
+  const timeAnimation = 2000;
 
   const checkRightAnswer = (selectedAnswer: string, letter: 'A' | 'B' | 'C' | 'D'): void => {
     stopSoundTimer();
@@ -49,12 +52,12 @@ export const Answer: React.FC<Props> = ({
       if (isSoundActive) {
         const id = setTimeout(() => {
           soundRightAnswer();
-        }, 4000);
+        }, timeAnimation);
         delayedCalls.current.push(id);
       }
       const id = setTimeout(() => {
         upQuestionNumber();
-      }, 6001);
+      }, timeChangeQuestion);
       delayedCalls.current.push(id);
     } else {
       if (activeRightToWrong) {
@@ -64,15 +67,14 @@ export const Answer: React.FC<Props> = ({
       }
       let id = setTimeout(() => {
         setIsClickedRightAnswer(false);
-        console.log(123);
-      }, 4000);
+      }, timeAnimation);
       delayedCalls.current.push(id);
       id = setTimeout(() => {
         setIsAnswerBacklight(true);
         if (isSoundActive) soundLoseAnswer();
-      }, 4000);
+      }, timeAnimation);
       delayedCalls.current.push(id);
-      id = setTimeout(() => setOpenModal(true), 6000);
+      id = setTimeout(() => setOpenModal(true), gameOverTime);
       delayedCalls.current.push(id);
     }
   };

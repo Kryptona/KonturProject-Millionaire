@@ -8,9 +8,10 @@ interface Props {
   setIsActive: Dispatch<SetStateAction<boolean>>;
   disable: boolean;
   setIsOpenHallHelpModal: Dispatch<SetStateAction<boolean>>;
+  isSoundActive: boolean;
 }
 
-export const HallHelp: React.FC<Props> = ({isActive, setIsActive, disable, setIsOpenHallHelpModal}) => {
+export const HallHelp: React.FC<Props> = ({isActive, setIsActive, disable, setIsOpenHallHelpModal, isSoundActive}) => {
   const click = () => {
     setIsOpenHallHelpModal(true);
   };
@@ -22,6 +23,7 @@ export const HallHelp: React.FC<Props> = ({isActive, setIsActive, disable, setIs
       isActive={isActive}
       setIsActive={setIsActive}
       disable={disable}
+      isSoundActive={isSoundActive}
     />
   );
 };

@@ -12,6 +12,7 @@ interface Props {
   setQuestionsList: (p: () => ReadonlyArray<QuestionModel>) => void;
   isActiveFiftyFifty: boolean;
   isActiveRightToWrong: boolean;
+  isSoundActive: boolean;
 }
 
 export const QuestionReplacement: React.FC<Props> = ({
@@ -21,6 +22,7 @@ export const QuestionReplacement: React.FC<Props> = ({
   setQuestionsList,
   isActiveFiftyFifty,
   isActiveRightToWrong,
+  isSoundActive,
 }) => {
   const click = () => {
     updateQuestionList();
@@ -34,6 +36,7 @@ export const QuestionReplacement: React.FC<Props> = ({
       setIsActive={setIsActive}
       disable={disable || !isActiveFiftyFifty || !isActiveRightToWrong}
       icon={faArrowRightArrowLeft}
+      isSoundActive={isSoundActive}
     />
   );
 };

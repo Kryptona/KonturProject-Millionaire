@@ -170,6 +170,7 @@ export const GamePage: React.FC = () => {
         setIsOpenFriedModal={setIsOpenFriedModal}
         setIsOpenHallHelpModal={setIsOpenHallHelpModal}
         setQuestionsList={setQuestionsList}
+        isSoundActive={isSoundActive}
       />
       {isEndGame && (
         <ModalEndGame
