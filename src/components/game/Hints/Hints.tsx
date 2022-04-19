@@ -17,6 +17,7 @@ interface Props {
   readonly setIsOpenFriedModal: Dispatch<SetStateAction<boolean>>;
   readonly setIsOpenHallHelpModal: Dispatch<SetStateAction<boolean>>;
   readonly setQuestionsList: (p: () => ReadonlyArray<QuestionModel>) => void;
+  readonly isSoundActive: boolean;
 }
 
 export const Hints: React.FC<Props> = ({
@@ -27,6 +28,7 @@ export const Hints: React.FC<Props> = ({
   setIsOpenFriedModal,
   setIsOpenHallHelpModal,
   setQuestionsList,
+  isSoundActive,
 }) => {
   const [activeFifty, setActiveFifty] = useSessionStorage('activeFifty', true);
   const [visibleRightToWrong, setVisibleRightToWrong] = useSessionStorage('visibleRightToWrong', true);
@@ -47,18 +49,26 @@ export const Hints: React.FC<Props> = ({
 
   return (
     <div className={styles.root}>
-      <FiftyFifty isActive={activeFifty} setIsActive={setActiveFifty} disable={disable} questions={questions} />
+      <FiftyFifty
+        isActive={activeFifty}
+        setIsActive={setActiveFifty}
+        disable={disable}
+        questions={questions}
+        isSoundActive={isSoundActive}
+      />
       <RightToWrong
         isActive={visibleRightToWrong}
         setIsActive={setVisibleRightToWrong}
         disable={disable}
         setActiveRightToWrong={setActiveRightToWrong}
+        isSoundActive={isSoundActive}
       />
       <HallHelp
         isActive={activeHallHelp}
         setIsActive={setActiveHallHelp}
         disable={disable}
         setIsOpenHallHelpModal={setIsOpenHallHelpModal}
+        isSoundActive={isSoundActive}
       />
       <QuestionReplacement
         isActive={activeQuestionReplacement}
@@ -67,12 +77,14 @@ export const Hints: React.FC<Props> = ({
         setQuestionsList={setQuestionsList}
         isActiveFiftyFifty={activeFifty}
         isActiveRightToWrong={visibleRightToWrong}
+        isSoundActive={isSoundActive}
       />
       <CallFriend
         isActive={activeCallFriend}
         setIsActive={setActiveCallFriend}
         disable={disable}
         setIsOpenFriedModal={setIsOpenFriedModal}
+        isSoundActive={isSoundActive}
       />
     </div>
   );

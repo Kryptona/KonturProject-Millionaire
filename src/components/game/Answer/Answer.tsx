@@ -1,4 +1,4 @@
-import React, {Dispatch, SetStateAction, useState} from 'react';
+import React, {Dispatch, SetStateAction, useEffect, useRef, useState} from 'react';
 import styles from './Answer.scss';
 import {AnimationAnswerButton} from '../../shared/AnimationAnswerButton/AnimationAnswerButton';
 import {deactivateAnswer} from '../../../utils/ListActiveAnswers';
@@ -18,6 +18,9 @@ type Props = {
   setIsClickedAnswer: Dispatch<SetStateAction<boolean>>;
   activeRightToWrong: boolean;
   setActiveRightToWrong: Dispatch<SetStateAction<boolean>>;
+  stopSoundTimer: () => void;
+  isSoundActive: boolean;
+  setIsClickedRightAnswer: Dispatch<SetStateAction<boolean>>;
 };
 export const Answer: React.FC<Props> = ({
   A,
@@ -31,34 +34,61 @@ export const Answer: React.FC<Props> = ({
   isClickedAnswer,
   setActiveRightToWrong,
   activeRightToWrong,
+  stopSoundTimer,
+  isSoundActive,
+  setIsClickedRightAnswer,
 }) => {
   const [isAnswerBacklight, setIsAnswerBacklight] = useState(false);
   const [soundLoseAnswer] = useSound(audioFileLost, {volume: 1});
   const [soundRightAnswer] = useSound(audioFileRight, {volume: 1});
+  const delayedCalls = useRef<NodeJS.Timeout[]>([]);
+  const timeChangeQuestion = 4001;
+  const gameOverTime = 4000;
+  const timeAnimation = 2000;
+
   const checkRightAnswer = (selectedAnswer: string, letter: 'A' | 'B' | 'C' | 'D'): void => {
+    stopSoundTimer();
     if (selectedAnswer === rightAnswer) {
-      setTimeout(() => {
-        soundRightAnswer();
-      }, 4000);
-      setTimeout(() => {
+      if (isSoundActive) {
+        const id = setTimeout(() => {
+          soundRightAnswer();
+        }, timeAnimation);
+        delayedCalls.current.push(id);
+      }
+      const id = setTimeout(() => {
         upQuestionNumber();
-      }, 6001);
+      }, timeChangeQuestion);
+      delayedCalls.current.push(id);
     } else {
       if (activeRightToWrong) {
         setActiveRightToWrong(false);
         deactivateAnswer(letter);
         return;
       }
-      setTimeout(() => {
+      let id = setTimeout(() => {
+        setIsClickedRightAnswer(false);
+      }, timeAnimation);
+      delayedCalls.current.push(id);
+      id = setTimeout(() => {
         setIsAnswerBacklight(true);
-        soundLoseAnswer();
-      }, 4000);
-      setTimeout(() => setOpenModal(true), 6000);
+        if (isSoundActive) soundLoseAnswer();
+      }, timeAnimation);
+      delayedCalls.current.push(id);
+      id = setTimeout(() => setOpenModal(true), gameOverTime);
+      delayedCalls.current.push(id);
     }
   };
   const getNameClassByAnswer = (answer: string) => {
     return answer === rightAnswer;
   };
+
+  useEffect(() => {
+    return () => {
+      for (let id of delayedCalls.current) {
+        clearTimeout(id);
+      }
+    };
+  }, []);
 
   return (
     <div className={styles.root}>
@@ -71,6 +101,7 @@ export const Answer: React.FC<Props> = ({
         classNameFieldAnswer={getNameClassByAnswer(A)}
         isAnswerBacklight={isAnswerBacklight}
         setIsAnswerBacklight={setIsAnswerBacklight}
+        isSoundActive={isSoundActive}
       />
       <AnimationAnswerButton
         letter={'B'}
@@ -81,6 +112,7 @@ export const Answer: React.FC<Props> = ({
         classNameFieldAnswer={getNameClassByAnswer(B)}
         isAnswerBacklight={isAnswerBacklight}
         setIsAnswerBacklight={setIsAnswerBacklight}
+        isSoundActive={isSoundActive}
       />
       <AnimationAnswerButton
         letter={'C'}
@@ -91,6 +123,7 @@ export const Answer: React.FC<Props> = ({
         classNameFieldAnswer={getNameClassByAnswer(C)}
         isAnswerBacklight={isAnswerBacklight}
         setIsAnswerBacklight={setIsAnswerBacklight}
+        isSoundActive={isSoundActive}
       />
       <AnimationAnswerButton
         letter={'D'}
@@ -101,6 +134,7 @@ export const Answer: React.FC<Props> = ({
         classNameFieldAnswer={getNameClassByAnswer(D)}
         isAnswerBacklight={isAnswerBacklight}
         setIsAnswerBacklight={setIsAnswerBacklight}
+        isSoundActive={isSoundActive}
       />
     </div>
   );

@@ -11,7 +11,7 @@ interface Props {
 export const ScoreItem: React.FC<Props> = ({value, isChecked}) => {
   return (
     <span className={cn(styles.root, {[styles.selected]: isChecked, [styles.fireproof]: value.fireproof})}>
-      <span className={styles.id}>{value.id}</span>
+      <span className={styles.id}>{value.id + 1}</span>
       <span className={styles.amount}>{value.amount} руб.</span>
     </span>
   );
