@@ -13,6 +13,7 @@ type questionOptions = {
   activeRightToWrong: boolean;
   setActiveRightToWrong: Dispatch<SetStateAction<boolean>>;
   stopSoundTimer: () => void;
+  isSoundActive: boolean;
 };
 
 export const Question: React.FC<questionOptions> = ({
@@ -24,6 +25,7 @@ export const Question: React.FC<questionOptions> = ({
   setActiveRightToWrong,
   activeRightToWrong,
   stopSoundTimer,
+  isSoundActive,
 }) => {
   return (
     <div className={styles.root}>
@@ -41,6 +43,7 @@ export const Question: React.FC<questionOptions> = ({
         activeRightToWrong={activeRightToWrong}
         setActiveRightToWrong={setActiveRightToWrong}
         stopSoundTimer={stopSoundTimer}
+        isSoundActive={isSoundActive}
       />
     </div>
   );

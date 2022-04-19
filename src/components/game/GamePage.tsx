@@ -29,7 +29,7 @@ const TIME_ANSWER = 30;
 
 export const GamePage: React.FC = () => {
   const [fireproofedScore, setFireproofedScore] = useSessionStorage('fireproofedScore', 0);
-  const [questionNumber, setQuestionNumber] = useSessionStorage('questionNumber', 14);
+  const [questionNumber, setQuestionNumber] = useSessionStorage('questionNumber', 0);
   const [timer, setTimer] = useSessionStorage('timer', TIME_ANSWER);
   const [isClickedAnswer, setIsClickedAnswer] = useSessionStorage('isClickedAnswer', false);
   const [activeRightToWrong, setActiveRightToWrong] = useSessionStorage('activeRightToWrong', false);
@@ -47,7 +47,7 @@ export const GamePage: React.FC = () => {
 
   const upQuestionNumber = () => {
     resetList();
-    const currentScore = scores[questionNumber + 1];
+    const currentScore = scores[questionNumber];
     if (currentScore.fireproof) {
       setFireproofedScore(currentScore.amount);
     }
@@ -59,17 +59,13 @@ export const GamePage: React.FC = () => {
     }
     setQuestionNumber(questionNumber + 1);
     setTimer(TIME_ANSWER);
-    resetTimerSound();
+    if (isSoundActive) resetTimerSound();
   };
 
   const resetTimerSound = () => {
     stop();
     timerSound();
   };
-
-  useEffect(() => {
-    return stop();
-  }, []);
 
   const resetGame = () => {
     setFireproofedScore(0);
@@ -82,7 +78,7 @@ export const GamePage: React.FC = () => {
     resetList();
     startGameSound();
     sessionStorage.clear();
-    resetTimerSound();
+    if (isSoundActive) resetTimerSound();
   };
 
   const checkChoseMenu = () => {
@@ -93,7 +89,7 @@ export const GamePage: React.FC = () => {
 
   const finishGame = () => {
     setIsEndGame(true);
-
+    stop();
     const highScore: HighScore = {
       id: userId,
       name: localStorageRepository.readUserName(),
@@ -111,7 +107,7 @@ export const GamePage: React.FC = () => {
 
   const finishGameByUser = () => {
     setIsEndGame(true);
-
+    stop();
     const highScore: HighScore = {
       id: userId,
       name: localStorageRepository.readUserName(),
@@ -122,7 +118,7 @@ export const GamePage: React.FC = () => {
   };
 
   const onSound = () => {
-    timerSound();
+    if (!isClickedAnswer) timerSound();
   };
 
   const offSound = () => {
@@ -138,6 +134,8 @@ export const GamePage: React.FC = () => {
       setIsSoundActive(true);
     }
   };
+
+  useEffect(() => stop, [stop]);
 
   return (
     <div className={styles.root}>
@@ -172,7 +170,15 @@ export const GamePage: React.FC = () => {
         setIsOpenHallHelpModal={setIsOpenHallHelpModal}
         setQuestionsList={setQuestionsList}
       />
-      {isEndGame && <ModalEndGame resetGame={resetGame} scores={fireproofedScore} isOpen={isEndGame} name="Джо" />}
+      {isEndGame && (
+        <ModalEndGame
+          isSoundActive={isSoundActive}
+          resetGame={resetGame}
+          scores={fireproofedScore}
+          isOpen={isEndGame}
+          name="Джо"
+        />
+      )}
       {isOpenHallHelpModal && (
         <ModalHallHelp
           isOpen={isOpenHallHelpModal}
@@ -198,6 +204,7 @@ export const GamePage: React.FC = () => {
         activeRightToWrong={activeRightToWrong}
         setActiveRightToWrong={setActiveRightToWrong}
         stopSoundTimer={stop}
+        isSoundActive={isSoundActive}
       />
     </div>
   );

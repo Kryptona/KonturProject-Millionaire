@@ -11,14 +11,15 @@ interface PropsEndGame {
   name: string;
   isOpen: boolean;
   resetGame: () => void;
+  isSoundActive: boolean;
 }
 
-export const ModalEndGame: React.FC<PropsEndGame> = ({scores, name, isOpen, resetGame}) => {
+export const ModalEndGame: React.FC<PropsEndGame> = ({scores, name, isOpen, resetGame, isSoundActive}) => {
   const rout = useNavigate();
   const [soundWinGame, {stop}] = useSound(audioFileWinGame, {volume: 1});
 
   useEffect(() => {
-    return soundWinGame();
+    if (isSoundActive) return soundWinGame();
   });
 
   const onStatistics = () => {

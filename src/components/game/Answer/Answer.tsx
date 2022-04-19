@@ -19,6 +19,7 @@ type Props = {
   activeRightToWrong: boolean;
   setActiveRightToWrong: Dispatch<SetStateAction<boolean>>;
   stopSoundTimer: () => void;
+  isSoundActive: boolean;
 };
 export const Answer: React.FC<Props> = ({
   A,
@@ -33,6 +34,7 @@ export const Answer: React.FC<Props> = ({
   setActiveRightToWrong,
   activeRightToWrong,
   stopSoundTimer,
+  isSoundActive,
 }) => {
   const [isAnswerBacklight, setIsAnswerBacklight] = useState(false);
   const [soundLoseAnswer] = useSound(audioFileLost, {volume: 1});
@@ -40,9 +42,10 @@ export const Answer: React.FC<Props> = ({
   const checkRightAnswer = (selectedAnswer: string, letter: 'A' | 'B' | 'C' | 'D'): void => {
     stopSoundTimer();
     if (selectedAnswer === rightAnswer) {
-      setTimeout(() => {
-        soundRightAnswer();
-      }, 4000);
+      if (isSoundActive)
+        setTimeout(() => {
+          soundRightAnswer();
+        }, 4000);
       setTimeout(() => {
         upQuestionNumber();
       }, 6001);
@@ -54,7 +57,7 @@ export const Answer: React.FC<Props> = ({
       }
       setTimeout(() => {
         setIsAnswerBacklight(true);
-        soundLoseAnswer();
+        if (isSoundActive) soundLoseAnswer();
       }, 4000);
       setTimeout(() => setOpenModal(true), 6000);
     }
@@ -74,6 +77,7 @@ export const Answer: React.FC<Props> = ({
         classNameFieldAnswer={getNameClassByAnswer(A)}
         isAnswerBacklight={isAnswerBacklight}
         setIsAnswerBacklight={setIsAnswerBacklight}
+        isSoundActive={isSoundActive}
       />
       <AnimationAnswerButton
         letter={'B'}
@@ -84,6 +88,7 @@ export const Answer: React.FC<Props> = ({
         classNameFieldAnswer={getNameClassByAnswer(B)}
         isAnswerBacklight={isAnswerBacklight}
         setIsAnswerBacklight={setIsAnswerBacklight}
+        isSoundActive={isSoundActive}
       />
       <AnimationAnswerButton
         letter={'C'}
@@ -94,6 +99,7 @@ export const Answer: React.FC<Props> = ({
         classNameFieldAnswer={getNameClassByAnswer(C)}
         isAnswerBacklight={isAnswerBacklight}
         setIsAnswerBacklight={setIsAnswerBacklight}
+        isSoundActive={isSoundActive}
       />
       <AnimationAnswerButton
         letter={'D'}
@@ -104,6 +110,7 @@ export const Answer: React.FC<Props> = ({
         classNameFieldAnswer={getNameClassByAnswer(D)}
         isAnswerBacklight={isAnswerBacklight}
         setIsAnswerBacklight={setIsAnswerBacklight}
+        isSoundActive={isSoundActive}
       />
     </div>
   );
