@@ -1,4 +1,4 @@
-import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import React, {Dispatch, SetStateAction, useEffect, useRef, useState} from 'react';
 import styles from './Answer.scss';
 import {AnimationAnswerButton} from '../../shared/AnimationAnswerButton/AnimationAnswerButton';
 import {deactivateAnswer} from '../../../utils/ListActiveAnswers';
@@ -41,7 +41,7 @@ export const Answer: React.FC<Props> = ({
   const [isAnswerBacklight, setIsAnswerBacklight] = useState(false);
   const [soundLoseAnswer] = useSound(audioFileLost, {volume: 1});
   const [soundRightAnswer] = useSound(audioFileRight, {volume: 1});
-  const delayedCalls: NodeJS.Timeout[] = [];
+  const delayedCalls = useRef<NodeJS.Timeout[]>([]);
 
   const checkRightAnswer = (selectedAnswer: string, letter: 'A' | 'B' | 'C' | 'D'): void => {
     stopSoundTimer();
@@ -50,12 +50,12 @@ export const Answer: React.FC<Props> = ({
         const id = setTimeout(() => {
           soundRightAnswer();
         }, 4000);
-        delayedCalls.push(id);
+        delayedCalls.current.push(id);
       }
       const id = setTimeout(() => {
         upQuestionNumber();
       }, 6001);
-      delayedCalls.push(id);
+      delayedCalls.current.push(id);
     } else {
       if (activeRightToWrong) {
         setActiveRightToWrong(false);
@@ -66,14 +66,14 @@ export const Answer: React.FC<Props> = ({
         setIsClickedRightAnswer(false);
         console.log(123);
       }, 4000);
-      delayedCalls.push(id);
+      delayedCalls.current.push(id);
       id = setTimeout(() => {
         setIsAnswerBacklight(true);
         if (isSoundActive) soundLoseAnswer();
       }, 4000);
-      delayedCalls.push(id);
+      delayedCalls.current.push(id);
       id = setTimeout(() => setOpenModal(true), 6000);
-      delayedCalls.push(id);
+      delayedCalls.current.push(id);
     }
   };
   const getNameClassByAnswer = (answer: string) => {
@@ -82,7 +82,7 @@ export const Answer: React.FC<Props> = ({
 
   useEffect(() => {
     return () => {
-      for (let id of delayedCalls) {
+      for (let id of delayedCalls.current) {
         clearTimeout(id);
       }
     };
