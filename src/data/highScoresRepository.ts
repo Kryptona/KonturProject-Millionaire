@@ -25,7 +25,7 @@ function readScores(): Promise<HighScore[]> {
             score: snapshotScore.score,
           });
         }
-        return scores.slice(0, 20).sort(compareTo);
+        return scores.sort(compareTo).slice(0, 20);
       } else {
         console.log('No data available');
         return [];
