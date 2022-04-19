@@ -76,9 +76,11 @@ export const GamePage: React.FC = () => {
     setIsOpenHallHelpModal(false);
     setIsEndGame(false);
     resetList();
-    startGameSound();
     sessionStorage.clear();
-    if (isSoundActive) resetTimerSound();
+    if (isSoundActive) {
+      resetTimerSound();
+      startGameSound();
+    }
   };
 
   const checkChoseMenu = () => {
