@@ -21,7 +21,7 @@ import {useSessionStorage} from '../../utils/Hooks';
 import {useNavigate} from 'react-router-dom';
 import useSound from 'use-sound';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
+import {faAngleLeft, faBell, faBellSlash} from '@fortawesome/free-solid-svg-icons';
 import audioFileStartGame from '/src/sounds/selectAnswer.mp3';
 import audioFileTimer from '/src/sounds/timer.mp3';
 
@@ -29,7 +29,7 @@ const TIME_ANSWER = 30;
 
 export const GamePage: React.FC = () => {
   const [fireproofedScore, setFireproofedScore] = useSessionStorage('fireproofedScore', 0);
-  const [questionNumber, setQuestionNumber] = useSessionStorage('questionNumber', 0);
+  const [questionNumber, setQuestionNumber] = useSessionStorage('questionNumber', 14);
   const [timer, setTimer] = useSessionStorage('timer', TIME_ANSWER);
   const [isClickedAnswer, setIsClickedAnswer] = useSessionStorage('isClickedAnswer', false);
   const [activeRightToWrong, setActiveRightToWrong] = useSessionStorage('activeRightToWrong', false);
@@ -38,6 +38,7 @@ export const GamePage: React.FC = () => {
   const [isEndGame, setIsEndGame] = useSessionStorage('isEndGame', false);
   const [userId] = useState(uuidv4());
   const router = useNavigate();
+  const [isSoundActive, setIsSoundActive] = useState(false);
 
   const [startGameSound] = useSound(audioFileStartGame, {volume: 1});
   const [timerSound, {stop}] = useSound(audioFileTimer, {volume: 1});
@@ -51,7 +52,7 @@ export const GamePage: React.FC = () => {
       setFireproofedScore(currentScore.amount);
     }
 
-    if (questionNumber === 15) {
+    if (questionNumber === 14) {
       finishGame();
       resetList();
       return;
@@ -120,12 +121,37 @@ export const GamePage: React.FC = () => {
     highScoresRepository.writeScore(highScore);
   };
 
+  const onSound = () => {
+    timerSound();
+  };
+
+  const offSound = () => {
+    stop();
+  };
+
+  const onClickSoundIcon = () => {
+    if (isSoundActive) {
+      setIsSoundActive(false);
+      offSound();
+    } else {
+      onSound();
+      setIsSoundActive(true);
+    }
+  };
+
   return (
     <div className={styles.root}>
       <div className={styles.display}>
         <button className={styles.end_game_bt} onClick={() => finishGameByUser()}>
           <FontAwesomeIcon icon={faAngleLeft} color={'white'} size={'lg'} />
           <span className={styles.content_bt}>Закончить игру</span>
+        </button>
+        <button className={styles.sound_bt} onClick={onClickSoundIcon}>
+          {isSoundActive ? (
+            <FontAwesomeIcon icon={faBell} color={'white'} size={'lg'} />
+          ) : (
+            <FontAwesomeIcon icon={faBellSlash} color={'white'} size={'lg'} />
+          )}
         </button>
         <img className={styles.image} src={logo} alt={'Кто хочет стать миллионером?'} />
         <Scores id={questionNumber} />
