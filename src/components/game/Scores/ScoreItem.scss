@@ -4,7 +4,7 @@
   width: auto;
   display: inline-block;
   font-family: $Roboto;
-
+  white-space: nowrap;
   padding: 2px 16px;
 
   &.fireproof {
@@ -25,7 +25,7 @@
     text-align: center;
   }
 
-  .amount{
+  .amount {
     display: inline-block;
     width: 100px;
     text-align: center;
@@ -36,7 +36,8 @@
   .root {
     width: auto;
 
-    .id, .amount {
+    .id,
+    .amount {
       width: auto;
       display: inline;
       font-size: 12px;
