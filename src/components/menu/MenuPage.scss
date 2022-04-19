@@ -1,3 +1,5 @@
+@import 'src/default.scss';
+
 .root {
   display: flex;
   flex-direction: column;
@@ -7,6 +9,16 @@
 
   padding: 24px;
   box-sizing: border-box;
+
+  .sound_bt {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    height: 40px;
+    border: none;
+    box-shadow: 0 2px 5px 1px rgb(0 0 0 / 16%);
+    color: $default_white;
+    font-size: 18px;
+  }
 
   .millionare_icon {
     width: 400px;
