@@ -37,6 +37,7 @@ export const QuestionReplacement: React.FC<Props> = ({
       disable={disable || !isActiveFiftyFifty || !isActiveRightToWrong}
       icon={faArrowRightArrowLeft}
       isSoundActive={isSoundActive}
+      title="Замена вопроса"
     />
   );
 };

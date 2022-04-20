@@ -15,6 +15,7 @@ interface Props {
   disable: boolean;
   icon: IconDefinition;
   isSoundActive: boolean;
+  title: string;
 }
 
 export interface PropsHint {
@@ -25,7 +26,16 @@ export interface PropsHint {
   isSoundActive: boolean;
 }
 
-export const Hint: React.FC<Props> = ({className, onClick, isActive, setIsActive, disable, icon, isSoundActive}) => {
+export const Hint: React.FC<Props> = ({
+  className,
+  onClick,
+  isActive,
+  setIsActive,
+  disable,
+  icon,
+  isSoundActive,
+  title,
+}) => {
   const [soundHintClick] = useSound(audioFile, {volume: 1});
   const handleClick = () => {
     if (isActive && !disable) {
@@ -37,7 +47,8 @@ export const Hint: React.FC<Props> = ({className, onClick, isActive, setIsActive
   return (
     <button
       className={cn(styles.root, {[styles.isActive]: isActive, [styles.isNotActive]: !isActive}, className)}
-      onClick={handleClick}>
+      onClick={handleClick}
+      title={title}>
       <FontAwesomeIcon icon={icon} color={'yellow'} size={'lg'} />
     </button>
   );

@@ -24,6 +24,7 @@ export const HallHelp: React.FC<Props> = ({isActive, setIsActive, disable, setIs
       setIsActive={setIsActive}
       disable={disable}
       isSoundActive={isSoundActive}
+      title="Помощь зала"
     />
   );
 };
