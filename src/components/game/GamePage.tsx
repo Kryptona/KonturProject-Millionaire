@@ -28,7 +28,7 @@ const TIME_ANSWER = 30;
 
 export const GamePage: React.FC = () => {
   const [fireproofedScore, setFireproofedScore] = useSessionStorage('fireproofedScore', 0);
-  const [questionNumber, setQuestionNumber] = useSessionStorage('questionNumber', 13);
+  const [questionNumber, setQuestionNumber] = useSessionStorage('questionNumber', 0);
   const [timer, setTimer] = useSessionStorage('timer', TIME_ANSWER);
   const [isClickedAnswer, setIsClickedAnswer] = useState(false);
   const [activeRightToWrong, setActiveRightToWrong] = useSessionStorage('activeRightToWrong', false);
