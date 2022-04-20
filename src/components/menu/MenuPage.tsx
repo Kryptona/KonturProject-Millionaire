@@ -64,7 +64,6 @@ export const MenuPage: React.FC = () => {
   return (
     <div className={styles.root}>
       <img className={styles.millionare_icon} src={millionaire} alt="icon" />
-
       <CustomInput
         className={styles.nickname_input}
         placeholder={placeholder}

@@ -206,6 +206,7 @@ export const GamePage: React.FC = () => {
         stopSoundTimer={stop}
         isSoundActive={isSoundActive}
         setIsClickedRightAnswer={setIsClickedRightAnswer}
+        isOpenModal={isEndGame}
       />
     </div>
   );

@@ -21,6 +21,7 @@ type Props = {
   stopSoundTimer: () => void;
   isSoundActive: boolean;
   setIsClickedRightAnswer: Dispatch<SetStateAction<boolean>>;
+  isOpenModal: boolean;
 };
 export const Answer: React.FC<Props> = ({
   A,
@@ -37,6 +38,7 @@ export const Answer: React.FC<Props> = ({
   stopSoundTimer,
   isSoundActive,
   setIsClickedRightAnswer,
+  isOpenModal,
 }) => {
   const [isAnswerBacklight, setIsAnswerBacklight] = useState(false);
   const [soundLoseAnswer] = useSound(audioFileLost, {volume: 1});
@@ -94,6 +96,13 @@ export const Answer: React.FC<Props> = ({
     };
   }, []);
 
+  useEffect(() => {
+    for (let id of delayedCalls.current) {
+      clearTimeout(id);
+      setIsAnswerBacklight(false);
+    }
+  }, [isOpenModal]);
+
   return (
     <div className={styles.root}>
       {[
@@ -112,6 +121,7 @@ export const Answer: React.FC<Props> = ({
           isAnswerBacklight={isAnswerBacklight}
           setIsAnswerBacklight={setIsAnswerBacklight}
           isSoundActive={isSoundActive}
+          isOpenModal={isOpenModal}
         />
       ))}
     </div>
