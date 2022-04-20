@@ -12,6 +12,12 @@ declare module '*.css' {
   export default content;
 }
 
+declare module '*.gif' {
+  const value: any;
+  // noinspection JSUnusedGlobalSymbols
+  export default value;
+}
+
 declare module '*.png' {
   const value: any;
   // noinspection JSUnusedGlobalSymbols

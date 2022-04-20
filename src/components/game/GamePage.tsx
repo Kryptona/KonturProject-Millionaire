@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import styles from './GamePage.scss';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {saveSessionState} from '../../utils/StogagesUtils';
+import {useSessionStorage} from '../../utils/Hooks';
+import {useNavigate} from 'react-router-dom';
 import {Question} from './Question/Question';
-import logo from '/src/img/millionaire_icon.svg';
 import {Scores} from './Scores/Scores';
 import {scores} from '../../resources/scores';
 import {ModalEndGame} from './ModalEndGame/ModalEndGame';
@@ -16,15 +19,14 @@ import {HighScore} from '../../models/HighScore';
 import {v4 as uuidv4} from 'uuid';
 import {highScoresRepository} from '../../data/highScoresRepository';
 import {localStorageRepository} from '../../data/localStorageRepository';
-import {saveSessionState} from '../../utils/StogagesUtils';
-import {useSessionStorage} from '../../utils/Hooks';
-import {useNavigate} from 'react-router-dom';
 import useSound from 'use-sound';
 import audioFile from '/src/sounds/selectAnswer.mp3';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
+// import logo from '/src/img/millionaire_icon.svg';
+import logo from '../../img/gifs_animations/Think_Phoenix.gif';
+import {GifsGiver} from './GifsGiver/GifsGiver';
 
-const TIME_ANSWER = 30;
+const TIME_ANSWER = 3000;
 
 export const GamePage: React.FC = () => {
   const [fireproofedScore, setFireproofedScore] = useSessionStorage('fireproofedScore', 0);
@@ -115,7 +117,8 @@ export const GamePage: React.FC = () => {
           <FontAwesomeIcon icon={faAngleLeft} color={'white'} size={'lg'} />
           <span className={styles.content_bt}>Закончить игру</span>
         </button>
-        <img className={styles.image} src={logo} alt={'Кто хочет стать миллионером?'} />
+        <GifsGiver />
+        {/*<img className={styles.image} src={logo} alt={'Кто хочет стать миллионером?'} />*/}
         <Scores id={questionNumber} />
       </div>
       <Timer
