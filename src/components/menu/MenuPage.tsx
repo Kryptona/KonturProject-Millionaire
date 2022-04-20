@@ -21,7 +21,8 @@ export const MenuPage: React.FC = () => {
   const [isSoundActive, setIsSoundActive] = useState(false);
 
   useEffect(() => {
-    if (isSoundActive) setUserName(localStorageRepository.readUserName());
+    if (isSoundActive) menuThemeSound();
+    setUserName(localStorageRepository.readUserName());
     setPlaceholder(generateUserName());
   }, []);
 
