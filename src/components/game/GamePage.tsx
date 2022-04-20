@@ -178,7 +178,6 @@ export const GamePage: React.FC = () => {
           resetGame={resetGame}
           scores={fireproofedScore}
           isOpen={isEndGame}
-          name="Джо"
         />
       )}
       {isOpenHallHelpModal && (
