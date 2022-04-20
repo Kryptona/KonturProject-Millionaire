@@ -30,8 +30,11 @@
     .text {
       text-align: left;
       font-size: 32px;
+      max-height: 220px;
       color: $yellow;
       margin: auto;
+      overflow: hidden;
+      overflow-wrap: break-word;
     }
   }
 

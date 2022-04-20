@@ -85,13 +85,7 @@ export const GamePage: React.FC = () => {
   const finishGame = () => {
     setIsEndGame(true);
     stop();
-    const highScore: HighScore = {
-      id: userId,
-      name: localStorageRepository.readUserName(),
-      score: fireproofedScore,
-    };
-
-    highScoresRepository.writeScore(highScore);
+    saveScores();
   };
 
   useEffect(() => {
@@ -102,6 +96,10 @@ export const GamePage: React.FC = () => {
   const finishGameByUser = () => {
     setIsEndGame(true);
     stop();
+    saveScores();
+  };
+
+  const saveScores = () => {
     const highScore: HighScore = {
       id: userId,
       name: localStorageRepository.readUserName(),
