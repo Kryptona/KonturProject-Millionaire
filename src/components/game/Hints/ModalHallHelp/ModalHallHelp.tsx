@@ -2,10 +2,11 @@ import styles from './ModalHallHelp.scss';
 import React from 'react';
 import {HintModalModel} from '../../../../models/HintModalModel';
 import Modal from 'react-modal';
-import {CustomButton, CustomButtonUse} from '../../../shared/CustomButton/CustomButton';
+import {HexagonButton} from '../../../shared/HexagonButton/HexagonButton';
 import {getStatistics} from '../../../../utils/Statistics';
 import {modalStyles} from '../../ModalEndGame/ModalEndGame';
 import {useSessionStorage} from '../../../../utils/Hooks';
+import {HexagonViewUse} from '../../../shared/HexagonView/HexagonView';
 
 export const ModalHallHelp: React.FC<HintModalModel> = ({isOpen, setOpenModal, questionNumber, questions}) => {
   const [listStatistics] = useSessionStorage('statistics', getStatistics(questions, questionNumber));
@@ -38,9 +39,9 @@ export const ModalHallHelp: React.FC<HintModalModel> = ({isOpen, setOpenModal, q
           </div>
         </div>
       </div>
-      <CustomButton className={styles.button} use={CustomButtonUse.blue} onClick={() => setOpenModal(false)}>
+      <HexagonButton className={styles.button} use={HexagonViewUse.blue} onClick={() => setOpenModal(false)}>
         хорошо
-      </CustomButton>
+      </HexagonButton>
     </Modal>
   );
 };

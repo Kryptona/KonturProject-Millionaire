@@ -1,12 +1,13 @@
 import styles from './ModalCallFriend.scss';
 import React from 'react';
 import Modal from 'react-modal';
-import {CustomButton, CustomButtonUse} from '../../../shared/CustomButton/CustomButton';
+import {HexagonButton} from '../../../shared/HexagonButton/HexagonButton';
 import {modalStyles} from '../../ModalEndGame/ModalEndGame';
 import {getPhrase} from '../../../../utils/ListPhrasesFriend';
 import friend from '/src/img/friend.png';
 import {HintModalModel} from '../../../../models/HintModalModel';
 import {useSessionStorage} from '../../../../utils/Hooks';
+import {HexagonViewUse} from '../../../shared/HexagonView/HexagonView';
 
 export const ModalCallFriend: React.FC<HintModalModel> = ({isOpen, setOpenModal, questionNumber, questions}) => {
   const [phrase] = useSessionStorage('phrase', getPhrase(questions, questionNumber));
@@ -19,9 +20,9 @@ export const ModalCallFriend: React.FC<HintModalModel> = ({isOpen, setOpenModal,
         </div>
         <span className={styles.text}>{phrase}</span>
       </div>
-      <CustomButton className={styles.button} use={CustomButtonUse.blue} onClick={() => setOpenModal(false)}>
+      <HexagonButton className={styles.button} use={HexagonViewUse.blue} onClick={() => setOpenModal(false)}>
         хорошо
-      </CustomButton>
+      </HexagonButton>
     </Modal>
   );
 };

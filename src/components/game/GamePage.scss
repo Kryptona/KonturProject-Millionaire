@@ -16,6 +16,7 @@
     }
 
     .end_game_bt, .sound_bt {
+      cursor: pointer;
       background: rgba(255, 255, 255, 0.1);
       border-radius: 8px;
       height: 40px;
@@ -26,7 +27,6 @@
 
       &:hover {
         background: rgba(255, 255, 255, 0.2);
-        cursor: pointer;
       }
 
       &:focus:not(:focus-visible) {

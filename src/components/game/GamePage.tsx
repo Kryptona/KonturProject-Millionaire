@@ -148,11 +148,7 @@ export const GamePage: React.FC = () => {
           <span className={styles.content_bt}>Закончить игру</span>
         </button>
         <button className={styles.sound_bt} onClick={onClickSoundIcon}>
-          {isSoundActive ? (
-            <FontAwesomeIcon icon={faBell} color={'white'} size={'lg'} />
-          ) : (
-            <FontAwesomeIcon icon={faBellSlash} color={'white'} size={'lg'} />
-          )}
+          <FontAwesomeIcon icon={isSoundActive ? faBell : faBellSlash} color={'white'} size={'lg'} />
         </button>
         <img className={styles.image} src={logo} alt={'Кто хочет стать миллионером?'} />
         <Scores id={questionNumber} />
