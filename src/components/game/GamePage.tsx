@@ -16,7 +16,7 @@ import {HighScore} from '../../models/HighScore';
 import {v4 as uuidv4} from 'uuid';
 import {highScoresRepository} from '../../data/highScoresRepository';
 import {localStorageRepository} from '../../data/localStorageRepository';
-import {saveSessionState} from '../../utils/StogagesUtils';
+import {saveSessionState} from '../../utils/StoragesUtils';
 import {useSessionStorage} from '../../utils/Hooks';
 import useSound from 'use-sound';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -107,7 +107,7 @@ export const GamePage: React.FC = () => {
     const highScore: HighScore = {
       id: userId,
       name: localStorageRepository.readUserName(),
-      score: fireproofedScore,
+      score: scores[questionNumber].amount,
     };
 
     highScoresRepository.writeScore(highScore);

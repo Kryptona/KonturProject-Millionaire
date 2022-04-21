@@ -2,7 +2,7 @@ import styles from './FiftyFifty.scss';
 import React from 'react';
 import {Hint, PropsHint} from '../../../shared/Hint/Hint';
 import {activeHintsFiftyFifty, ListActiveAnswer} from '../../../../utils/ListActiveAnswers';
-import {saveSessionState} from '../../../../utils/StogagesUtils';
+import {saveSessionState} from '../../../../utils/StoragesUtils';
 import {faScaleBalanced} from '@fortawesome/free-solid-svg-icons';
 
 export const FiftyFifty: React.FC<PropsHint> = ({isActive, setIsActive, disable, questions, isSoundActive}) => {

@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {loadLocalState, loadSessionState, saveLocalState, saveSessionState} from './StogagesUtils';
+import {loadLocalState, loadSessionState, saveLocalState, saveSessionState} from './StoragesUtils';
 
 function useSessionStorage(key: string, initialValue: any) {
   const [storedValue, setStoredValue] = useState(() => {
