@@ -1,5 +1,5 @@
 import styles from './AnimationAnswerButton.scss';
-import React, {Dispatch, SetStateAction, useState} from 'react';
+import React, {Dispatch, SetStateAction, useEffect, useRef, useState} from 'react';
 import {AnswerCustomButton} from '../AnswerCustomButton/AnswerCustomButton';
 import cn from 'classnames';
 import {ListActiveAnswer} from '../../../utils/ListActiveAnswers';
@@ -16,6 +16,7 @@ interface PropsAnimationButtonAnswer {
   readonly classNameFieldAnswer: boolean;
   readonly isAnswerBacklight: boolean;
   readonly setIsAnswerBacklight: Dispatch<SetStateAction<boolean>>;
+  readonly isSoundActive: boolean;
 }
 
 export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
@@ -28,25 +29,34 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
   classNameFieldAnswer,
   isAnswerBacklight,
   setIsAnswerBacklight,
+  isSoundActive,
 }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [soundOnClick] = useSound(audioFileClick, {volume: 1});
+  let delayedCall = useRef<NodeJS.Timeout | undefined>(undefined);
+  const timeChangeQuestion = 4000;
 
   const changeField = () => {
     onClick();
     if (!isDisable && ListActiveAnswer[letter]) {
-      soundOnClick();
+      if (isSoundActive) soundOnClick();
       setIsDisable(true);
       setIsClicked(!isClicked);
 
-      setTimeout(() => {
+      delayedCall.current = setTimeout(() => {
         setIsClicked(false);
         setIsDisable(false);
         setIsAnswerBacklight(false);
-      }, 6000);
+      }, timeChangeQuestion);
     }
   };
-
+  useEffect(() => {
+    return () => {
+      if (delayedCall.current) {
+        clearTimeout(delayedCall.current);
+      }
+    };
+  }, []);
   const isActive = ListActiveAnswer[letter];
 
   return (

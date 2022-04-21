@@ -15,7 +15,6 @@ function readScores(): Promise<HighScore[]> {
     .then((snapshot) => {
       if (snapshot.exists()) {
         const snapshotScores = snapshot.val();
-        console.log(snapshotScores);
         const scores: HighScore[] = [];
         for (let key of Object.keys(snapshotScores)) {
           const snapshotScore = snapshotScores[key];
@@ -27,7 +26,6 @@ function readScores(): Promise<HighScore[]> {
         }
         return scores.sort(compareTo).slice(0, 20);
       } else {
-        console.log('No data available');
         return [];
       }
     })

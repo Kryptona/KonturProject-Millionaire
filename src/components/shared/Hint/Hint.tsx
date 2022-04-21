@@ -4,14 +4,17 @@ import cn from 'classnames';
 import {QuestionModel} from '../../../models/QuestionModel';
 import audioFile from '/src/sounds/selectHint.mp3';
 import useSound from 'use-sound';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {IconDefinition} from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   className: string;
-  img: string;
   onClick: () => void;
   isActive: boolean;
   setIsActive: Dispatch<SetStateAction<boolean>>;
   disable: boolean;
+  icon: IconDefinition;
+  isSoundActive: boolean;
 }
 
 export interface PropsHint {
@@ -19,13 +22,14 @@ export interface PropsHint {
   setIsActive: Dispatch<SetStateAction<boolean>>;
   disable: boolean;
   questions: QuestionModel;
+  isSoundActive: boolean;
 }
 
-export const Hint: React.FC<Props> = ({className, img, onClick, isActive, setIsActive, disable}) => {
+export const Hint: React.FC<Props> = ({className, onClick, isActive, setIsActive, disable, icon, isSoundActive}) => {
   const [soundHintClick] = useSound(audioFile, {volume: 1});
   const handleClick = () => {
     if (isActive && !disable) {
-      soundHintClick();
+      if (isSoundActive) soundHintClick();
       setIsActive(false);
       onClick();
     }
@@ -34,7 +38,7 @@ export const Hint: React.FC<Props> = ({className, img, onClick, isActive, setIsA
     <button
       className={cn(styles.root, {[styles.isActive]: isActive, [styles.isNotActive]: !isActive}, className)}
       onClick={handleClick}>
-      <img className={styles.img} src={img} alt="img" />
+      <FontAwesomeIcon icon={icon} color={'yellow'} size={'lg'} />
     </button>
   );
 };
