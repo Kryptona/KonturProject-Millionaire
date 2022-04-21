@@ -3,7 +3,6 @@ import styles from './GamePage.scss';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {saveSessionState} from '../../utils/StogagesUtils';
 import {useSessionStorage} from '../../utils/Hooks';
-import {useNavigate} from 'react-router-dom';
 import {Question} from './Question/Question';
 import {Scores} from './Scores/Scores';
 import {scores} from '../../resources/scores';
@@ -19,18 +18,12 @@ import {HighScore} from '../../models/HighScore';
 import {v4 as uuidv4} from 'uuid';
 import {highScoresRepository} from '../../data/highScoresRepository';
 import {localStorageRepository} from '../../data/localStorageRepository';
-import {saveSessionState} from '../../utils/StogagesUtils';
-import {useSessionStorage} from '../../utils/Hooks';
 import useSound from 'use-sound';
-import audioFile from '/src/sounds/selectAnswer.mp3';
-import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
-// import logo from '/src/img/millionaire_icon.svg';
-import logo from '../../img/gifs_animations/Think_Phoenix.gif';
-import {GifsGiver} from './GifsGiver/GifsGiver';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faAngleLeft, faBell, faBellSlash} from '@fortawesome/free-solid-svg-icons';
 import audioFileStartGame from '/src/sounds/selectAnswer.mp3';
+import {faAngleLeft, faBell, faBellSlash} from '@fortawesome/free-solid-svg-icons';
+// import logo from '/src/img/millionaire_icon.svg';
 import audioFileTimer from '/src/sounds/timer.mp3';
+import {PersonsShower, PersonsShowerStage} from './GifsGiver/PersonsShower';
 
 const TIME_ANSWER = 3000;
 
@@ -150,39 +143,64 @@ export const GamePage: React.FC = () => {
 
   return (
     <div className={styles.root}>
-      <div className={styles.display}>
-        <button className={styles.end_game_bt} onClick={() => finishGameByUser()}>
-          <FontAwesomeIcon icon={faAngleLeft} color={'white'} size={'lg'} />
-          <span className={styles.content_bt}>Закончить игру</span>
-        </button>
-        <button className={styles.sound_bt} onClick={onClickSoundIcon}>
-          {isSoundActive ? (
-            <FontAwesomeIcon icon={faBell} color={'white'} size={'lg'} />
-          ) : (
-            <FontAwesomeIcon icon={faBellSlash} color={'white'} size={'lg'} />
-          )}
-        </button>
-        <GifsGiver />
-        {/*<img className={styles.image} src={logo} alt={'Кто хочет стать миллионером?'} />*/}
+      <button className={styles.end_game_bt} onClick={() => finishGameByUser()}>
+        <FontAwesomeIcon icon={faAngleLeft} color={'white'} size={'lg'} />
+      </button>
+
+      <button className={styles.sound_bt} onClick={onClickSoundIcon}>
+        {isSoundActive ? (
+          <FontAwesomeIcon icon={faBell} color={'white'} size={'lg'} />
+        ) : (
+          <FontAwesomeIcon icon={faBellSlash} color={'white'} size={'lg'} />
+        )}
+      </button>
+
+      <div className={styles.persons_shower}>
+        <PersonsShower stage={PersonsShowerStage.answering} />
+      </div>
+
+      <div className={styles.score}>
         <Scores id={questionNumber} />
       </div>
-      <Timer
-        time={timer}
-        setCounter={setTimer}
-        setOpenModal={setIsEndGame}
-        isDisable={isClickedAnswer}
-        isOpenModal={isEndGame}
-      />
-      <Hints
-        restart={isEndGame}
-        disable={isClickedAnswer}
-        questions={questionsList[questionNumber] as QuestionModel}
-        setActiveRightToWrong={setActiveRightToWrong}
-        setIsOpenFriedModal={setIsOpenFriedModal}
-        setIsOpenHallHelpModal={setIsOpenHallHelpModal}
-        setQuestionsList={setQuestionsList}
-        isSoundActive={isSoundActive}
-      />
+
+      <div className={styles.timer}>
+        <Timer
+          time={timer}
+          setCounter={setTimer}
+          setOpenModal={setIsEndGame}
+          isDisable={isClickedAnswer}
+          isOpenModal={isEndGame}
+        />
+      </div>
+
+      <div className={styles.hints}>
+        <Hints
+          restart={isEndGame}
+          disable={isClickedAnswer}
+          questions={questionsList[questionNumber] as QuestionModel}
+          setActiveRightToWrong={setActiveRightToWrong}
+          setIsOpenFriedModal={setIsOpenFriedModal}
+          setIsOpenHallHelpModal={setIsOpenHallHelpModal}
+          setQuestionsList={setQuestionsList}
+          isSoundActive={isSoundActive}
+        />
+      </div>
+
+      <div className={styles.questions}>
+        <Question
+          questionCard={questionsList[questionNumber] as QuestionModel}
+          UpQuestionNumber={upQuestionNumber}
+          setOpenModal={finishGame}
+          isClickedAnswer={isClickedAnswer}
+          setIsClickedAnswer={setIsClickedAnswer}
+          activeRightToWrong={activeRightToWrong}
+          setActiveRightToWrong={setActiveRightToWrong}
+          stopSoundTimer={stop}
+          isSoundActive={isSoundActive}
+          setIsClickedRightAnswer={setIsClickedRightAnswer}
+        />
+      </div>
+
       {isEndGame && (
         <ModalEndGame
           isSoundActive={isSoundActive}
@@ -208,18 +226,6 @@ export const GamePage: React.FC = () => {
           questionNumber={questionNumber}
         />
       )}
-      <Question
-        questionCard={questionsList[questionNumber] as QuestionModel}
-        UpQuestionNumber={upQuestionNumber}
-        setOpenModal={finishGame}
-        isClickedAnswer={isClickedAnswer}
-        setIsClickedAnswer={setIsClickedAnswer}
-        activeRightToWrong={activeRightToWrong}
-        setActiveRightToWrong={setActiveRightToWrong}
-        stopSoundTimer={stop}
-        isSoundActive={isSoundActive}
-        setIsClickedRightAnswer={setIsClickedRightAnswer}
-      />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import styles from './Timre.scss';
+import styles from './Timer.scss';
 import React, {Dispatch, SetStateAction, useEffect} from 'react';
 
 interface PropsTimer {

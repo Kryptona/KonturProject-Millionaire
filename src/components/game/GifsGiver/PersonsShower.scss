@@ -1,0 +1,14 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  z-index: 1;
+
+  .image_gamer{
+    margin-left: 100px;
+    z-index: 1;
+  }
+  .image_host{
+    margin-left: -500px;
+    z-index: 1;
+  }
+}
