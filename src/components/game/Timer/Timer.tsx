@@ -11,16 +11,16 @@ interface PropsTimer {
 
 export const Timer: React.FC<PropsTimer> = ({time, setOpenModal, setCounter, isOpenModal, isDisable}) => {
   useEffect(() => {
-    const timer = time > 0 && setInterval(() => setCounter(time - 1), 1000);
+    const timer = Number(time > 0 && window.setInterval(() => setCounter(time - 1), 1000));
     if (isDisable || isOpenModal) {
-      clearInterval(timer as NodeJS.Timeout);
+      clearInterval(timer);
     }
     if (time == 0 && !isDisable) {
       setOpenModal(true);
       setCounter(0);
-      clearInterval(timer as NodeJS.Timeout);
+      clearInterval(timer);
     }
-    return () => clearInterval(timer as NodeJS.Timeout);
+    return () => clearInterval(timer);
   }, [time]);
 
   return (

@@ -19,6 +19,7 @@ export const FiftyFifty: React.FC<PropsHint> = ({isActive, setIsActive, disable,
       setIsActive={setIsActive}
       disable={disable}
       isSoundActive={isSoundActive}
+      title="50/50"
     />
   );
 };

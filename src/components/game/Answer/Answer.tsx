@@ -21,6 +21,7 @@ type Props = {
   stopSoundTimer: () => void;
   isSoundActive: boolean;
   setIsClickedRightAnswer: Dispatch<SetStateAction<boolean>>;
+  isOpenModal: boolean;
 };
 export const Answer: React.FC<Props> = ({
   A,
@@ -37,6 +38,7 @@ export const Answer: React.FC<Props> = ({
   stopSoundTimer,
   isSoundActive,
   setIsClickedRightAnswer,
+  isOpenModal,
 }) => {
   const [isAnswerBacklight, setIsAnswerBacklight] = useState(false);
   const [soundLoseAnswer] = useSound(audioFileLost, {volume: 1});
@@ -55,6 +57,7 @@ export const Answer: React.FC<Props> = ({
         }, timeAnimation);
         delayedCalls.current.push(id);
       }
+
       const id = setTimeout(() => {
         upQuestionNumber();
       }, timeChangeQuestion);
@@ -65,15 +68,18 @@ export const Answer: React.FC<Props> = ({
         deactivateAnswer(letter);
         return;
       }
+
       let id = setTimeout(() => {
         setIsClickedRightAnswer(false);
       }, timeAnimation);
       delayedCalls.current.push(id);
+
       id = setTimeout(() => {
         setIsAnswerBacklight(true);
         if (isSoundActive) soundLoseAnswer();
       }, timeAnimation);
       delayedCalls.current.push(id);
+
       id = setTimeout(() => setOpenModal(true), gameOverTime);
       delayedCalls.current.push(id);
     }
@@ -90,52 +96,34 @@ export const Answer: React.FC<Props> = ({
     };
   }, []);
 
+  useEffect(() => {
+    for (let id of delayedCalls.current) {
+      clearTimeout(id);
+      setIsAnswerBacklight(false);
+    }
+  }, [isOpenModal]);
+
   return (
     <div className={styles.root}>
-      <AnimationAnswerButton
-        letter={'A'}
-        onClick={() => checkRightAnswer(A, 'A')}
-        answerText={A}
-        isDisable={isClickedAnswer}
-        setIsDisable={setIsClickedAnswer}
-        classNameFieldAnswer={getNameClassByAnswer(A)}
-        isAnswerBacklight={isAnswerBacklight}
-        setIsAnswerBacklight={setIsAnswerBacklight}
-        isSoundActive={isSoundActive}
-      />
-      <AnimationAnswerButton
-        letter={'B'}
-        onClick={() => checkRightAnswer(B, 'B')}
-        answerText={B}
-        isDisable={isClickedAnswer}
-        setIsDisable={setIsClickedAnswer}
-        classNameFieldAnswer={getNameClassByAnswer(B)}
-        isAnswerBacklight={isAnswerBacklight}
-        setIsAnswerBacklight={setIsAnswerBacklight}
-        isSoundActive={isSoundActive}
-      />
-      <AnimationAnswerButton
-        letter={'C'}
-        onClick={() => checkRightAnswer(C, 'C')}
-        answerText={C}
-        isDisable={isClickedAnswer}
-        setIsDisable={setIsClickedAnswer}
-        classNameFieldAnswer={getNameClassByAnswer(C)}
-        isAnswerBacklight={isAnswerBacklight}
-        setIsAnswerBacklight={setIsAnswerBacklight}
-        isSoundActive={isSoundActive}
-      />
-      <AnimationAnswerButton
-        letter={'D'}
-        onClick={() => checkRightAnswer(D, 'D')}
-        answerText={D}
-        isDisable={isClickedAnswer}
-        setIsDisable={setIsClickedAnswer}
-        classNameFieldAnswer={getNameClassByAnswer(D)}
-        isAnswerBacklight={isAnswerBacklight}
-        setIsAnswerBacklight={setIsAnswerBacklight}
-        isSoundActive={isSoundActive}
-      />
+      {[
+        {answer: A, letter: 'A'} as const,
+        {answer: B, letter: 'B'} as const,
+        {answer: C, letter: 'C'} as const,
+        {answer: D, letter: 'D'} as const,
+      ].map((x) => (
+        <AnimationAnswerButton
+          letter={x.letter}
+          onClick={() => checkRightAnswer(x.answer, x.letter)}
+          answerText={x.answer}
+          isDisable={isClickedAnswer}
+          setIsDisable={setIsClickedAnswer}
+          classNameFieldAnswer={getNameClassByAnswer(x.answer)}
+          isAnswerBacklight={isAnswerBacklight}
+          setIsAnswerBacklight={setIsAnswerBacklight}
+          isSoundActive={isSoundActive}
+          isOpenModal={isOpenModal}
+        />
+      ))}
     </div>
   );
 };

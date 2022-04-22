@@ -24,6 +24,7 @@ export const CallFriend: React.FC<Props> = ({isActive, setIsActive, disable, set
       setIsActive={setIsActive}
       disable={disable}
       isSoundActive={isSoundActive}
+      title="Звонок другу"
     />
   );
 };

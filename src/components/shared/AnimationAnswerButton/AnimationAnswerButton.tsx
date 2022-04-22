@@ -17,6 +17,7 @@ interface PropsAnimationButtonAnswer {
   readonly isAnswerBacklight: boolean;
   readonly setIsAnswerBacklight: Dispatch<SetStateAction<boolean>>;
   readonly isSoundActive: boolean;
+  readonly isOpenModal: boolean;
 }
 
 export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
@@ -30,6 +31,7 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
   isAnswerBacklight,
   setIsAnswerBacklight,
   isSoundActive,
+  isOpenModal,
 }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [soundOnClick] = useSound(audioFileClick, {volume: 1});
@@ -57,6 +59,15 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (delayedCall.current) {
+      clearTimeout(delayedCall.current);
+      setIsDisable(false);
+      setIsClicked(false);
+    }
+  }, [isOpenModal]);
+
   const isActive = ListActiveAnswer[letter];
 
   return (

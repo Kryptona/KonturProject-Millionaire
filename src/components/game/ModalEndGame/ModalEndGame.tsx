@@ -10,13 +10,12 @@ import {HexagonLink} from '../../shared/HexagonLink/HexagonLink';
 
 interface PropsEndGame {
   scores: number;
-  name: string;
   isOpen: boolean;
   resetGame: () => void;
   isSoundActive: boolean;
 }
 
-export const ModalEndGame: React.FC<PropsEndGame> = ({scores, name, isOpen, resetGame, isSoundActive}) => {
+export const ModalEndGame: React.FC<PropsEndGame> = ({scores, isOpen, resetGame, isSoundActive}) => {
   const [soundWinGame, {stop}] = useSound(audioFileWinGame, {volume: 1});
 
   useEffect(() => {

@@ -88,13 +88,7 @@ export const GamePage: React.FC = () => {
   const finishGame = () => {
     setIsEndGame(true);
     stop();
-    const highScore: HighScore = {
-      id: userId,
-      name: localStorageRepository.readUserName(),
-      score: fireproofedScore,
-    };
-
-    highScoresRepository.writeScore(highScore);
+    saveScores();
   };
 
   useEffect(() => {
@@ -104,13 +98,17 @@ export const GamePage: React.FC = () => {
 
   const finishGameByUser = () => {
     setIsEndGame(true);
-    if (questionNumber !== 0) setFireproofedScore(scores[questionNumber - 1].amount);
+    setFireproofedScore(scores[questionNumber].amount);
 
     stop();
+    saveScores();
+  };
+
+  const saveScores = () => {
     const highScore: HighScore = {
       id: userId,
       name: localStorageRepository.readUserName(),
-      score: scores[questionNumber].amount,
+      score: fireproofedScore,
     };
 
     highScoresRepository.writeScore(highScore);
@@ -196,6 +194,7 @@ export const GamePage: React.FC = () => {
           stopSoundTimer={stop}
           isSoundActive={isSoundActive}
           setIsClickedRightAnswer={setIsClickedRightAnswer}
+          isOpenModal={isEndGame}
         />
       </div>
 
@@ -205,7 +204,6 @@ export const GamePage: React.FC = () => {
           resetGame={resetGame}
           scores={fireproofedScore}
           isOpen={isEndGame}
-          name="Джо"
         />
       )}
       {isOpenHallHelpModal && (

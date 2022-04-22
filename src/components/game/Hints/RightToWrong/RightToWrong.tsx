@@ -30,6 +30,7 @@ export const RightToWrong: React.FC<Props> = ({
       setIsActive={setIsActive}
       disable={disable}
       isSoundActive={isSoundActive}
+      title="Право на ошибку"
     />
   );
 };
