@@ -101,7 +101,7 @@ export const GamePage: React.FC = () => {
 
   const finishGameByUser = () => {
     setIsEndGame(true);
-    setFireproofedScore(scores[questionNumber].amount);
+    if (questionNumber !== 0) setFireproofedScore(scores[questionNumber - 1].amount);
 
     stop();
     const highScore: HighScore = {
