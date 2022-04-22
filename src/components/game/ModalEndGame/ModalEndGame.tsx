@@ -1,10 +1,12 @@
 import styles from './ModalEndGame.scss';
 import React, {useEffect} from 'react';
-import {CustomButton, CustomButtonUse} from '../../shared/CustomButton/CustomButton';
+import {HexagonButton} from '../../shared/HexagonButton/HexagonButton';
 import Modal from 'react-modal';
 import {useNavigate} from 'react-router-dom';
 import useSound from 'use-sound';
 import audioFileWinGame from '/src/sounds/winGame.mp3';
+import {HexagonViewUse} from '../../shared/HexagonView/HexagonView';
+import {HexagonLink} from '../../shared/HexagonLink/HexagonLink';
 
 interface PropsEndGame {
   scores: number;
@@ -15,25 +17,24 @@ interface PropsEndGame {
 }
 
 export const ModalEndGame: React.FC<PropsEndGame> = ({scores, name, isOpen, resetGame, isSoundActive}) => {
-  const rout = useNavigate();
   const [soundWinGame, {stop}] = useSound(audioFileWinGame, {volume: 1});
 
   useEffect(() => {
-    if (isSoundActive) return soundWinGame();
+    if (isSoundActive) {
+      return soundWinGame();
+    }
   });
 
+  const restartGame = () => {
+    resetGame();
+    stop();
+  };
+
   const onStatistics = () => {
-    rout('/statistics');
     stop();
   };
 
   const onMenu = () => {
-    rout('/');
-    stop();
-  };
-
-  const restartGame = () => {
-    resetGame();
     stop();
   };
 
@@ -41,15 +42,15 @@ export const ModalEndGame: React.FC<PropsEndGame> = ({scores, name, isOpen, rese
     <Modal isOpen={isOpen} className={styles.root} style={modalStyles}>
       <span className={styles.title}>Вы выиграли {scores} руб.</span>
       <div className={styles.buttons}>
-        <CustomButton use={CustomButtonUse.blue} onClick={restartGame}>
+        <HexagonButton use={HexagonViewUse.blue} onClick={restartGame}>
           Начать игру заново
-        </CustomButton>
-        <CustomButton use={CustomButtonUse.blue} onClick={onStatistics}>
+        </HexagonButton>
+        <HexagonLink use={HexagonViewUse.blue} to={'/statistics'} onClick={onStatistics}>
           <span className={styles.word}>Статистика</span>
-        </CustomButton>
-        <CustomButton use={CustomButtonUse.blue} onClick={onMenu}>
+        </HexagonLink>
+        <HexagonLink use={HexagonViewUse.blue} to={'/'} onClick={onMenu}>
           <span className={styles.word}>Меню</span>
-        </CustomButton>
+        </HexagonLink>
       </div>
     </Modal>
   );

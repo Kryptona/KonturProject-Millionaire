@@ -26,10 +26,10 @@
     color: $default_white;
     font-size: 18px;
     z-index: 9;
+    cursor: pointer;
 
     &:hover {
       background: rgba(255, 255, 255, 0.2);
-      cursor: pointer;
     }
 
     &:focus:not(:focus-visible) {

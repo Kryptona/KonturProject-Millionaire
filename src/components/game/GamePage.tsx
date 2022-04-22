@@ -18,6 +18,8 @@ import {HighScore} from '../../models/HighScore';
 import {v4 as uuidv4} from 'uuid';
 import {highScoresRepository} from '../../data/highScoresRepository';
 import {localStorageRepository} from '../../data/localStorageRepository';
+import {saveSessionState} from '../../utils/StoragesUtils';
+import {useSessionStorage} from '../../utils/Hooks';
 import useSound from 'use-sound';
 import audioFileStartGame from '/src/sounds/selectAnswer.mp3';
 import {faAngleLeft, faBell, faBellSlash} from '@fortawesome/free-solid-svg-icons';
@@ -102,13 +104,13 @@ export const GamePage: React.FC = () => {
 
   const finishGameByUser = () => {
     setIsEndGame(true);
-    setFireproofedScore(scores[questionNumber].amount);
+    if (questionNumber !== 0) setFireproofedScore(scores[questionNumber - 1].amount);
 
     stop();
     const highScore: HighScore = {
       id: userId,
       name: localStorageRepository.readUserName(),
-      score: fireproofedScore,
+      score: scores[questionNumber].amount,
     };
 
     highScoresRepository.writeScore(highScore);
@@ -148,11 +150,7 @@ export const GamePage: React.FC = () => {
       </button>
 
       <button className={styles.sound_bt} onClick={onClickSoundIcon}>
-        {isSoundActive ? (
-          <FontAwesomeIcon icon={faBell} color={'white'} size={'lg'} />
-        ) : (
-          <FontAwesomeIcon icon={faBellSlash} color={'white'} size={'lg'} />
-        )}
+        <FontAwesomeIcon icon={isSoundActive ? faBell : faBellSlash} color={'white'} size={'lg'} />
       </button>
 
       <div className={styles.persons_shower}>

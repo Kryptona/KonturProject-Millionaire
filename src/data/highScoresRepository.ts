@@ -1,5 +1,7 @@
 import {child, get, getDatabase, ref, set} from 'firebase/database';
 import {HighScore} from '../models/HighScore';
+import firebase from 'firebase/database';
+import {query, orderByChild, limitToLast} from 'firebase/database';
 
 function writeScore(highScore: HighScore) {
   const db = getDatabase();
@@ -10,8 +12,9 @@ function writeScore(highScore: HighScore) {
 }
 
 function readScores(): Promise<HighScore[]> {
-  const dbRef = ref(getDatabase());
-  return get(child(dbRef, `users`))
+  const dbRef = getDatabase();
+  const q = query(ref(dbRef, 'users'), orderByChild('score'), limitToLast(20));
+  return get(q)
     .then((snapshot) => {
       if (snapshot.exists()) {
         const snapshotScores = snapshot.val();
@@ -24,7 +27,7 @@ function readScores(): Promise<HighScore[]> {
             score: snapshotScore.score,
           });
         }
-        return scores.sort(compareTo).slice(0, 20);
+        return scores.sort(compareTo);
       } else {
         return [];
       }

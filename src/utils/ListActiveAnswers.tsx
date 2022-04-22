@@ -1,5 +1,5 @@
 import {QuestionModel} from '../models/QuestionModel';
-import {loadSessionState} from './StogagesUtils';
+import {loadSessionState} from './StoragesUtils';
 
 export const ListActiveAnswer: {[variant: string]: boolean} = loadSessionState('ListActiveAnswer', {
   A: true,

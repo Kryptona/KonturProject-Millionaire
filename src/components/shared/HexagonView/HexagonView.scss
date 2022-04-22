@@ -5,15 +5,10 @@ $height: 64px;
 $half-height: calc(#{$height} / 2);
 $factor: 32px;
 
-@mixin colorMap($color, $hover-color) {
-  background-color: $color;
-
-  &:hover {
-    background-color: $hover-color;
-  }
-}
-
 .root {
+  @include hexagon_clip_path($factor);
+  display: inline-flex;
+  align-items: center;
   margin: 0;
   padding: 0 $factor;
   border: none;
@@ -21,20 +16,33 @@ $factor: 32px;
   min-height: $height;
   user-select: none;
   text-align: center;
+  text-decoration: none;
   box-sizing: border-box;
   transition: background-color $transition_duration;
   color: white;
   font-size: 38px;
   font-weight: 400;
 
-  :focus:not(:focus-visible) {
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:focus:not(:focus-visible) {
     outline: none;
   }
 
-  @include hexagon_clip_path(32px);
+  @media (max-width: 800px) {
+    font-size: 24px;
+  }
+}
 
-  &:active {
-    transform: translateY(1px);
+@mixin colorMap($color, $hover-color) {
+  background-color: $color;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: $hover-color;
+    }
   }
 }
 
@@ -48,28 +56,4 @@ $factor: 32px;
 
 .blue {
   @include colorMap(#0c2cac, green);
-}
-
-@media screen and (max-width: 800px) {
-  .root {
-      font-size: 24px;
-  }
-}
-
-@media (hover: none) {
-  .secondary {
-    &:hover {
-      background: #600268;
-    }
-  }
-  .primary {
-    &:hover {
-      background: #003d17;
-    }
-  }
-  .blue {
-    &:hover {
-      background: #0c2cac;
-    }
-  }
 }

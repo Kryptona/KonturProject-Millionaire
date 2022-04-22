@@ -7,7 +7,7 @@ import {QuestionReplacement} from './QuestionReplacement/QuestionReplacement';
 import {CallFriend} from './CallFriend/CallFriend';
 import {QuestionModel} from '../../../models/QuestionModel';
 import {useSessionStorage} from '../../../utils/Hooks';
-import {loadSessionState} from '../../../utils/StogagesUtils';
+import {loadSessionState} from '../../../utils/StoragesUtils';
 
 interface Props {
   readonly restart: boolean;

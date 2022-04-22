@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import millionaire from '../../img/millionaire_icon.svg';
 import styles from './MenuPage.scss';
 import {CustomInput} from '../shared/CustomInput/CustomInput';
-import {CustomButton, CustomButtonUse} from '../shared/CustomButton/CustomButton';
-import {useNavigate} from 'react-router-dom';
 import {resetList} from '../../utils/ListActiveAnswers';
 import {localStorageRepository} from '../../data/localStorageRepository';
 import {generateUserName} from '../../utils/userNameGenerator';
@@ -12,6 +10,8 @@ import audioFileStartGame from '/src/sounds/selectAnswer.mp3';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faBell, faBellSlash} from '@fortawesome/free-solid-svg-icons';
 import audioFileMenuTheme from '/src/sounds/menuTheme.mp3';
+import {HexagonViewUse} from '../shared/HexagonView/HexagonView';
+import {HexagonLink} from '../shared/HexagonLink/HexagonLink';
 
 export const MenuPage: React.FC = () => {
   const [userName, setUserName] = useState('');
@@ -25,20 +25,14 @@ export const MenuPage: React.FC = () => {
     setPlaceholder(generateUserName());
   }, []);
 
-  const rout = useNavigate();
   const onStartGame = () => {
     sessionStorage.clear();
-    if (isSoundActive) startGameSound();
-    resetList();
-    rout('/game');
-    localStorageRepository.writeUserName(userName?.trim() ? userName : placeholder);
-  };
-  const onStatistics = () => {
-    rout('/statistics');
-  };
+    if (isSoundActive) {
+      startGameSound();
+    }
 
-  const onSettings = () => {
-    console.log('onSettings clicked');
+    resetList();
+    localStorageRepository.writeUserName(userName?.trim() ? userName : placeholder);
   };
 
   const onSound = () => {
@@ -71,21 +65,19 @@ export const MenuPage: React.FC = () => {
         value={userName}
         onChange={setUserName}
       />
-      <CustomButton className={styles.bt} onClick={onStartGame} use={CustomButtonUse.secondary}>
+
+      <HexagonLink className={styles.bt} use={HexagonViewUse.secondary} to={'/game'} onClick={onStartGame}>
         <span className={styles.content}>Начать игру</span>
-      </CustomButton>
-      <CustomButton className={styles.bt} onClick={onStatistics} use={CustomButtonUse.secondary}>
+      </HexagonLink>
+      <HexagonLink className={styles.bt} use={HexagonViewUse.secondary} to={'/statistics'}>
         <span className={styles.content}>Таблица лидеров</span>
-      </CustomButton>
-      <CustomButton className={styles.bt} onClick={onSettings} use={CustomButtonUse.secondary}>
+      </HexagonLink>
+      <HexagonLink className={styles.bt} use={HexagonViewUse.secondary} to={'/settings'}>
         <span className={styles.content}>Настройки</span>
-      </CustomButton>
+      </HexagonLink>
+
       <button className={styles.sound_bt} onClick={onClickSoundIcon}>
-        {isSoundActive ? (
-          <FontAwesomeIcon icon={faBell} color={'white'} size={'lg'} />
-        ) : (
-          <FontAwesomeIcon icon={faBellSlash} color={'white'} size={'lg'} />
-        )}
+        <FontAwesomeIcon icon={isSoundActive ? faBell : faBellSlash} color={'white'} size={'lg'} />
       </button>
     </div>
   );

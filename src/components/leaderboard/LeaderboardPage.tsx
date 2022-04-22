@@ -5,10 +5,9 @@ import {highScoresRepository} from '../../data/highScoresRepository';
 import {LeaderboardItem} from './LeaderboardItem/LeaderboardItem';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAngleLeft} from '@fortawesome/free-solid-svg-icons';
-import {useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 export const LeaderboardPage: React.FC = () => {
-  const rout = useNavigate();
   const [scores, setScores] = useState<HighScore[]>([]);
 
   useEffect(() => {
@@ -17,16 +16,12 @@ export const LeaderboardPage: React.FC = () => {
     });
   }, []);
 
-  const onMenu = () => {
-    rout('/');
-  };
-
   return (
     <div className={styles.root}>
       <header className={styles.header}>
-        <button className={styles.back_bt} onClick={onMenu}>
+        <Link className={styles.back_bt} to={'/'}>
           <FontAwesomeIcon icon={faAngleLeft} color={'white'} size={'lg'} />
-        </button>
+        </Link>
         <h1>Таблица лидеров</h1>
       </header>
       <div className={styles.scores}>

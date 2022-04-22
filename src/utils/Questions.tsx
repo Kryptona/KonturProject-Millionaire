@@ -1,6 +1,6 @@
 import {questions} from '../resources/questions';
 import {QuestionModel} from '../models/QuestionModel';
-import {loadSessionState, saveSessionState} from './StogagesUtils';
+import {loadSessionState, saveSessionState} from './StoragesUtils';
 
 let questionsList: QuestionModel[] = [];
 let addedQuestions: number[] = [];
