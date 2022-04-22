@@ -22,7 +22,7 @@ import {faAngleLeft, faBell, faBellSlash} from '@fortawesome/free-solid-svg-icon
 import audioFileTimer from '/src/sounds/timer.mp3';
 import {PersonsShower, PersonsShowerStage} from './GifsGiver/PersonsShower';
 
-const TIME_ANSWER = 10000;
+const TIME_ANSWER = 30;
 
 export const GamePage: React.FC = () => {
   const [fireproofedScore, setFireproofedScore] = useSessionStorage('fireproofedScore', 0);
@@ -31,9 +31,9 @@ export const GamePage: React.FC = () => {
   const [isClickedAnswer, setIsClickedAnswer] = useState(false);
   const [activeRightToWrong, setActiveRightToWrong] = useSessionStorage('activeRightToWrong', false);
 
-  const [isOpenFriedModal, setIsOpenFriedModal] = useSessionStorage('isOpenFriedModal', false); //todo
-  const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useSessionStorage('isOpenHallHelpModal', false); //todo
-  const [isEndGame, setIsEndGame] = useSessionStorage('isEndGame', false); //todo
+  const [isOpenFriedModal, setIsOpenFriedModal] = useSessionStorage('isOpenFriedModal', false);
+  const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useSessionStorage('isOpenHallHelpModal', false);
+  const [isEndGame, setIsEndGame] = useSessionStorage('isEndGame', false);
   const [userId] = useState(uuidv4());
   const [isSoundActive, setIsSoundActive] = useState(false);
 
