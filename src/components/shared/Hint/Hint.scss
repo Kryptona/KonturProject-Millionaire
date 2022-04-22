@@ -1,6 +1,5 @@
 @import '../../game/default.scss';
-@import "src/default.scss";
-
+@import 'src/default.scss';
 
 .root {
   margin-left: 10px;
@@ -32,45 +31,45 @@
   }
 }
 
-@media screen and (max-width: 640px){
+@media screen and (max-width: 640px) {
   .root {
     height: 75px;
     width: 75px;
 
-    &>svg {
+    & > svg {
       height: 45px;
     }
   }
 }
 
-@media screen and (max-width: 505px){
+@media screen and (max-width: 505px) {
   .root {
     height: 60px;
     width: 60px;
 
-    &>svg {
+    & > svg {
       height: 40px;
     }
   }
 }
 
-@media screen and (max-width: 450px){
+@media screen and (max-width: 450px) {
   .root {
     height: 50px;
     width: 50px;
 
-    &>svg {
+    & > svg {
       height: 30px;
     }
   }
 }
 
-@media screen and (max-width: 450px){
+@media screen and (max-width: 450px) {
   .root {
     height: 45px;
     width: 45px;
 
-    &>svg {
+    & > svg {
       height: 25px;
     }
   }

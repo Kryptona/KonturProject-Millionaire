@@ -1,56 +1,131 @@
-import React, {Dispatch, SetStateAction} from 'react';
-import {Answer} from '../Answer/Answer';
-import styles from './Question.scss';
+import React, {Dispatch, useEffect, useRef, useState} from 'react';
 import {QuestionField} from '../QuestionField/QuestionField';
 import {QuestionModel} from '../../../models/QuestionModel';
+import {AnimationAnswerButton} from '../../shared/AnimationAnswerButton/AnimationAnswerButton';
+import useSound from 'use-sound';
+import {deactivateAnswer} from '../../../utils/ListActiveAnswers';
+import styles from './Question.scss';
+import audioFileLost from '/src/sounds/loss.mp3';
+import audioFileRight from '/src/sounds/rightAnswer.mp3';
 
-type questionOptions = {
+interface Props {
   questionCard: QuestionModel;
-  UpQuestionNumber: () => void;
-  setOpenModal: Dispatch<SetStateAction<boolean>>;
+  onSwitchQuestion: () => void;
+  onSelectAnswer: () => void;
+  onRightAnswer: () => void;
+  onWrongAnswer: () => void;
+  onGameOver: () => void;
   isClickedAnswer: boolean;
-  setIsClickedAnswer: Dispatch<SetStateAction<boolean>>;
+  setIsClickedAnswer: Dispatch<boolean>;
   activeRightToWrong: boolean;
-  setActiveRightToWrong: Dispatch<SetStateAction<boolean>>;
-  stopSoundTimer: () => void;
+  setActiveRightToWrong: Dispatch<boolean>;
+  setIsClickedRightAnswer: Dispatch<boolean>;
   isSoundActive: boolean;
-  setIsClickedRightAnswer: Dispatch<SetStateAction<boolean>>;
-  isOpenModal: boolean;
-};
+  isEndGame: boolean;
+}
 
-export const Question: React.FC<questionOptions> = ({
+const timeChangeQuestion = 4001;
+const gameOverTime = 4000;
+const timeAnimation = 2000;
+export const Question: React.FC<Props> = ({
   questionCard,
-  UpQuestionNumber,
-  setOpenModal,
+  onSwitchQuestion,
+  onSelectAnswer,
+  onRightAnswer,
+  onWrongAnswer,
+  onGameOver,
   isClickedAnswer,
   setIsClickedAnswer,
   setActiveRightToWrong,
   activeRightToWrong,
-  stopSoundTimer,
-  isSoundActive,
   setIsClickedRightAnswer,
-  isOpenModal,
+  isSoundActive,
+  isEndGame,
 }) => {
+  const [isAnswerBacklight, setIsAnswerBacklight] = useState(false);
+  const [soundLoseAnswer] = useSound(audioFileLost, {volume: 1});
+  const [soundRightAnswer] = useSound(audioFileRight, {volume: 1});
+  const delayedCalls = useRef<NodeJS.Timeout[]>([]);
+
+  const onSelectAnswerWrapper = (selectedAnswer: string, letter: 'A' | 'B' | 'C' | 'D'): void => {
+    onSelectAnswer();
+
+    if (selectedAnswer === questionCard.rightAnswer) {
+      const rightAnswerTimerId = setTimeout(() => {
+        onRightAnswer();
+        if (isSoundActive) {
+          soundRightAnswer();
+        }
+      }, timeAnimation);
+      delayedCalls.current.push(rightAnswerTimerId);
+
+      const switchQuestionTimerId = setTimeout(() => {
+        onSwitchQuestion();
+      }, timeChangeQuestion);
+      delayedCalls.current.push(switchQuestionTimerId);
+    } else {
+      if (activeRightToWrong) {
+        setActiveRightToWrong(false);
+        deactivateAnswer(letter);
+        return;
+      }
+
+      const wrongAnswerTimerId = setTimeout(() => {
+        onWrongAnswer();
+        setIsClickedRightAnswer(false);
+        setIsAnswerBacklight(true);
+        if (isSoundActive) {
+          soundLoseAnswer();
+        }
+      }, timeAnimation);
+      delayedCalls.current.push(wrongAnswerTimerId);
+
+      const gameOverTimerId = setTimeout(() => {
+        onGameOver();
+      }, gameOverTime);
+      delayedCalls.current.push(gameOverTimerId);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      for (let id of delayedCalls.current) {
+        clearTimeout(id);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    for (let id of delayedCalls.current) {
+      clearTimeout(id);
+      setIsAnswerBacklight(false);
+    }
+  }, [isEndGame]);
+
   return (
     <div className={styles.root}>
       <QuestionField question={questionCard.question} />
-      <Answer
-        A={questionCard.A}
-        B={questionCard.B}
-        C={questionCard.C}
-        D={questionCard.D}
-        rightAnswer={questionCard.rightAnswer}
-        setOpenModal={setOpenModal}
-        upQuestionNumber={UpQuestionNumber}
-        setIsClickedAnswer={setIsClickedAnswer}
-        isClickedAnswer={isClickedAnswer}
-        activeRightToWrong={activeRightToWrong}
-        setActiveRightToWrong={setActiveRightToWrong}
-        stopSoundTimer={stopSoundTimer}
-        isSoundActive={isSoundActive}
-        setIsClickedRightAnswer={setIsClickedRightAnswer}
-        isOpenModal={isOpenModal}
-      />
+      <div className={styles.answers}>
+        {[
+          {answer: questionCard.A, letter: 'A'} as const,
+          {answer: questionCard.B, letter: 'B'} as const,
+          {answer: questionCard.C, letter: 'C'} as const,
+          {answer: questionCard.D, letter: 'D'} as const,
+        ].map((x) => (
+          <AnimationAnswerButton
+            letter={x.letter}
+            onClick={() => onSelectAnswerWrapper(x.answer, x.letter)}
+            answerText={x.answer}
+            isDisable={isClickedAnswer}
+            setIsDisable={setIsClickedAnswer}
+            classNameFieldAnswer={x.answer === questionCard.rightAnswer}
+            isAnswerBacklight={isAnswerBacklight}
+            setIsAnswerBacklight={setIsAnswerBacklight}
+            isSoundActive={isSoundActive}
+            isEndGame={isEndGame}
+          />
+        ))}
+      </div>
     </div>
   );
 };

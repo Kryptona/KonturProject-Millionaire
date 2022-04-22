@@ -6,4 +6,16 @@ $hover-color: green;
   margin-right: auto;
   width: 100%;
   font-size: 36px;
+
+  .answers {
+    display: grid;
+    grid-gap: 8px;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+
+    @media (max-width: 760px) {
+      grid-template-rows: repeat(4, min-content);
+      grid-template-columns: 1fr;
+    }
+  }
 }

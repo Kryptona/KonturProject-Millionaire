@@ -10,12 +10,11 @@ import {HexagonLink} from '../../shared/HexagonLink/HexagonLink';
 
 interface PropsEndGame {
   scores: number;
-  isOpen: boolean;
   resetGame: () => void;
   isSoundActive: boolean;
 }
 
-export const ModalEndGame: React.FC<PropsEndGame> = ({scores, isOpen, resetGame, isSoundActive}) => {
+export const ModalEndGame: React.FC<PropsEndGame> = ({scores, resetGame, isSoundActive}) => {
   const [soundWinGame, {stop}] = useSound(audioFileWinGame, {volume: 1});
 
   useEffect(() => {
@@ -38,7 +37,7 @@ export const ModalEndGame: React.FC<PropsEndGame> = ({scores, isOpen, resetGame,
   };
 
   return (
-    <Modal isOpen={isOpen} className={styles.root} style={modalStyles}>
+    <Modal isOpen className={styles.root} style={modalStyles}>
       <span className={styles.title}>Вы выиграли {scores} руб.</span>
       <div className={styles.buttons}>
         <HexagonButton use={HexagonViewUse.blue} onClick={restartGame}>
@@ -63,5 +62,8 @@ export const modalStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+  },
+  overlay: {
+    zIndex: 9,
   },
 };
