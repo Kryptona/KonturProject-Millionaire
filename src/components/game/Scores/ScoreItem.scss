@@ -32,15 +32,14 @@
   }
 }
 
-@media screen and (max-width: 800px) {
+@media (max-width: 800px) {
   .root {
-    width: auto;
-
-    .id,
+    font-size: 12px;
+    .id {
+      width: 16px;
+    }
     .amount {
-      width: auto;
-      display: inline;
-      font-size: 12px;
+      width: 80px;
     }
   }
 }

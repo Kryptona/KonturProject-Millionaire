@@ -12,6 +12,7 @@ import {faBell, faBellSlash} from '@fortawesome/free-solid-svg-icons';
 import audioFileMenuTheme from '/src/sounds/menuTheme.mp3';
 import {HexagonViewUse} from '../shared/HexagonView/HexagonView';
 import {HexagonLink} from '../shared/HexagonLink/HexagonLink';
+import {GlassButton} from '../shared/GlassView/GlassButton';
 
 export const MenuPage: React.FC = () => {
   const [userName, setUserName] = useState('');
@@ -36,20 +37,12 @@ export const MenuPage: React.FC = () => {
     localStorageRepository.writeUserName(userName?.trim() ? userName : placeholder);
   };
 
-  const onSound = () => {
-    menuThemeSound();
-  };
-
-  const offSound = () => {
-    stop();
-  };
-
   const onClickSoundIcon = () => {
     if (isSoundActive) {
+      stop();
       setIsSoundActive(false);
-      offSound();
     } else {
-      onSound();
+      menuThemeSound();
       setIsSoundActive(true);
     }
   };
@@ -58,6 +51,10 @@ export const MenuPage: React.FC = () => {
 
   return (
     <div className={styles.root}>
+      <GlassButton className={styles.sound_bt} onClick={onClickSoundIcon}>
+        <FontAwesomeIcon color={'white'} size={'lg'} icon={isSoundActive ? faBell : faBellSlash} />
+      </GlassButton>
+
       <img className={styles.millionare_icon} src={millionaire} alt="icon" />
       <CustomInput
         className={styles.nickname_input}
@@ -67,18 +64,11 @@ export const MenuPage: React.FC = () => {
       />
 
       <HexagonLink className={styles.bt} use={HexagonViewUse.secondary} to={'/game'} onClick={onStartGame}>
-        <span className={styles.content}>Начать игру</span>
+        Начать игру
       </HexagonLink>
       <HexagonLink className={styles.bt} use={HexagonViewUse.secondary} to={'/statistics'}>
-        <span className={styles.content}>Таблица лидеров</span>
+        Таблица лидеров
       </HexagonLink>
-      <HexagonLink className={styles.bt} use={HexagonViewUse.secondary} to={'/settings'}>
-        <span className={styles.content}>Настройки</span>
-      </HexagonLink>
-
-      <button className={styles.sound_bt} onClick={onClickSoundIcon}>
-        <FontAwesomeIcon icon={isSoundActive ? faBell : faBellSlash} color={'white'} size={'lg'} />
-      </button>
     </div>
   );
 };

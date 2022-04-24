@@ -6,20 +6,20 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCrown} from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
-  highScore: HighScore;
-  index: number;
+  readonly highScore: HighScore;
+  readonly index: number;
 }
 
 export const LeaderboardItem: React.FC<Props> = ({highScore, index}) => {
+  const name = highScore.name?.trim() || 'Незнакомец';
   const avatar = stringToAvatar(highScore.name);
-
   const rankIcon = renderRankIcon(index);
 
   return (
     <div className={styles.root}>
       <img className={styles.avatar} src={avatar} alt={'аватар'} />
       <div className={styles.content}>
-        <div className={styles.name}>{highScore.name}</div>
+        <div className={styles.name}>{name}</div>
         <div>Очки: {highScore.score}</div>
       </div>
       <span className={styles.rank}>

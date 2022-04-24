@@ -1,10 +1,6 @@
 @import '../../../default.scss';
 
 .root {
-  width: 560px;
-  max-width: 100%;
-  font-size: 36px;
-
   outline: none;
   border: none;
   border-bottom: 2px solid $default_blue;
@@ -14,9 +10,5 @@
 
   &:focus {
     border-color: rgba($default_blue, 0.7);
-  }
-
-  @media (max-width: 560px) {
-    font-size: 22px;
   }
 }

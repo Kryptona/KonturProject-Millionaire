@@ -9,7 +9,6 @@ $factor: 32px;
   @include hexagon_clip_path($factor);
   display: inline-flex;
   align-items: center;
-  margin: 0;
   padding: 0 $factor;
   border: none;
   cursor: pointer;
@@ -20,7 +19,7 @@ $factor: 32px;
   box-sizing: border-box;
   transition: background-color $transition_duration;
   color: white;
-  font-size: 38px;
+  font-size: 28px;
   font-weight: 400;
 
   &:active {

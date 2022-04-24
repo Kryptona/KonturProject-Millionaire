@@ -1,9 +1,12 @@
-$step: 250px;
+$step: 100px;
+$stepMini: 25px;
 
 $imgWidth: 960px;
 $imgHeight: 640px;
 
 .root {
+  height: 100%;
+  max-width: 100%;
   max-height: 100%;
   display: flex;
   flex-flow: row nowrap;
@@ -13,10 +16,9 @@ $imgHeight: 640px;
   .image {
     display: block;
     height: auto;
-    max-width: calc(100% - #{$step});
+    max-width: 50%;
     max-height: 100%;
     object-fit: scale-down;
-    z-index: 1;
   }
 
   .image_gamer {
@@ -27,5 +29,17 @@ $imgHeight: 640px;
   .image_host {
     @extend .image;
     margin-left: -$step;
+  }
+}
+
+@media (max-width: 560px) {
+  .root {
+    .image_gamer {
+      margin-right: -$stepMini;
+    }
+
+    .image_host {
+      margin-left: -$stepMini;
+    }
   }
 }

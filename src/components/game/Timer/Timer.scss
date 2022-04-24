@@ -1,9 +1,16 @@
 @import '../default';
 
+$size: 40px;
+
 .root {
+  width: $size;
+  height: $size;
   z-index: 9;
-  font-size: 24px;
+  font-size: 20px;
   color: yellow;
-  background: none;
-  display: inline-block;
+  background-color: black;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
 }

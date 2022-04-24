@@ -1,40 +1,8 @@
 .root {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 8px;
   width: 100%;
   max-height: 100%;
-  margin: 10px auto 10px auto;
-  text-align: center;
-  z-index: 99;
-  display: flex;
-  flex-flow: column;
-
-  & > * {
-    flex: 0 1 1fr;
-  }
-
-  .fiftyFifty {
-    z-index: 99;
-  }
-
-  .hallHelp {
-
-  }
-
-  .rightToWrong {
-
-  }
-
-  .questionReplacement {
-
-  }
-
-  .callFriend {
-
-  }
-}
-
-@media screen and (min-width: 800px){
-
-}
-@media screen and (min-width: 450px){
-
+  z-index: 8;
 }

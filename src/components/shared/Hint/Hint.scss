@@ -2,15 +2,14 @@
 @import 'src/default.scss';
 
 .root {
-  margin-left: 10px;
-  border-radius: 50%;
   display: inline-block;
+  width: 80px;
+  height: 80px;
   padding: 0;
   background: $blue;
-  height: 80px;
-  width: 80px;
+  border-radius: 50%;
 
-  &>svg {
+  & > svg {
     height: 50px;
   }
 }

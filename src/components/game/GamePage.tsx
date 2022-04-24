@@ -20,7 +20,8 @@ import useSound from 'use-sound';
 import audioFileStartGame from '/src/sounds/selectAnswer.mp3';
 import {faAngleLeft, faBell, faBellSlash} from '@fortawesome/free-solid-svg-icons';
 import audioFileTimer from '/src/sounds/timer.mp3';
-import {PersonsShower, PersonsShowerStage} from './GifsGiver/PersonsShower';
+import {PersonsShower, PersonsShowerStage} from './PersonsShower/PersonsShower';
+import {GlassButton} from '../shared/GlassView/GlassButton';
 
 const TIME_ANSWER = 30;
 
@@ -104,7 +105,8 @@ export const GamePage: React.FC = () => {
     timerSound();
   };
 
-  const resetGame = () => {
+  const onRestart = () => {
+    setPersonAnimation(PersonsShowerStage.asking);
     setFireproofedScore(0);
     setQuestionNumber(0);
     setTimer(TIME_ANSWER);
@@ -156,23 +158,15 @@ export const GamePage: React.FC = () => {
 
   return (
     <div className={styles.root}>
-      <button className={styles.end_game_bt} onClick={() => onGameEndByUser()}>
-        <FontAwesomeIcon icon={faAngleLeft} color={'white'} size={'lg'} />
-      </button>
+      <div className={styles.buttons}>
+        <GlassButton className={styles.end_game_bt} onClick={() => onGameEndByUser()}>
+          <FontAwesomeIcon icon={faAngleLeft} color={'white'} size={'lg'} />
+        </GlassButton>
 
-      <button className={styles.sound_bt} onClick={onClickSoundIcon}>
-        <FontAwesomeIcon icon={isSoundActive ? faBell : faBellSlash} color={'white'} size={'lg'} />
-      </button>
+        <GlassButton className={styles.sound_bt} onClick={onClickSoundIcon}>
+          <FontAwesomeIcon color={'white'} size={'lg'} icon={isSoundActive ? faBell : faBellSlash} />
+        </GlassButton>
 
-      <div className={styles.persons_shower}>
-        <PersonsShower stage={personAnimation} />
-      </div>
-
-      <div className={styles.score}>
-        <Scores id={questionNumber} />
-      </div>
-
-      <div className={styles.timer}>
         <Timer
           time={timer}
           setCounter={setTimer}
@@ -180,6 +174,14 @@ export const GamePage: React.FC = () => {
           isDisable={isClickedAnswer}
           isOpenModal={isEndGame}
         />
+      </div>
+
+      <div className={styles.persons_shower}>
+        <PersonsShower stage={personAnimation} />
+      </div>
+
+      <div className={styles.score}>
+        <Scores id={questionNumber} />
       </div>
 
       <div className={styles.hints}>
@@ -213,7 +215,7 @@ export const GamePage: React.FC = () => {
         />
       </div>
 
-      {isEndGame && <ModalEndGame isSoundActive={isSoundActive} resetGame={resetGame} scores={fireproofedScore} />}
+      {isEndGame && <ModalEndGame score={fireproofedScore} onRestart={onRestart} isSoundActive={isSoundActive} />}
       {isOpenHallHelpModal && (
         <ModalHallHelp
           onClose={() => setIsOpenHallHelpModal(false)}

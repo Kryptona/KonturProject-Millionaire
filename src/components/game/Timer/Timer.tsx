@@ -25,7 +25,7 @@ export const Timer: React.FC<PropsTimer> = ({time, setOpenModal, setCounter, isO
 
   return (
     <div className={styles.root}>
-      <div> Осталось времени: {time} сек.</div>
+      <div className={styles.time}>{time}</div>
     </div>
   );
 };

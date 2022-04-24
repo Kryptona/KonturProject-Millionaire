@@ -1,7 +1,26 @@
 .root {
   color: yellow;
-  text-align: left;
-  & > ul {
+
+  .list {
+    display: block;
+    margin: 0;
+    padding: 0;
     list-style-type: none;
+  }
+
+  .item {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .root {
+    .list {
+      display: none;
+    }
+
+    .item {
+      display: block;
+    }
   }
 }
