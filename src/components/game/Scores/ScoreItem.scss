@@ -1,25 +1,45 @@
 @import '../../../default.scss';
 
 .root {
-  width: 100px;
+  width: auto;
   display: inline-block;
   font-family: $Roboto;
-
-  padding: 2px 4px;
-
-  &.selected {
-    @include hexagon_clip_path(8px);
-    background-color: orange;
-  }
+  white-space: nowrap;
+  padding: 2px 16px;
 
   &.fireproof {
     color: white;
   }
 
+  &.selected {
+    @include hexagon_clip_path(8px);
+    background-color: orange;
+    color: $dark_blue;
+    font-weight: bold;
+  }
+
   .id {
     display: inline-block;
-    width: 24px;
+    width: 20px;
     margin-right: 8px;
-    text-align: center;
+    text-align: right;
+  }
+
+  .amount {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+  }
+}
+
+@media (max-width: 800px) {
+  .root {
+    font-size: 12px;
+    .id {
+      width: 16px;
+    }
+    .amount {
+      width: 80px;
+    }
   }
 }

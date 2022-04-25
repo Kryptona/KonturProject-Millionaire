@@ -1,31 +1,40 @@
+@import 'src/default.scss';
+
 .root {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
 
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(213.77deg, #151978 37.3%, #600268 95.78%);
+  .sound_bt {
+    position: absolute;
+    top: 32px;
+    left: 32px;
+  }
 
   .millionare_icon {
-    width: 400px;
-    height: 400px;
-    margin-top: 96px;
+    width: 100%;
+    max-width: 400px;
+    max-height: 400px;
+    margin: 5vmin 0;
   }
 
   .nickname_input {
-    margin-top: 64px;
-  }
+    width: 560px;
+    max-width: 100%;
+    font-size: 28px;
 
-  .play_game_button {
-    margin-top: 32px;
-  }
-
-  .buttons {
-    margin-top: 16px;
-
-    & > *:not(:first-child) {
-      margin-left: 16px;
+    @media (max-width: 560px) {
+      font-size: 24px;
     }
+  }
+
+  .bt {
+    width: 320px;
+    max-width: 100%;
+    justify-content: center;
   }
 }

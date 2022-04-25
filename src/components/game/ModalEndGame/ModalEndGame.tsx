@@ -1,54 +1,61 @@
 import styles from './ModalEndGame.scss';
-import React, {Dispatch, SetStateAction} from 'react';
-import {CustomButton, CustomButtonUse} from '../../shared/CustomButton/CustomButton';
+import React, {useEffect} from 'react';
+import {HexagonButton} from '../../shared/HexagonButton/HexagonButton';
 import Modal from 'react-modal';
-import {useNavigate} from 'react-router-dom';
+import useSound from 'use-sound';
+import audioFileWinGame from '/src/sounds/winGame.mp3';
+import {HexagonViewUse} from '../../shared/HexagonView/HexagonView';
+import {HexagonLink} from '../../shared/HexagonLink/HexagonLink';
+import {useLocalStorage} from '../../../utils/Hooks';
 
 interface PropsEndGame {
-  scores: number;
-  name: string;
-  isOpen: boolean;
-  setOpenModal: Dispatch<SetStateAction<boolean>>;
-  resetGame: () => void;
+  score: number;
+  onRestart: () => void;
+  isSoundActive: boolean;
 }
 
-export const ModalEndGame: React.FC<PropsEndGame> = ({scores, name, isOpen, setOpenModal, resetGame}) => {
-  const rout = useNavigate();
+export const ModalEndGame: React.FC<PropsEndGame> = ({score, onRestart, isSoundActive}) => {
+  const [volume] = useLocalStorage('soundLevel', 0.5);
+  const [soundWinGame, {stop}] = useSound(audioFileWinGame, {volume: volume});
+
+  useEffect(() => {
+    if (isSoundActive) {
+      return soundWinGame();
+    }
+  });
+
+  const onRestartWrapper = () => {
+    onRestart();
+    stop();
+  };
 
   const onStatistics = () => {
-    console.log('onStatistics clicked');
+    stop();
   };
 
   const onMenu = () => {
-    rout('/');
-    console.log('onMenu clicked');
-  };
-
-  const restartGame = () => {
-    setOpenModal(false);
-    resetGame();
-    console.log('Reset Game');
+    stop();
   };
 
   return (
-    <Modal isOpen={isOpen} className={styles.root} style={modalStyles}>
-      <span className={styles.title}>Вы выиграли {scores} руб.</span>
+    <Modal isOpen className={styles.root} style={modalStyles}>
+      <span className={styles.title}>Вы выиграли {score} руб.</span>
       <div className={styles.buttons}>
-        <CustomButton use={CustomButtonUse.blue} onClick={restartGame}>
+        <HexagonButton use={HexagonViewUse.blue} onClick={onRestartWrapper}>
           Начать игру заново
-        </CustomButton>
-        <CustomButton use={CustomButtonUse.blue} onClick={onStatistics}>
+        </HexagonButton>
+        <HexagonLink use={HexagonViewUse.blue} to={'/statistics'} onClick={onStatistics}>
           <span className={styles.word}>Статистика</span>
-        </CustomButton>
-        <CustomButton use={CustomButtonUse.blue} onClick={onMenu}>
+        </HexagonLink>
+        <HexagonLink use={HexagonViewUse.blue} to={'/'} onClick={onMenu}>
           <span className={styles.word}>Меню</span>
-        </CustomButton>
+        </HexagonLink>
       </div>
     </Modal>
   );
 };
 
-const modalStyles = {
+export const modalStyles = {
   content: {
     top: '50%',
     left: '50%',
@@ -56,5 +63,8 @@ const modalStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+  },
+  overlay: {
+    zIndex: 9,
   },
 };

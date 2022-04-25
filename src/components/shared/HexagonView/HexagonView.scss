@@ -1,0 +1,58 @@
+@import 'src/default.scss';
+@import '../../../default.scss';
+
+$height: 64px;
+$half-height: calc(#{$height} / 2);
+$factor: 32px;
+
+.root {
+  @include hexagon_clip_path($factor);
+  display: inline-flex;
+  align-items: center;
+  padding: 0 $factor;
+  border: none;
+  cursor: pointer;
+  min-height: $height;
+  user-select: none;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: background-color $transition_duration;
+  color: white;
+  font-size: 28px;
+  font-weight: 400;
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  @media (max-width: 800px) {
+    font-size: 24px;
+  }
+}
+
+@mixin colorMap($color, $hover-color) {
+  background-color: $color;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: $hover-color;
+    }
+  }
+}
+
+.primary {
+  @include colorMap(#003d17, #5a3e22);
+}
+
+.secondary {
+  @include colorMap(#600268, #c2b82d);
+}
+
+.blue {
+  @include colorMap(#0c2cac, green);
+}

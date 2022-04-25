@@ -1,0 +1,84 @@
+@import '../../default.scss';
+
+.root {
+  background: $violet;
+  color: $blue;
+  z-index: 9;
+  position: absolute;
+  text-align: center;
+  height: auto;
+  width: 800px;
+
+  padding: 16px;
+  box-sizing: border-box;
+
+  .statistics {
+    text-align: left;
+    padding: 15px;
+
+
+    .diagram {
+      margin-bottom: 10px;
+      font-size: 32px;
+      .nameColumn {
+        color: $yellow;
+        margin-right: 10px;
+      }
+
+      .columnWrapper {
+        display: inline-block;
+        background: none;
+        max-width: 90%;
+
+        .column {
+          background: #c2b82d;
+          text-align: right;
+          color: white;
+          animation-duration: 3s;
+          animation-name: visible;
+        }
+      }
+
+    }
+  }
+
+  .button {
+
+  }
+}
+
+@keyframes visible {
+
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+  
+}
+
+@media screen and (max-width: 800px){
+
+  .root {
+    width: 450px;
+    height: auto;
+
+    span, div {
+      font-size: 24px;
+    }
+
+    span {
+      display: inline-block;
+    }
+  }
+
+}
+
+@media screen and (max-width: 450px) {
+
+  .root {
+    width: 400px;
+  }
+
+}

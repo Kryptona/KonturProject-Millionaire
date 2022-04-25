@@ -1,19 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+$Roboto: 'Roboto';
+
+$yellow: yellow;
+$dark_blue: #1d2290;
+$violet: rgba(72, 26, 120, 0.84);
+$white: white;
+$default_blue: #1a76ff;
+$default_white: #f9fafe;
+$transition_duration: 250ms;
+
+:global{
+  html, body, #root{
+    width: 100%;
+    min-height: 100vh;
+  }
+}
+html {
+  min-width: 360px;
+}
+
 body {
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
+  background: linear-gradient(213.77deg, $dark_blue 37.3%, $violet 95.78%);
+  font-family: $Roboto;
 }
 
-$default_blue: #1A76FF;
-$default_white: #F9FAFE;
-$transition_duration: 250ms;
-
-$Roboto: 'Roboto';
-
-@mixin hexagon_clip_path($factor){
-  clip-path: polygon($factor 0, calc(100% - #{$factor}) 0%, 100% 50%, calc(100% - #{$factor}) 100%, $factor 100%, 0% 50%);
+@mixin hexagon_clip_path($factor) {
+  clip-path: polygon(
+    $factor 0,
+    calc(100% - #{$factor}) 0%,
+    100% 50%,
+    calc(100% - #{$factor}) 100%,
+    $factor 100%,
+    0% 50%
+  );
 }
-

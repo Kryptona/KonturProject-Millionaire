@@ -1,38 +1,79 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import millionaire from '../../img/millionaire_icon.svg';
 import styles from './MenuPage.scss';
 import {CustomInput} from '../shared/CustomInput/CustomInput';
-import {CustomButton, CustomButtonUse} from '../shared/CustomButton/CustomButton';
-import {useNavigate} from 'react-router-dom';
+import {resetList} from '../../utils/ListActiveAnswers';
+import {localStorageRepository} from '../../data/localStorageRepository';
+import {generateUserName} from '../../utils/userNameGenerator';
+import useSound from 'use-sound';
+import audioFileStartGame from '/src/sounds/selectAnswer.mp3';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faBell, faBellSlash} from '@fortawesome/free-solid-svg-icons';
+import audioFileMenuTheme from '/src/sounds/menuTheme.mp3';
+import {HexagonViewUse} from '../shared/HexagonView/HexagonView';
+import {HexagonLink} from '../shared/HexagonLink/HexagonLink';
+import {GlassButton} from '../shared/GlassView/GlassButton';
+import {useLocalStorage} from '../../utils/Hooks';
 
 export const MenuPage: React.FC = () => {
-  const rout = useNavigate();
+  const [userName, setUserName] = useState('');
+  const [placeholder, setPlaceholder] = useState('');
+  const [volume] = useLocalStorage('soundLevel', 0);
+  const [menuThemeSound, {stop}] = useSound(audioFileMenuTheme, {volume: volume});
+  const [startGameSound] = useSound(audioFileStartGame, {volume: volume});
+  const [isSoundActive, setIsSoundActive] = useState(false);
+
+  useEffect(() => {
+    if (isSoundActive) menuThemeSound();
+    setUserName(localStorageRepository.readUserName());
+    setPlaceholder(generateUserName());
+  }, []);
+
   const onStartGame = () => {
-    rout('/game');
-  };
-  const onStatistics = () => {
-    console.log('onStatistics clicked');
+    sessionStorage.clear();
+    if (isSoundActive) {
+      startGameSound();
+    }
+
+    resetList();
+    localStorageRepository.writeUserName(userName?.trim() ? userName : placeholder);
   };
 
-  const onSettings = () => {
-    console.log('onSettings clicked');
+  const onClickSoundIcon = () => {
+    if (isSoundActive) {
+      stop();
+      setIsSoundActive(false);
+    } else {
+      menuThemeSound();
+      setIsSoundActive(true);
+    }
   };
+
+  useEffect(() => stop, [stop]);
 
   return (
     <div className={styles.root}>
+      <GlassButton className={styles.sound_bt} onClick={onClickSoundIcon}>
+        <FontAwesomeIcon color={'white'} size={'lg'} icon={isSoundActive ? faBell : faBellSlash} />
+      </GlassButton>
+
       <img className={styles.millionare_icon} src={millionaire} alt="icon" />
-      <CustomInput className={styles.nickname_input} placeholder={'Введите ник'} />
-      <CustomButton className={styles.play_game_button} onClick={onStartGame} use={CustomButtonUse.secondary}>
+      <CustomInput
+        className={styles.nickname_input}
+        placeholder={placeholder}
+        value={userName}
+        onChange={setUserName}
+      />
+
+      <HexagonLink className={styles.bt} use={HexagonViewUse.secondary} to={'/game'} onClick={onStartGame}>
         Начать игру
-      </CustomButton>
-      <div className={styles.buttons}>
-        <CustomButton onClick={onStatistics} use={CustomButtonUse.secondary}>
-          Статистика
-        </CustomButton>
-        <CustomButton onClick={onSettings} use={CustomButtonUse.secondary}>
-          Настройки
-        </CustomButton>
-      </div>
+      </HexagonLink>
+      <HexagonLink className={styles.bt} use={HexagonViewUse.secondary} to={'/statistics'}>
+        Таблица лидеров
+      </HexagonLink>
+      <HexagonLink className={styles.bt} use={HexagonViewUse.secondary} to={'/settings'}>
+        Настройки
+      </HexagonLink>
     </div>
   );
 };

@@ -6,8 +6,8 @@ $white: white;
 
 .root {
   background: $violet;
-  color: $blue;
-  z-index: 9999;
+  color: $dark_blue;
+  z-index: 9;
   position: absolute;
   text-align: center;
   height: 300px;
@@ -35,4 +35,29 @@ $white: white;
       width: 280px;
     }
   }
+}
+
+@media screen and (max-width: 800px) {
+  span {
+    display: block;
+  }
+
+  .root {
+    width: 450px;
+    height: auto;
+
+    .buttons {
+
+      .word, {
+        font-size: 24px;
+        width: auto;
+      }
+    }
+
+    .title {
+      font-size: 24px;
+    }
+
+  }
+
 }

@@ -1,0 +1,75 @@
+@import '../../game/default.scss';
+@import 'src/default.scss';
+
+.root {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  padding: 0;
+  background: $blue;
+  border-radius: 50%;
+
+  & > svg {
+    height: 50px;
+  }
+}
+
+.isActive:hover {
+  cursor: pointer;
+  background: $default_blue;
+}
+
+.isNotActive {
+  opacity: 0.25;
+  cursor: default;
+}
+
+@media (hover: none) {
+  .isActive:hover {
+    background: none;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .root {
+    height: 75px;
+    width: 75px;
+
+    & > svg {
+      height: 45px;
+    }
+  }
+}
+
+@media screen and (max-width: 505px) {
+  .root {
+    height: 60px;
+    width: 60px;
+
+    & > svg {
+      height: 40px;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .root {
+    height: 50px;
+    width: 50px;
+
+    & > svg {
+      height: 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .root {
+    height: 45px;
+    width: 45px;
+
+    & > svg {
+      height: 25px;
+    }
+  }
+}

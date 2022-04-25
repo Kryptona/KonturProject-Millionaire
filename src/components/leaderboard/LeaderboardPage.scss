@@ -1,0 +1,29 @@
+.root {
+  width: min-content;
+  height: 100%;
+  margin: 0 auto;
+  max-width: 100%;
+  color: white;
+  padding: 16px;
+  box-sizing: border-box;
+
+  .header {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 16px;
+
+    .back_bt {
+      border-radius: 50%;
+    }
+  }
+
+  .scores {
+    width: 600px;
+    max-width: 100%;
+
+    & > *:not(:first-child) {
+      margin-top: 16px;
+    }
+  }
+}

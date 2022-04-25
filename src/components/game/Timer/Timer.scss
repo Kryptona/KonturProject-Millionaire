@@ -1,0 +1,17 @@
+@import '../default';
+
+$size: 40px;
+
+.root {
+  width: $size;
+  height: $size;
+  z-index: 9;
+  font-size: 20px;
+  color: yellow;
+  background: none;
+  border: #c2b82d 1px solid;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}

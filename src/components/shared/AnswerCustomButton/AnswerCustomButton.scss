@@ -1,17 +1,20 @@
 .root {
   width: 100%;
+  font-size: 40px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  text-align: left;
 
-  .content {
-    display: flex;
-    flex-flow: row nowrap;
-    font-size: 40px;
+  .letter {
+    color: yellow;
+    margin-right: 8px;
+    white-space: nowrap;
+  }
+}
 
-    .letter {
-      color: yellow;
-      margin-right: 8px;
-    }
-
-    .text {
-    }
+@media screen and (max-width: 700px) {
+  .text, .letter {
+    font-size: 20px;
   }
 }

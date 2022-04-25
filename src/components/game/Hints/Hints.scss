@@ -1,0 +1,8 @@
+.root {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 8px;
+  width: 100%;
+  max-height: 100%;
+  z-index: 8;
+}
