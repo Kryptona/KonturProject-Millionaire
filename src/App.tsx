@@ -1,12 +1,13 @@
 import React from 'react';
 import {Routes} from 'react-router-dom';
 import styles from './App.scss';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {GamePage} from './components/game/GamePage';
 import {MenuPage} from './components/menu/MenuPage';
 import {LeaderboardPage} from './components/leaderboard/LeaderboardPage';
 import {initializeApp} from 'firebase/app';
 import {apiKey} from './appConstants';
+import {Settings} from './components/settings/Settings';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route index element={<MenuPage />} />
           <Route path="/game" element={<GamePage />} />
           <Route path="/statistics" element={<LeaderboardPage />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </Router>
     </div>

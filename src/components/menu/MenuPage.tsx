@@ -13,12 +13,14 @@ import audioFileMenuTheme from '/src/sounds/menuTheme.mp3';
 import {HexagonViewUse} from '../shared/HexagonView/HexagonView';
 import {HexagonLink} from '../shared/HexagonLink/HexagonLink';
 import {GlassButton} from '../shared/GlassView/GlassButton';
+import {useLocalStorage} from '../../utils/Hooks';
 
 export const MenuPage: React.FC = () => {
   const [userName, setUserName] = useState('');
   const [placeholder, setPlaceholder] = useState('');
-  const [startGameSound] = useSound(audioFileStartGame, {volume: 1});
-  const [menuThemeSound, {stop}] = useSound(audioFileMenuTheme, {volume: 1});
+  const [volume] = useLocalStorage('soundLevel', 0);
+  const [menuThemeSound, {stop}] = useSound(audioFileMenuTheme, {volume: volume});
+  const [startGameSound] = useSound(audioFileStartGame, {volume: volume});
   const [isSoundActive, setIsSoundActive] = useState(false);
 
   useEffect(() => {
@@ -68,6 +70,9 @@ export const MenuPage: React.FC = () => {
       </HexagonLink>
       <HexagonLink className={styles.bt} use={HexagonViewUse.secondary} to={'/statistics'}>
         Таблица лидеров
+      </HexagonLink>
+      <HexagonLink className={styles.bt} use={HexagonViewUse.secondary} to={'/settings'}>
+        Настройки
       </HexagonLink>
     </div>
   );

@@ -7,6 +7,7 @@ import {deactivateAnswer} from '../../../utils/ListActiveAnswers';
 import styles from './Question.scss';
 import audioFileLost from '/src/sounds/loss.mp3';
 import audioFileRight from '/src/sounds/rightAnswer.mp3';
+import {useLocalStorage} from '../../../utils/Hooks';
 
 interface Props {
   questionCard: QuestionModel;
@@ -43,8 +44,9 @@ export const Question: React.FC<Props> = ({
   isEndGame,
 }) => {
   const [isAnswerBacklight, setIsAnswerBacklight] = useState(false);
-  const [soundLoseAnswer] = useSound(audioFileLost, {volume: 1});
-  const [soundRightAnswer] = useSound(audioFileRight, {volume: 1});
+  const [volume] = useLocalStorage('soundLevel', 0.5);
+  const [soundLoseAnswer] = useSound(audioFileLost, {volume: volume});
+  const [soundRightAnswer] = useSound(audioFileRight, {volume: volume});
   const delayedCalls = useRef<NodeJS.Timeout[]>([]);
 
   const onSelectAnswerWrapper = (selectedAnswer: string, letter: 'A' | 'B' | 'C' | 'D'): void => {

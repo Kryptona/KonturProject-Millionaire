@@ -16,6 +16,9 @@ $transition_duration: 250ms;
     min-height: 100vh;
   }
 }
+html {
+  min-width: 360px;
+}
 
 body {
   margin: 0;
