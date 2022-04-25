@@ -23,11 +23,11 @@ export const SoundSettings: React.FC = () => {
   return (
     <div className={styles.root}>
       <GlassButton className={styles.button} onClick={upSoundLevel}>
-        <FontAwesomeIcon size={'lg'} icon={faPlus} />
+        <FontAwesomeIcon size={'lg'} icon={faPlus} title="Увеличить громкость" />
       </GlassButton>
       <p className={styles.label}>{soundLevel * 10}</p>
       <GlassButton className={styles.button} onClick={downSoundLevel}>
-        <FontAwesomeIcon size={'lg'} icon={faMinus} />
+        <FontAwesomeIcon size={'lg'} icon={faMinus} title="Уменьшить громкость" />
       </GlassButton>
     </div>
   );
