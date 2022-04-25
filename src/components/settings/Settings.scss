@@ -4,6 +4,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  transform: translateY(50%);
 
   .labelSoundLevel {
     color: $yellow;
@@ -11,7 +13,6 @@
   }
 
   .soundLevelButtons {
-
 
   }
 
