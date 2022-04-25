@@ -78,7 +78,10 @@ export const GamePage: React.FC = () => {
     }
 
     if (questionNumber === 14) {
-      onGameEnd();
+      setIsEndGame(true);
+      stop();
+      saveScore(currentScore.amount);
+
       resetList();
       return;
     }
@@ -137,6 +140,7 @@ export const GamePage: React.FC = () => {
   };
 
   const saveScore = (score: number) => {
+    console.log(score);
     highScoresRepository.writeScore({
       id: userId,
       name: localStorageRepository.readUserName(),
