@@ -1,10 +1,11 @@
 import styles from './AnimationAnswerButton.scss';
-import React, {Dispatch, SetStateAction, useEffect, useRef, useState} from 'react';
+import React, {Dispatch, useEffect, useRef, useState} from 'react';
 import {AnswerCustomButton} from '../AnswerCustomButton/AnswerCustomButton';
 import cn from 'classnames';
 import {ListActiveAnswer} from '../../../utils/ListActiveAnswers';
 import useSound from 'use-sound';
 import audioFileClick from '/src/sounds/selectAnswer.mp3';
+import {useLocalStorage} from '../../../utils/Hooks';
 
 interface PropsAnimationButtonAnswer {
   readonly className?: string;
@@ -21,7 +22,6 @@ interface PropsAnimationButtonAnswer {
 }
 
 export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
-  className,
   answerText,
   onClick,
   letter,
@@ -34,7 +34,10 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
   isEndGame,
 }) => {
   const [isClicked, setIsClicked] = useState(false);
-  const [soundOnClick] = useSound(audioFileClick, {volume: 1});
+
+  const [volume] = useLocalStorage('soundLevel', 0.5);
+  const [soundOnClick] = useSound(audioFileClick, {volume: volume});
+
   let delayedCall = useRef<NodeJS.Timeout | undefined>(undefined);
   const timeChangeQuestion = 4000;
 

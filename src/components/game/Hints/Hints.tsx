@@ -14,7 +14,7 @@ interface Props {
   readonly disable: boolean;
   readonly questions: QuestionModel;
   readonly setActiveRightToWrong: Dispatch<SetStateAction<boolean>>;
-  readonly setIsOpenFriedModal: Dispatch<SetStateAction<boolean>>;
+  readonly setIsOpenFriendModal: Dispatch<SetStateAction<boolean>>;
   readonly setIsOpenHallHelpModal: Dispatch<SetStateAction<boolean>>;
   readonly setQuestionsList: (p: () => ReadonlyArray<QuestionModel>) => void;
   readonly isSoundActive: boolean;
@@ -25,7 +25,7 @@ export const Hints: React.FC<Props> = ({
   disable,
   questions,
   setActiveRightToWrong,
-  setIsOpenFriedModal,
+  setIsOpenFriendModal,
   setIsOpenHallHelpModal,
   setQuestionsList,
   isSoundActive,
@@ -83,7 +83,7 @@ export const Hints: React.FC<Props> = ({
         isActive={activeCallFriend}
         setIsActive={setActiveCallFriend}
         disable={disable}
-        setIsOpenFriedModal={setIsOpenFriedModal}
+        setIsOpenFriedModal={setIsOpenFriendModal}
         isSoundActive={isSoundActive}
       />
     </div>

@@ -1,0 +1,25 @@
+@import "src/default.scss";
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .labelSoundLevel {
+    color: $yellow;
+    font-size: 32px;
+  }
+
+  .soundLevelButtons {
+
+
+  }
+
+  .bt {
+    width: 320px;
+    max-width: 100%;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+}

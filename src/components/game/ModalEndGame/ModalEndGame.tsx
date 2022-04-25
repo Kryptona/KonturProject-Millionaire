@@ -6,6 +6,7 @@ import useSound from 'use-sound';
 import audioFileWinGame from '/src/sounds/winGame.mp3';
 import {HexagonViewUse} from '../../shared/HexagonView/HexagonView';
 import {HexagonLink} from '../../shared/HexagonLink/HexagonLink';
+import {useLocalStorage} from '../../../utils/Hooks';
 
 interface PropsEndGame {
   score: number;
@@ -14,7 +15,8 @@ interface PropsEndGame {
 }
 
 export const ModalEndGame: React.FC<PropsEndGame> = ({score, onRestart, isSoundActive}) => {
-  const [soundWinGame, {stop}] = useSound(audioFileWinGame, {volume: 1});
+  const [volume] = useLocalStorage('soundLevel', 0.5);
+  const [soundWinGame, {stop}] = useSound(audioFileWinGame, {volume: volume});
 
   useEffect(() => {
     if (isSoundActive) {

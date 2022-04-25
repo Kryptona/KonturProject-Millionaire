@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styles from './GamePage.scss';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {saveSessionState} from '../../utils/StoragesUtils';
-import {useSessionStorage} from '../../utils/Hooks';
+import {useLocalStorage, useSessionStorage} from '../../utils/Hooks';
 import {Question} from './Question/Question';
 import {Scores} from './Scores/Scores';
 import {scores} from '../../resources/scores';
@@ -32,7 +32,7 @@ export const GamePage: React.FC = () => {
   const [isClickedAnswer, setIsClickedAnswer] = useState(false);
   const [activeRightToWrong, setActiveRightToWrong] = useSessionStorage('activeRightToWrong', false);
 
-  const [isOpenFriedModal, setIsOpenFriedModal] = useSessionStorage('isOpenFriedModal', false);
+  const [isOpenFriendModal, setIsOpenFriendModal] = useSessionStorage('isOpenFriendModal', false);
   const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useSessionStorage('isOpenHallHelpModal', false);
   const [isEndGame, setIsEndGame] = useSessionStorage('isEndGame', false);
   const [userId] = useState(uuidv4());
@@ -41,8 +41,9 @@ export const GamePage: React.FC = () => {
   const [isClickedRightAnswer, setIsClickedRightAnswer] = useSessionStorage('isClickedRightAnswer', true);
   const [personAnimation, setPersonAnimation] = useState<PersonsShowerStage>(PersonsShowerStage.asking);
 
-  const [startGameSound] = useSound(audioFileStartGame, {volume: 1});
-  const [timerSound, {stop}] = useSound(audioFileTimer, {volume: 1});
+  const [volume] = useLocalStorage('soundLevel', 0.5);
+  const [startGameSound] = useSound(audioFileStartGame, {volume: volume});
+  const [timerSound, {stop}] = useSound(audioFileTimer, {volume: volume});
 
   const [questionsList, setQuestionsList] = useState(() => getQuestionsList(false));
 
@@ -111,7 +112,7 @@ export const GamePage: React.FC = () => {
     setQuestionNumber(0);
     setTimer(TIME_ANSWER);
     setQuestionsList(getQuestionsList(true));
-    setIsOpenFriedModal(false);
+    setIsOpenFriendModal(false);
     setIsOpenHallHelpModal(false);
     setIsEndGame(false);
     resetList();
@@ -190,7 +191,7 @@ export const GamePage: React.FC = () => {
           disable={isClickedAnswer}
           questions={questionsList[questionNumber]}
           setActiveRightToWrong={setActiveRightToWrong}
-          setIsOpenFriedModal={setIsOpenFriedModal}
+          setIsOpenFriendModal={setIsOpenFriendModal}
           setIsOpenHallHelpModal={setIsOpenHallHelpModal}
           setQuestionsList={setQuestionsList}
           isSoundActive={isSoundActive}
@@ -223,9 +224,9 @@ export const GamePage: React.FC = () => {
           questionNumber={questionNumber}
         />
       )}
-      {isOpenFriedModal && (
+      {isOpenFriendModal && (
         <ModalCallFriend
-          onClose={() => setIsOpenFriedModal(false)}
+          onClose={() => setIsOpenFriendModal(false)}
           question={questionsList[questionNumber]}
           questionNumber={questionNumber}
         />
