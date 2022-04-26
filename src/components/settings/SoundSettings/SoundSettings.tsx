@@ -1,34 +1,31 @@
 import React from 'react';
 import styles from './SoundSettings.scss';
 import {useLocalStorage} from '../../../utils/Hooks';
-import {GlassButton} from '../../shared/GlassView/GlassButton';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faPlus, faMinus} from '@fortawesome/free-solid-svg-icons';
 
 export const SoundSettings: React.FC = () => {
-  const [soundLevel, setSoundLevel] = useLocalStorage('soundLevel', 0);
-
-  const upSoundLevel = () => {
-    if (soundLevel < 1) {
-      setSoundLevel(Math.round((soundLevel + 0.1) * 10) / 10);
-    }
-  };
-
-  const downSoundLevel = () => {
-    if (soundLevel > 0) {
-      setSoundLevel(Math.round((soundLevel - 0.1) * 10) / 10);
-    }
-  };
+  const [soundLevel, setSoundLevel] = useLocalStorage('soundLevel', 0.1);
 
   return (
-    <div className={styles.root}>
-      <GlassButton className={styles.button} onClick={upSoundLevel}>
-        <FontAwesomeIcon size={'lg'} icon={faPlus} title="Увеличить громкость" />
-      </GlassButton>
-      <p className={styles.label}>{soundLevel * 10}</p>
-      <GlassButton className={styles.button} onClick={downSoundLevel}>
-        <FontAwesomeIcon size={'lg'} icon={faMinus} title="Уменьшить громкость" />
-      </GlassButton>
+    <div className={styles.page}>
+      <p className={styles.soundLevel}>{soundLevel}</p>
+      <div className={styles.range} data-range={true}>
+        <input
+          type="range"
+          list="options"
+          className={styles.input}
+          min="0"
+          max="1"
+          step="0.1"
+          value={soundLevel}
+          onChange={(e) => setSoundLevel(e.target.value)}
+        />
+
+        <datalist className={styles.list} id="options">
+          {[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1].map((x) => (
+            <option value={x} data-range-link={'step-' + x.toString()} />
+          ))}
+        </datalist>
+      </div>
     </div>
   );
 };

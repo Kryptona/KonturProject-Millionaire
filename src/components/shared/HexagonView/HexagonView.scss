@@ -30,6 +30,7 @@ $factor: 32px;
     outline: none;
   }
 
+
   @media (max-width: 800px) {
     font-size: 24px;
   }
@@ -37,6 +38,10 @@ $factor: 32px;
 
 @mixin colorMap($color, $hover-color) {
   background-color: $color;
+
+  &:focus-visible {
+    background-color: $hover-color;
+  }
 
   @media (hover: hover) {
     &:hover {

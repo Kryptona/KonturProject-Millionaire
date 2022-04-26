@@ -19,7 +19,7 @@ export const ModalCallFriend: React.FC<Props> = ({onClose, questionNumber, quest
   const [phrase] = useSessionStorage('phrase', getPhrase(question, questionNumber));
 
   return (
-    <Modal isOpen className={styles.root} style={modalStyles}>
+    <Modal isOpen className={styles.root} style={modalStyles} ariaHideApp={false}>
       <div className={styles.window}>
         <div className={styles.imageContainer}>
           <img className={styles.img} src={friend} alt={'friend'} />
