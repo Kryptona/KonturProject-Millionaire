@@ -38,7 +38,7 @@ export const ModalEndGame: React.FC<PropsEndGame> = ({score, onRestart, isSoundA
   };
 
   return (
-    <Modal isOpen className={styles.root} style={modalStyles}>
+    <Modal isOpen className={styles.root} style={modalStyles} ariaHideApp={false}>
       <span className={styles.title}>Вы выиграли {score} руб.</span>
       <div className={styles.buttons}>
         <HexagonButton use={HexagonViewUse.blue} onClick={onRestartWrapper}>

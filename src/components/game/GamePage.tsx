@@ -24,6 +24,7 @@ import {PersonsShower, PersonsShowerStage} from './PersonsShower/PersonsShower';
 import {GlassButton} from '../shared/GlassView/GlassButton';
 
 const TIME_ANSWER = 30;
+const TIME_ANIMATION_ANSWER = 1000;
 
 export const GamePage: React.FC = () => {
   const [fireproofedScore, setFireproofedScore] = useSessionStorage('fireproofedScore', 0);
@@ -93,7 +94,11 @@ export const GamePage: React.FC = () => {
 
   const onSelectAnswer = () => {
     setPersonAnimation(PersonsShowerStage.answering);
-    stop();
+    if (activeRightToWrong) {
+      setTimeout(() => {
+        setPersonAnimation(PersonsShowerStage.asking);
+      }, TIME_ANIMATION_ANSWER);
+    } else stop();
   };
 
   const onRightAnswer = () => {
