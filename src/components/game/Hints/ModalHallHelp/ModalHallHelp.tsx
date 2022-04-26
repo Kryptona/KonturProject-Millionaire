@@ -18,7 +18,7 @@ export const ModalHallHelp: React.FC<Props> = ({onClose, questionNumber, questio
   const [listStatistics] = useSessionStorage('statistics', getStatistics(question, questionNumber));
 
   return (
-    <Modal isOpen className={styles.root} style={modalStyles}>
+    <Modal isOpen className={styles.root} style={modalStyles} ariaHideApp={false}>
       <div className={styles.statistics}>
         {['A', 'B', 'C', 'D'].map((x) => (
           <div className={styles.diagram}>
