@@ -5,6 +5,9 @@
   flex-flow: row nowrap;
   align-items: center;
   text-align: left;
+  &:focus-visible {
+
+  }
 
   .letter {
     color: yellow;
