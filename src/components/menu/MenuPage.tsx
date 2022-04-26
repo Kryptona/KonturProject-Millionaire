@@ -51,6 +51,10 @@ export const MenuPage: React.FC = () => {
 
   useEffect(() => stop, [stop]);
 
+  const checkerSetUserName = (name: string) => {
+    if (name.length <= 30) setUserName(name);
+  };
+
   return (
     <div className={styles.root}>
       <GlassButton className={styles.sound_bt} onClick={onClickSoundIcon}>
@@ -62,7 +66,7 @@ export const MenuPage: React.FC = () => {
         className={styles.nickname_input}
         placeholder={placeholder}
         value={userName}
-        onChange={setUserName}
+        onChange={(value) => checkerSetUserName(value)}
       />
 
       <HexagonLink className={styles.bt} use={HexagonViewUse.secondary} to={'/game'} onClick={onStartGame}>
