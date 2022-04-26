@@ -48,6 +48,10 @@ $factor: 32px;
       background-color: $hover-color;
     }
   }
+
+  &:focus-visible {
+    background-color: $hover-color;
+  }
 }
 
 .primary {
