@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPlus, faMinus} from '@fortawesome/free-solid-svg-icons';
 
 export const SoundSettings: React.FC = () => {
-  const [soundLevel, setSoundLevel] = useLocalStorage('soundLevel', 0);
+  const [soundLevel, setSoundLevel] = useLocalStorage('soundLevel', 0.1);
 
   const upSoundLevel = () => {
     if (soundLevel < 1) {
