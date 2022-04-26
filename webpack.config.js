@@ -3,8 +3,11 @@ const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const {InjectManifest} = require('workbox-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const distDirectory = path.resolve(__dirname, 'dist');
+const publicDirectory = path.resolve(__dirname, 'public');
 const nodeModulesDir = path.resolve(__dirname, 'node_modules');
 const srcDirectory = path.resolve(__dirname, 'src');
 
@@ -90,6 +93,23 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].bundle.css',
       ignoreOrder: true,
+    }),
+    new InjectManifest({
+      swSrc: path.resolve(publicDirectory, 'sw.js'),
+      swDest: 'sw.js',
+      exclude: ['sw.js', 'manifest.json'],
+      include: [/\.(bundle|chunk)\.(js|css)/, /\.(html|png|gif|svg|mp3)/],
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: publicDirectory,
+          to: distDirectory,
+          globOptions: {
+            ignore: ['**/sw.js', '**/index.html'],
+          },
+        },
+      ],
     }),
   ],
   devServer: {
