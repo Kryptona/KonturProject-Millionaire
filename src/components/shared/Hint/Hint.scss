@@ -19,6 +19,10 @@
   background: $default_blue;
 }
 
+.isActive:focus-visible {
+  background: $default_blue;
+}
+
 .isNotActive {
   opacity: 0.25;
   cursor: default;
