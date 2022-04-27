@@ -3,12 +3,12 @@
 .root {
   outline: none;
   border: none;
-  border-bottom: 2px solid $default_blue;
+  border-bottom: 2px solid #2a54b5;
   background: none;
   color: white;
   text-align: center;
 
   &:focus {
-    border-color: rgba($default_blue, 0.7);
+    border-color: rgba(42, 84, 181, 0.7);
   }
 }

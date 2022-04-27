@@ -147,7 +147,6 @@ export const GamePage: React.FC = () => {
   };
 
   const saveScore = (score: number) => {
-    console.log(score);
     highScoresRepository.writeScore({
       id: userId,
       name: localStorageRepository.readUserName(),
@@ -170,11 +169,14 @@ export const GamePage: React.FC = () => {
   return (
     <div className={styles.root}>
       <div className={styles.buttons}>
-        <GlassButton className={styles.end_game_bt} onClick={() => onGameEndByUser()}>
+        <GlassButton className={styles.end_game_bt} onClick={() => onGameEndByUser()} title="закончить игру">
           <FontAwesomeIcon icon={faAngleLeft} color={'white'} size={'lg'} />
         </GlassButton>
 
-        <GlassButton className={styles.sound_bt} onClick={onClickSoundIcon}>
+        <GlassButton
+          className={styles.sound_bt}
+          onClick={onClickSoundIcon}
+          title={isSoundActive ? 'отключить звук' : 'включить звук'}>
           <FontAwesomeIcon color={'white'} size={'lg'} icon={isSoundActive ? faBell : faBellSlash} />
         </GlassButton>
 
