@@ -2,12 +2,13 @@
 @import '../default.scss';
 
 .root {
-  background: $violet;
+  background: $dark_blue;
   z-index: 9;
   position: absolute;
   text-align: center;
   height: 300px;
   width: 800px;
+  border-radius: $modal_border_radius;
 
   padding: 16px;
   box-sizing: border-box;

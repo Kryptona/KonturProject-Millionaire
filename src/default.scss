@@ -3,12 +3,14 @@
 $Roboto: 'Roboto';
 
 $yellow: yellow;
-$dark_blue: #0f0836;
-$violet: #ca48ca;
+$dark_blue: #180492;
+$violet: #920092;
 $white: white;
 $default_blue: #1a76ff;
 $default_white: #f9fafe;
 $transition_duration: 250ms;
+
+$modal_border_radius: 8px;
 
 :global{
   html, body, #root{
@@ -23,7 +25,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(213.77deg, $dark_blue 37.3%, $violet 95.78%);
+  background: linear-gradient(222.81deg, $dark_blue -0.89%, $violet 100%);
   font-family: $Roboto;
 }
 

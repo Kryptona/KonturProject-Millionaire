@@ -1,5 +1,5 @@
 @import '../../default.scss';
-
+@import '../../../../default.scss';
 
 .root {
   background: $violet;
@@ -9,16 +9,15 @@
   text-align: center;
   height: 300px;
   width: 800px;
+  border-radius: $modal_border_radius;
 
   padding: 16px;
   box-sizing: border-box;
 
   .window {
-
     display: flex;
 
     .imageContainer {
-
       .img {
         width: 150px;
         height: 200px;
@@ -38,19 +37,15 @@
   }
 
   .button {
-
   }
-
 }
 
 @media screen and (max-width: 800px) {
-
   .root {
     width: 450px;
     height: auto;
 
     .window {
-
       .img {
         width: 100px;
         height: 150px;
@@ -60,14 +55,11 @@
         font-size: 24px;
       }
     }
-
   }
 }
 
 @media screen and (max-width: 450px) {
-
   .root {
     width: 400px;
   }
-
 }
