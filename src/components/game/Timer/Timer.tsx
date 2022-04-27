@@ -1,6 +1,6 @@
 import styles from './Timer.scss';
 import React, {Dispatch, SetStateAction, useEffect} from 'react';
-import {buildStyles, CircularProgressbar} from 'react-circular-progressbar';
+import {CircularProgressbar} from 'react-circular-progressbar';
 
 interface PropsTimer {
   time: number;
@@ -24,6 +24,16 @@ export const Timer: React.FC<PropsTimer> = ({time, setOpenModal, setCounter, isO
     return () => clearInterval(timer);
   }, [time]);
 
+  const getColorTimer = () => {
+    if (time < 10) return `rgba(249, 0, 0, ${time})`;
+    else return `rgba(249, 249, 0, ${time})`;
+  };
+
+  const getColorTime = () => {
+    if (time < 10) return '#f3012c';
+    else return '#fff300';
+  };
+
   return (
     <div>
       <CircularProgressbar
@@ -36,7 +46,7 @@ export const Timer: React.FC<PropsTimer> = ({time, setOpenModal, setCounter, isO
           // Customize the path, i.e. the "completed progress"
           path: {
             // Path color
-            stroke: `rgba(249, 249, 0, ${time})`,
+            stroke: getColorTimer(),
             // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
             strokeLinecap: 'butt',
             strokeWidth: '4',
@@ -61,7 +71,7 @@ export const Timer: React.FC<PropsTimer> = ({time, setOpenModal, setCounter, isO
             dominantBaseline: 'central',
             textAnchor: 'middle',
             // Text color
-            fill: '#fff300',
+            fill: getColorTime(),
             // Text size
             fontSize: '50px',
           },
