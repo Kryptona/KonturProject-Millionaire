@@ -1,12 +1,8 @@
-@import '../default.scss';
 @import '../../../default.scss';
-
-$violet: #5a1880;
-$white: white;
+@import '../default.scss';
 
 .root {
   background: $violet;
-  color: $dark_blue;
   z-index: 9;
   position: absolute;
   text-align: center;

@@ -41,13 +41,13 @@ export const ModalEndGame: React.FC<PropsEndGame> = ({score, onRestart, isSoundA
     <Modal isOpen className={styles.root} style={modalStyles} ariaHideApp={false}>
       <span className={styles.title}>Вы выиграли {score} руб.</span>
       <div className={styles.buttons}>
-        <HexagonButton use={HexagonViewUse.blue} onClick={onRestartWrapper}>
+        <HexagonButton use={HexagonViewUse.secondary} onClick={onRestartWrapper}>
           Начать игру заново
         </HexagonButton>
-        <HexagonLink use={HexagonViewUse.blue} to={'/statistics'} onClick={onStatistics}>
+        <HexagonLink use={HexagonViewUse.secondary} to={'/statistics'} onClick={onStatistics}>
           <span className={styles.word}>Статистика</span>
         </HexagonLink>
-        <HexagonLink use={HexagonViewUse.blue} to={'/'} onClick={onMenu}>
+        <HexagonLink use={HexagonViewUse.secondary} to={'/'} onClick={onMenu}>
           <span className={styles.word}>Меню</span>
         </HexagonLink>
       </div>
