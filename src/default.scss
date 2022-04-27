@@ -25,8 +25,14 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(222deg, $back_violet -0.89%, $default_blue 100%);
   font-family: $Roboto;
+  animation-name: wow;
+  animation-duration: 8s;
+  animation-fill-mode: both;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  background: radial-gradient(circle, $back_violet 25%, $default_blue 100%);
+  background-size: 200% 200%;
 }
 
 @mixin hexagon_clip_path($factor) {
@@ -38,4 +44,22 @@ body {
     $factor 100%,
     0% 50%
   );
+}
+
+@keyframes wow {
+  0% {
+    background-position: 0 100%;
+  }
+  25% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 100% 0;
+  }
+  75% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0 100%;
+  }
 }
