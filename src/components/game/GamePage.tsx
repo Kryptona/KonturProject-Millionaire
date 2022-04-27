@@ -22,6 +22,7 @@ import {faAngleLeft, faBell, faBellSlash} from '@fortawesome/free-solid-svg-icon
 import audioFileTimer from '/src/sounds/timer.mp3';
 import {PersonsShower, PersonsShowerStage} from './PersonsShower/PersonsShower';
 import {GlassButton} from '../shared/GlassView/GlassButton';
+import {DEFAULT_VOLUME_LEVEL} from '../settings/SoundSettings/SoundSettings';
 
 const TIME_ANSWER = 30;
 const TIME_ANIMATION_ANSWER = 1000;
@@ -42,7 +43,7 @@ export const GamePage: React.FC = () => {
   const [isClickedRightAnswer, setIsClickedRightAnswer] = useSessionStorage('isClickedRightAnswer', true);
   const [personAnimation, setPersonAnimation] = useState<PersonsShowerStage>(PersonsShowerStage.asking);
 
-  const [volume] = useLocalStorage('soundLevel', 0.5);
+  const [volume] = useLocalStorage('soundLevel', DEFAULT_VOLUME_LEVEL);
   const [startGameSound] = useSound(audioFileStartGame, {volume: volume});
   const [timerSound, {stop}] = useSound(audioFileTimer, {volume: volume});
 
