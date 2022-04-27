@@ -6,10 +6,10 @@ $yellow: yellow;
 $dark_blue: #180492;
 $violet: #920092;
 $white: white;
-$default_blue: #1a76ff;
+$default_blue: #1240a9;
 $default_white: #f9fafe;
 $transition_duration: 250ms;
-
+$back_violet: #662389;
 $modal_border_radius: 8px;
 
 :global{
@@ -25,7 +25,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(222.81deg, $dark_blue -0.89%, $violet 100%);
+  background: linear-gradient(222deg, $back_violet -0.89%, $default_blue 100%);
   font-family: $Roboto;
 }
 

@@ -58,7 +58,10 @@ export const MenuPage: React.FC = () => {
 
   return (
     <div className={styles.root}>
-      <GlassButton className={styles.sound_bt} onClick={onClickSoundIcon}>
+      <GlassButton
+        className={styles.sound_bt}
+        onClick={onClickSoundIcon}
+        title={isSoundActive ? 'отключить звук' : 'включить звук'}>
         <FontAwesomeIcon color={'white'} size={'lg'} icon={isSoundActive ? faBell : faBellSlash} />
       </GlassButton>
 
