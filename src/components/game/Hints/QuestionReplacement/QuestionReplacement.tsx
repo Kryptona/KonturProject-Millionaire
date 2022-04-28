@@ -10,9 +10,9 @@ interface Props {
   setIsActive: Dispatch<SetStateAction<boolean>>;
   disable: boolean;
   setQuestionsList: (p: () => ReadonlyArray<QuestionModel>) => void;
-  isActiveFiftyFifty: boolean;
-  isActiveRightToWrong: boolean;
   isSoundActive: boolean;
+  isActiveHint: boolean;
+  setIsActiveHint: Dispatch<boolean>;
 }
 
 export const QuestionReplacement: React.FC<Props> = ({
@@ -20,13 +20,14 @@ export const QuestionReplacement: React.FC<Props> = ({
   setIsActive,
   disable,
   setQuestionsList,
-  isActiveFiftyFifty,
-  isActiveRightToWrong,
   isSoundActive,
+  isActiveHint,
+  setIsActiveHint,
 }) => {
   const click = () => {
     updateQuestionList();
     setQuestionsList(() => getQuestionsList(false));
+    setIsActiveHint(true);
   };
   return (
     <Hint
@@ -34,7 +35,7 @@ export const QuestionReplacement: React.FC<Props> = ({
       onClick={click}
       isActive={isActive}
       setIsActive={setIsActive}
-      disable={disable || !isActiveFiftyFifty || !isActiveRightToWrong}
+      disable={disable || isActiveHint}
       icon={faArrowRightArrowLeft}
       isSoundActive={isSoundActive}
       title="Замена вопроса"

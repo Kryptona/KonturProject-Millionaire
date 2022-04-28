@@ -9,11 +9,22 @@ interface Props {
   disable: boolean;
   setIsOpenHallHelpModal: Dispatch<SetStateAction<boolean>>;
   isSoundActive: boolean;
+  isActiveHint: boolean;
+  setIsActiveHint: Dispatch<boolean>;
 }
 
-export const HallHelp: React.FC<Props> = ({isActive, setIsActive, disable, setIsOpenHallHelpModal, isSoundActive}) => {
+export const HallHelp: React.FC<Props> = ({
+  isActive,
+  setIsActive,
+  disable,
+  setIsOpenHallHelpModal,
+  isSoundActive,
+  isActiveHint,
+  setIsActiveHint,
+}) => {
   const click = () => {
     setIsOpenHallHelpModal(true);
+    setIsActiveHint(true);
   };
   return (
     <Hint
@@ -22,7 +33,7 @@ export const HallHelp: React.FC<Props> = ({isActive, setIsActive, disable, setIs
       onClick={click}
       isActive={isActive}
       setIsActive={setIsActive}
-      disable={disable}
+      disable={disable || isActiveHint}
       isSoundActive={isSoundActive}
       title="Помощь зала"
     />
