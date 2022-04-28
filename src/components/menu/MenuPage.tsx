@@ -53,7 +53,7 @@ export const MenuPage: React.FC = () => {
   useEffect(() => stop, [stop]);
 
   const checkerSetUserName = (name: string) => {
-    if (name.length <= 30) setUserName(name);
+    setUserName(name.substring(0, 30));
   };
 
   return (
