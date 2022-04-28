@@ -24,6 +24,8 @@ export interface PropsHint {
   disable: boolean;
   questions: QuestionModel;
   isSoundActive: boolean;
+  isActiveHint: boolean;
+  setIsActiveHint: Dispatch<boolean>;
 }
 
 export const Hint: React.FC<Props> = ({

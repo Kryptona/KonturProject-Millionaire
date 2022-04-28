@@ -5,10 +5,19 @@ import {activeHintsFiftyFifty, ListActiveAnswer} from '../../../../utils/ListAct
 import {saveSessionState} from '../../../../utils/StoragesUtils';
 import {faScaleBalanced} from '@fortawesome/free-solid-svg-icons';
 
-export const FiftyFifty: React.FC<PropsHint> = ({isActive, setIsActive, disable, questions, isSoundActive}) => {
+export const FiftyFifty: React.FC<PropsHint> = ({
+  isActive,
+  setIsActive,
+  disable,
+  questions,
+  isSoundActive,
+  isActiveHint,
+  setIsActiveHint,
+}) => {
   const click = () => {
     activeHintsFiftyFifty(questions);
     saveSessionState('ListActiveAnswer', ListActiveAnswer);
+    setIsActiveHint(true);
   };
   return (
     <Hint
@@ -17,7 +26,7 @@ export const FiftyFifty: React.FC<PropsHint> = ({isActive, setIsActive, disable,
       onClick={click}
       isActive={isActive}
       setIsActive={setIsActive}
-      disable={disable}
+      disable={disable || isActiveHint}
       isSoundActive={isSoundActive}
       title="50/50"
     />

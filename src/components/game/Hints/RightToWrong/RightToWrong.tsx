@@ -8,7 +8,9 @@ interface Props {
   readonly isActive: boolean;
   readonly setIsActive: Dispatch<SetStateAction<boolean>>;
   readonly disable: boolean;
-  isSoundActive: boolean;
+  readonly isSoundActive: boolean;
+  readonly isActiveHint: boolean;
+  readonly setIsActiveHint: Dispatch<boolean>;
 }
 
 export const RightToWrong: React.FC<Props> = ({
@@ -17,9 +19,12 @@ export const RightToWrong: React.FC<Props> = ({
   setIsActive,
   disable,
   isSoundActive,
+  isActiveHint,
+  setIsActiveHint,
 }) => {
   const onClick = () => {
     setActiveRightToWrong(true);
+    setIsActiveHint(true);
   };
   return (
     <Hint
@@ -28,7 +33,7 @@ export const RightToWrong: React.FC<Props> = ({
       onClick={onClick}
       isActive={isActive}
       setIsActive={setIsActive}
-      disable={disable}
+      disable={disable || isActiveHint}
       isSoundActive={isSoundActive}
       title="Право на ошибку"
     />

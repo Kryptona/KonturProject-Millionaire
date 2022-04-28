@@ -33,6 +33,7 @@ export const GamePage: React.FC = () => {
   const [timer, setTimer] = useSessionStorage('timer', TIME_ANSWER);
   const [isClickedAnswer, setIsClickedAnswer] = useState(false);
   const [activeRightToWrong, setActiveRightToWrong] = useSessionStorage('activeRightToWrong', false);
+  const [isActiveHint, setIsActiveHint] = useLocalStorage('isActiveHint', false);
 
   const [isOpenFriendModal, setIsOpenFriendModal] = useSessionStorage('isOpenFriendModal', false);
   const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useSessionStorage('isOpenHallHelpModal', false);
@@ -72,6 +73,8 @@ export const GamePage: React.FC = () => {
   }, [personAnimation]);
 
   const onSwitchQuestion = () => {
+    setIsActiveHint(false);
+    setActiveRightToWrong(false);
     setPersonAnimation(PersonsShowerStage.asking);
 
     resetList();
@@ -116,6 +119,8 @@ export const GamePage: React.FC = () => {
   };
 
   const onRestart = () => {
+    setIsActiveHint(false);
+    setActiveRightToWrong(false);
     setPersonAnimation(PersonsShowerStage.asking);
     setFireproofedScore(0);
     setQuestionNumber(0);
@@ -207,6 +212,8 @@ export const GamePage: React.FC = () => {
           setIsOpenHallHelpModal={setIsOpenHallHelpModal}
           setQuestionsList={setQuestionsList}
           isSoundActive={isSoundActive}
+          isActiveHint={isActiveHint}
+          setIsActiveHint={setIsActiveHint}
         />
       </div>
 

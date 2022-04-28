@@ -18,6 +18,8 @@ interface Props {
   readonly setIsOpenHallHelpModal: Dispatch<SetStateAction<boolean>>;
   readonly setQuestionsList: (p: () => ReadonlyArray<QuestionModel>) => void;
   readonly isSoundActive: boolean;
+  readonly isActiveHint: boolean;
+  readonly setIsActiveHint: Dispatch<boolean>;
 }
 
 export const Hints: React.FC<Props> = ({
@@ -29,6 +31,8 @@ export const Hints: React.FC<Props> = ({
   setIsOpenHallHelpModal,
   setQuestionsList,
   isSoundActive,
+  setIsActiveHint,
+  isActiveHint,
 }) => {
   const [activeFifty, setActiveFifty] = useSessionStorage('activeFifty', true);
   const [visibleRightToWrong, setVisibleRightToWrong] = useSessionStorage('visibleRightToWrong', true);
@@ -55,6 +59,8 @@ export const Hints: React.FC<Props> = ({
         disable={disable}
         questions={questions}
         isSoundActive={isSoundActive}
+        isActiveHint={isActiveHint}
+        setIsActiveHint={setIsActiveHint}
       />
       <RightToWrong
         isActive={visibleRightToWrong}
@@ -62,6 +68,8 @@ export const Hints: React.FC<Props> = ({
         disable={disable}
         setActiveRightToWrong={setActiveRightToWrong}
         isSoundActive={isSoundActive}
+        isActiveHint={isActiveHint}
+        setIsActiveHint={setIsActiveHint}
       />
       <HallHelp
         isActive={activeHallHelp}
@@ -69,15 +77,17 @@ export const Hints: React.FC<Props> = ({
         disable={disable}
         setIsOpenHallHelpModal={setIsOpenHallHelpModal}
         isSoundActive={isSoundActive}
+        isActiveHint={isActiveHint}
+        setIsActiveHint={setIsActiveHint}
       />
       <QuestionReplacement
         isActive={activeQuestionReplacement}
         setIsActive={setActiveQuestionReplacement}
         disable={disable}
         setQuestionsList={setQuestionsList}
-        isActiveFiftyFifty={activeFifty}
-        isActiveRightToWrong={visibleRightToWrong}
         isSoundActive={isSoundActive}
+        isActiveHint={isActiveHint}
+        setIsActiveHint={setIsActiveHint}
       />
       <CallFriend
         isActive={activeCallFriend}
@@ -85,6 +95,8 @@ export const Hints: React.FC<Props> = ({
         disable={disable}
         setIsOpenFriedModal={setIsOpenFriendModal}
         isSoundActive={isSoundActive}
+        isActiveHint={isActiveHint}
+        setIsActiveHint={setIsActiveHint}
       />
     </div>
   );

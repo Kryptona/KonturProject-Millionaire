@@ -9,11 +9,22 @@ interface Props {
   disable: boolean;
   setIsOpenFriedModal: Dispatch<SetStateAction<boolean>>;
   isSoundActive: boolean;
+  isActiveHint: boolean;
+  setIsActiveHint: Dispatch<boolean>;
 }
 
-export const CallFriend: React.FC<Props> = ({isActive, setIsActive, disable, setIsOpenFriedModal, isSoundActive}) => {
+export const CallFriend: React.FC<Props> = ({
+  isActive,
+  setIsActive,
+  disable,
+  setIsOpenFriedModal,
+  isSoundActive,
+  setIsActiveHint,
+  isActiveHint,
+}) => {
   const clickHint = () => {
     setIsOpenFriedModal(true);
+    setIsActiveHint(true);
   };
   return (
     <Hint
@@ -22,7 +33,7 @@ export const CallFriend: React.FC<Props> = ({isActive, setIsActive, disable, set
       onClick={clickHint}
       isActive={isActive}
       setIsActive={setIsActive}
-      disable={disable}
+      disable={disable || isActiveHint}
       isSoundActive={isSoundActive}
       title="Звонок другу"
     />
