@@ -33,7 +33,7 @@ export const GamePage: React.FC = () => {
   const [timer, setTimer] = useSessionStorage('timer', TIME_ANSWER);
   const [isClickedAnswer, setIsClickedAnswer] = useState(false);
   const [activeRightToWrong, setActiveRightToWrong] = useSessionStorage('activeRightToWrong', false);
-  const [isActiveHint, setIsActiveHint] = useLocalStorage('isActiveHint', false);
+  const [isActiveHint, setIsActiveHint] = useSessionStorage('isActiveHint', false);
 
   const [isOpenFriendModal, setIsOpenFriendModal] = useSessionStorage('isOpenFriendModal', false);
   const [isOpenHallHelpModal, setIsOpenHallHelpModal] = useSessionStorage('isOpenHallHelpModal', false);

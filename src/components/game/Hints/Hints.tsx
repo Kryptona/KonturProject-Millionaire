@@ -49,6 +49,8 @@ export const Hints: React.FC<Props> = ({
     setActiveHallHelp(loadSessionState('activeHallHelp', true));
     setActiveQuestionReplacement(loadSessionState('activeQuestionReplacement', true));
     setActiveCallFriend(loadSessionState('activeCallFriend', true));
+    if (activeFifty && visibleRightToWrong && activeHallHelp && activeQuestionReplacement && activeCallFriend)
+      setIsActiveHint(false);
   }, [restart]);
 
   return (
