@@ -6,6 +6,7 @@ import {ListActiveAnswer} from '../../../utils/ListActiveAnswers';
 import useSound from 'use-sound';
 import audioFileClick from '/src/sounds/selectAnswer.mp3';
 import {useLocalStorage} from '../../../utils/Hooks';
+import {DEFAULT_VOLUME_LEVEL} from '../../settings/SoundSettings/SoundSettings';
 
 interface PropsAnimationButtonAnswer {
   readonly className?: string;
@@ -35,7 +36,7 @@ export const AnimationAnswerButton: React.FC<PropsAnimationButtonAnswer> = ({
 }) => {
   const [isClicked, setIsClicked] = useState(false);
 
-  const [volume] = useLocalStorage('soundLevel', 0.5);
+  const [volume] = useLocalStorage('soundLevel', DEFAULT_VOLUME_LEVEL);
   const [soundOnClick] = useSound(audioFileClick, {volume: volume});
 
   let delayedCall = useRef<NodeJS.Timeout | undefined>(undefined);

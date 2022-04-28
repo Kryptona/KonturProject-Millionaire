@@ -1,4 +1,6 @@
+@import '../../../../default.scss';
 @import '../../default.scss';
+
 
 .root {
   background: $violet;
@@ -8,6 +10,7 @@
   text-align: center;
   height: auto;
   width: 800px;
+  border-radius: $modal_border_radius;
 
   padding: 16px;
   box-sizing: border-box;
@@ -55,7 +58,7 @@
   to {
     width: 100%;
   }
-  
+
 }
 
 @media screen and (max-width: 800px){

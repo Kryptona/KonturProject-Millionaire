@@ -14,11 +14,12 @@ import {HexagonViewUse} from '../shared/HexagonView/HexagonView';
 import {HexagonLink} from '../shared/HexagonLink/HexagonLink';
 import {GlassButton} from '../shared/GlassView/GlassButton';
 import {useLocalStorage} from '../../utils/Hooks';
+import {DEFAULT_VOLUME_LEVEL} from '../settings/SoundSettings/SoundSettings';
 
 export const MenuPage: React.FC = () => {
   const [userName, setUserName] = useState('');
   const [placeholder, setPlaceholder] = useState('');
-  const [volume] = useLocalStorage('soundLevel', 0);
+  const [volume] = useLocalStorage('soundLevel', DEFAULT_VOLUME_LEVEL);
   const [menuThemeSound, {stop}] = useSound(audioFileMenuTheme, {volume: volume});
   const [startGameSound] = useSound(audioFileStartGame, {volume: volume});
   const [isSoundActive, setIsSoundActive] = useState(false);
@@ -57,7 +58,10 @@ export const MenuPage: React.FC = () => {
 
   return (
     <div className={styles.root}>
-      <GlassButton className={styles.sound_bt} onClick={onClickSoundIcon}>
+      <GlassButton
+        className={styles.sound_bt}
+        onClick={onClickSoundIcon}
+        title={isSoundActive ? 'отключить звук' : 'включить звук'}>
         <FontAwesomeIcon color={'white'} size={'lg'} icon={isSoundActive ? faBell : faBellSlash} />
       </GlassButton>
 

@@ -2,8 +2,10 @@ import React from 'react';
 import styles from './SoundSettings.scss';
 import {useLocalStorage} from '../../../utils/Hooks';
 
+const DEFAULT_VOLUME_LEVEL = 0.1;
+
 export const SoundSettings: React.FC = () => {
-  const [soundLevel, setSoundLevel] = useLocalStorage('soundLevel', 0.1);
+  const [soundLevel, setSoundLevel] = useLocalStorage('soundLevel', DEFAULT_VOLUME_LEVEL);
 
   return (
     <div className={styles.page}>
@@ -29,3 +31,5 @@ export const SoundSettings: React.FC = () => {
     </div>
   );
 };
+
+export {DEFAULT_VOLUME_LEVEL};
